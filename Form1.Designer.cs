@@ -49,10 +49,26 @@ namespace CoordinateTrackerAndClicker
             this.labelTest = new System.Windows.Forms.Label();
             this.CountLabel = new System.Windows.Forms.Label();
             this.CountInput = new System.Windows.Forms.NumericUpDown();
+            this.btnAddAction = new System.Windows.Forms.Button();
+            this.btnSaveMacro = new System.Windows.Forms.Button();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.cmbActionType = new System.Windows.Forms.ComboBox();
+            this.chkReturnToOriginal = new System.Windows.Forms.CheckBox();
+            this.numericDelay = new System.Windows.Forms.NumericUpDown();
+            this.btnExecuteMacro = new System.Windows.Forms.Button();
+            this.lstMacros = new System.Windows.Forms.ListBox();
+            this.lstActions = new System.Windows.Forms.ListBox();
+            this.textBoxMacroName = new System.Windows.Forms.TextBox();
+            this.numericDelayBefore = new System.Windows.Forms.NumericUpDown();
+            this.textBoxActionName = new System.Windows.Forms.TextBox();
+            this.textBoxDisplayInfo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).BeginInit();
             this.SuspendLayout();
             // 
             // StartButton
@@ -224,9 +240,9 @@ namespace CoordinateTrackerAndClicker
             // 
             // labelTest
             // 
-            this.labelTest.Location = new System.Drawing.Point(338, 167);
+            this.labelTest.Location = new System.Drawing.Point(230, 169);
             this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(142, 50);
+            this.labelTest.Size = new System.Drawing.Size(281, 255);
             this.labelTest.TabIndex = 12;
             this.labelTest.Text = "dfdfsdfsdf\\nfgdgdfgdfgdfgfdf";
             // 
@@ -260,9 +276,181 @@ namespace CoordinateTrackerAndClicker
             0,
             0});
             // 
+            // btnAddAction
+            // 
+            this.btnAddAction.Location = new System.Drawing.Point(517, 12);
+            this.btnAddAction.Name = "btnAddAction";
+            this.btnAddAction.Size = new System.Drawing.Size(100, 32);
+            this.btnAddAction.TabIndex = 15;
+            this.btnAddAction.Text = "Добави";
+            this.btnAddAction.UseVisualStyleBackColor = true;
+            this.btnAddAction.Click += new System.EventHandler(this.btnAddAction_Click);
+            // 
+            // btnSaveMacro
+            // 
+            this.btnSaveMacro.Location = new System.Drawing.Point(623, 14);
+            this.btnSaveMacro.Name = "btnSaveMacro";
+            this.btnSaveMacro.Size = new System.Drawing.Size(100, 30);
+            this.btnSaveMacro.TabIndex = 16;
+            this.btnSaveMacro.Text = "Запамети";
+            this.btnSaveMacro.UseVisualStyleBackColor = true;
+            this.btnSaveMacro.Click += new System.EventHandler(this.btnSaveMacro_Click);
+            // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(517, 64);
+            this.txtX.Multiline = true;
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(120, 18);
+            this.txtX.TabIndex = 17;
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(643, 65);
+            this.txtY.Multiline = true;
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(120, 17);
+            this.txtY.TabIndex = 18;
+            // 
+            // cmbActionType
+            // 
+            this.cmbActionType.FormattingEnabled = true;
+            this.cmbActionType.Items.AddRange(new object[] {
+            "Единичен килк",
+            "Двоен клик",
+            "Скролване"});
+            this.cmbActionType.Location = new System.Drawing.Point(517, 99);
+            this.cmbActionType.Name = "cmbActionType";
+            this.cmbActionType.Size = new System.Drawing.Size(174, 21);
+            this.cmbActionType.TabIndex = 19;
+            // 
+            // chkReturnToOriginal
+            // 
+            this.chkReturnToOriginal.AutoSize = true;
+            this.chkReturnToOriginal.Location = new System.Drawing.Point(709, 103);
+            this.chkReturnToOriginal.Name = "chkReturnToOriginal";
+            this.chkReturnToOriginal.Size = new System.Drawing.Size(148, 17);
+            this.chkReturnToOriginal.TabIndex = 20;
+            this.chkReturnToOriginal.Text = "Return to Original Position";
+            this.chkReturnToOriginal.UseVisualStyleBackColor = true;
+            // 
+            // numericDelay
+            // 
+            this.numericDelay.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.numericDelay.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDelay.Location = new System.Drawing.Point(655, 195);
+            this.numericDelay.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericDelay.Name = "numericDelay";
+            this.numericDelay.Size = new System.Drawing.Size(120, 20);
+            this.numericDelay.TabIndex = 21;
+            this.numericDelay.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // btnExecuteMacro
+            // 
+            this.btnExecuteMacro.Location = new System.Drawing.Point(1006, 10);
+            this.btnExecuteMacro.Name = "btnExecuteMacro";
+            this.btnExecuteMacro.Size = new System.Drawing.Size(100, 30);
+            this.btnExecuteMacro.TabIndex = 22;
+            this.btnExecuteMacro.Text = "Изпълни Макро";
+            this.btnExecuteMacro.UseVisualStyleBackColor = true;
+            this.btnExecuteMacro.Click += new System.EventHandler(this.btnExecuteMacro_Click);
+            // 
+            // lstMacros
+            // 
+            this.lstMacros.FormattingEnabled = true;
+            this.lstMacros.Location = new System.Drawing.Point(1006, 221);
+            this.lstMacros.Name = "lstMacros";
+            this.lstMacros.Size = new System.Drawing.Size(206, 95);
+            this.lstMacros.TabIndex = 23;
+            this.lstMacros.SelectedIndexChanged += new System.EventHandler(this.lstMacros_SelectedIndexChanged);
+            // 
+            // lstActions
+            // 
+            this.lstActions.FormattingEnabled = true;
+            this.lstActions.Location = new System.Drawing.Point(517, 221);
+            this.lstActions.Name = "lstActions";
+            this.lstActions.Size = new System.Drawing.Size(168, 95);
+            this.lstActions.TabIndex = 24;
+            this.lstActions.SelectedIndexChanged += new System.EventHandler(this.lstActions_SelectedIndexChanged);
+            // 
+            // textBoxMacroName
+            // 
+            this.textBoxMacroName.Location = new System.Drawing.Point(1006, 166);
+            this.textBoxMacroName.Name = "textBoxMacroName";
+            this.textBoxMacroName.Size = new System.Drawing.Size(231, 20);
+            this.textBoxMacroName.TabIndex = 25;
+            this.textBoxMacroName.Text = "Име на Макрото";
+            // 
+            // numericDelayBefore
+            // 
+            this.numericDelayBefore.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDelayBefore.Location = new System.Drawing.Point(517, 195);
+            this.numericDelayBefore.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericDelayBefore.Name = "numericDelayBefore";
+            this.numericDelayBefore.Size = new System.Drawing.Size(120, 20);
+            this.numericDelayBefore.TabIndex = 26;
+            this.numericDelayBefore.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // textBoxActionName
+            // 
+            this.textBoxActionName.Location = new System.Drawing.Point(517, 166);
+            this.textBoxActionName.Name = "textBoxActionName";
+            this.textBoxActionName.Size = new System.Drawing.Size(231, 20);
+            this.textBoxActionName.TabIndex = 27;
+            this.textBoxActionName.Text = "Име на действието";
+            // 
+            // textBoxDisplayInfo
+            // 
+            this.textBoxDisplayInfo.Location = new System.Drawing.Point(709, 221);
+            this.textBoxDisplayInfo.Multiline = true;
+            this.textBoxDisplayInfo.Name = "textBoxDisplayInfo";
+            this.textBoxDisplayInfo.ReadOnly = true;
+            this.textBoxDisplayInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxDisplayInfo.Size = new System.Drawing.Size(270, 203);
+            this.textBoxDisplayInfo.TabIndex = 28;
+            this.textBoxDisplayInfo.Text = "Макро информация";
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(492, 331);
+            this.ClientSize = new System.Drawing.Size(1269, 445);
+            this.Controls.Add(this.textBoxDisplayInfo);
+            this.Controls.Add(this.textBoxActionName);
+            this.Controls.Add(this.numericDelayBefore);
+            this.Controls.Add(this.textBoxMacroName);
+            this.Controls.Add(this.lstActions);
+            this.Controls.Add(this.lstMacros);
+            this.Controls.Add(this.btnExecuteMacro);
+            this.Controls.Add(this.numericDelay);
+            this.Controls.Add(this.chkReturnToOriginal);
+            this.Controls.Add(this.cmbActionType);
+            this.Controls.Add(this.txtY);
+            this.Controls.Add(this.txtX);
+            this.Controls.Add(this.btnSaveMacro);
+            this.Controls.Add(this.btnAddAction);
             this.Controls.Add(this.CountInput);
             this.Controls.Add(this.CountLabel);
             this.Controls.Add(this.labelTest);
@@ -288,7 +476,10 @@ namespace CoordinateTrackerAndClicker
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -310,5 +501,33 @@ namespace CoordinateTrackerAndClicker
         private Label labelTest;
         private Label CountLabel;
         private NumericUpDown CountInput;
+        private Button btnAddAction;
+        private Button btnSaveMacro;
+        private TextBox txtX;
+        private TextBox txtY;
+        private ComboBox cmbActionType;
+        private CheckBox chkReturnToOriginal;
+        private NumericUpDown numericDelay;
+        private Button btnExecuteMacro;
+        private ListBox lstMacros;
+        private ListBox lstActions;
+        private TextBox textBoxMacroName;
+        private NumericUpDown numericDelayBefore;
+        private TextBox textBoxActionName;
+        private TextBox textBoxDisplayInfo;
+
+        // Декларация на елементи
+        //private TextBox txtX;
+        //private TextBox txtY;
+        //private ComboBox cmbActionType;
+        //private CheckBox chkReturnToOriginal;
+        //private NumericUpDown numericDelay;
+
+        //private Button btnAddAction;
+        //private Button btnSaveMacro;
+
+        //private Button btnExecuteMacro;
+        //private ListBox lstMacros;
+        //private ListBox lstActions;
     }
 }
