@@ -44,12 +44,13 @@ namespace CoordinateTrackerAndClicker
         private List<Point> clickHistory = new List<Point>();
         private List<POINT> savedPoints = new List<POINT>();
         private Point lastCoordinate = new Point();
-        private Rectangle formBounds;
+        //private Rectangle formBounds;
 
         // Нови променливи за автоматично кликане
         private Timer autoClickTimer;
         private DateTime endTime;
-        private int countRepeat;
+        private int countActionRepeat;
+        private int countMacRepeat;
 
         private bool isSingleClick = true;
         private bool isDoubleClick = false;
@@ -62,6 +63,8 @@ namespace CoordinateTrackerAndClicker
         public Form1()
         {
             InitializeComponent();
+            cmbActionType.SelectedIndex = 0;
+
             SetupForm();
             SetupMouseTracking();
 
@@ -77,14 +80,14 @@ namespace CoordinateTrackerAndClicker
         {
             this.KeyPreview = true;
             this.KeyDown += MainForm_KeyDown;
-            this.Shown += MainForm_Shown;
+            //this.Shown += MainForm_Shown;
             SetupGlobalMouseHook();
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            formBounds = new Rectangle(this.Location, this.Size);
-        }
+        //private void MainForm_Shown(object sender, EventArgs e)
+        //{
+        //    formBounds = new Rectangle(this.Location, this.Size);
+        //}
 
         private void SetupMouseTracking()
         {
@@ -102,34 +105,43 @@ namespace CoordinateTrackerAndClicker
                 if (GetCursorPos(out point))
                 {
                     currentCoordinate = new Point(point.X, point.Y);
-                    CurrentPositionLabel.Text = $"Текуща позиция: X={currentCoordinate.X}, Y={currentCoordinate.Y}";
-                    txtX.Text = (currentCoordinate.X).ToString();
-                    txtY.Text = (currentCoordinate.Y).ToString();
+                    CurrentPositionLabel.Text = $"Текуща позиция: X : {currentCoordinate.X} Y : {currentCoordinate.Y}";                
                 }
             }
         }
 
         private void OnGlobalMouseClick(Point clickPoint)
         {
-            if (isRecording && !IsClickInFormBounds(clickPoint))
+            if (isRecording)// && !IsClickInFormBounds(clickPoint))
             {
                 clickHistory.Add(clickPoint);
                 currentCoordinate = clickPoint;
                 UpdateCurrentPositionLabel(clickPoint);
+                UpdateLastClickLabel(true);
             }
         }
 
-        private bool IsClickInFormBounds(Point clickPoint)
+        private void UpdateLastClickLabel(bool fromMouseClick)
         {
-            return formBounds.Contains(clickPoint);
+            if (clickHistory.Count > 0) 
+            {
+                int clickCounts = clickHistory.Count;
+                lastCoordinate = clickHistory[clickCounts - (fromMouseClick ? 1 : 2)];
+                LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";
+            }    
         }
+
+        //private bool IsClickInFormBounds(Point clickPoint)
+        //{
+        //    return formBounds.Contains(clickPoint);
+        //}
 
         private void SaveLastValidCoordinate()
         {
             if (clickHistory.Count > 0)
             {
                 int clickCounts = clickHistory.Count;
-                lastCoordinate = clickCounts == 1 ? clickHistory[clickCounts - 1] : clickHistory[clickCounts - 2];
+                lastCoordinate = clickHistory.Count == 1 ? clickHistory[clickCounts - 1] : clickHistory[clickCounts - 2];
                 Point lastClick = lastCoordinate;
 
                 if (!isFirstCoordinateSet)
@@ -142,8 +154,10 @@ namespace CoordinateTrackerAndClicker
                     secondSavedCoordinate = lastClick;
                 }
 
-                UpdateCoordinatesLabel();
+                //UpdateCoordinatesLabel();
                 UpdateCoordinatesBoxes(lastCoordinate);
+                UpdateLastClickLabel(false);
+                //LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";
             }
         }
 
@@ -180,20 +194,12 @@ namespace CoordinateTrackerAndClicker
             StartButton.Enabled = true;
             StopButton.Enabled = false;
             clickHistory.Clear();
-            UpdateCoordinatesLabel();
+            //UpdateCoordinatesLabel();
             CurrentPositionLabel.Text = "Текуща позиция: ";
             StatusLabel.Text = "";
         }
 
-        private void UpdateCoordinatesLabel()
-        {
-            string firstCoord = firstSavedCoordinate.IsEmpty ?
-                "Няма" : $"X={firstSavedCoordinate.X}, Y={firstSavedCoordinate.Y}";
-            string secondCoord = secondSavedCoordinate.IsEmpty ?
-                "Няма" : $"X={secondSavedCoordinate.X}, Y={secondSavedCoordinate.Y}";
-
-            CoordinatesLabel.Text = $"Запазени координати:\nПърви: {firstCoord}\nВтори: {secondCoord}";
-        }
+      
 
         private void UpdateCurrentPositionLabel(Point point)
         {
@@ -225,7 +231,7 @@ namespace CoordinateTrackerAndClicker
             StatusLabel.Text = "Автоматично кликане в прогрес...";
 
             endTime = DateTime.Now.AddMinutes(duration);
-            countRepeat = count;
+            countActionRepeat = count;
 
             autoClickTimer = new Timer();
             autoClickTimer.Interval = frequency * 1000; // Convert to milliseconds
@@ -235,35 +241,36 @@ namespace CoordinateTrackerAndClicker
 
         private void AutoClickTimer_Tick(object sender, EventArgs e)
         {
-            if (DateTime.Now >= endTime || countRepeat <= 0)
+            if (DateTime.Now >= endTime || countActionRepeat <= 0)
             {
                 currentActionIndex++;
 
                 if (currentMacro.Actions.Count <= currentActionIndex)
                 {
-                    autoClickTimer.Stop();
-                    StartClickingButton.Enabled = true;
-                    StatusLabel.Text = "Автоматичното кликане приключи.";
-                    return;
+                    currentMacro.RepeatCount--;
+                    currentActionIndex = 0;
+
+                    if (currentMacro.RepeatCount <= 0)
+                    {
+                        autoClickTimer.Stop();
+                        StartClickingButton.Enabled = true;                
+                        StatusLabel.Text = "Автоматичното кликане приключи.";
+                        return;
+                    } 
+                    
+                    
                 }
 
                 endTime = DateTime.Now.AddMinutes(currentMacro.Actions[currentActionIndex].Duration);
-                countRepeat = currentMacro.Actions[currentActionIndex].RepeatCount;
+                countActionRepeat = currentMacro.Actions[currentActionIndex].RepeatCount;
                 autoClickTimer.Interval = currentMacro.Actions[currentActionIndex].Frequency * 1000;
             }
 
-
-
             // Избор на крайно дейстрие
-            //if(isSingleClick) SimulateClick(firstSavedCoordinate.X, firstSavedCoordinate.Y);
-            //else if(isDoubleClick) SimulateDoubleClick(firstSavedCoordinate.X, firstSavedCoordinate.Y);
-            //else if(isMacroCommand) SimulateTwoActionsClick();
-            //ExecuteMacro(currentMacro);
-            //ExecuteAction(action, originalPos);
             ExecuteAction(currentMacro.Actions[currentActionIndex]);
 
             // Намаля максималния брои на повторения
-            countRepeat--;
+            countActionRepeat--;
         }
 
         private void SimulateClick(int x, int y)
@@ -355,25 +362,6 @@ namespace CoordinateTrackerAndClicker
         }
 
 
-
-        private void radioButtonSingleClick_CheckedChanged(object sender, EventArgs e)
-        {
-            isSingleClick = !isSingleClick;
-            setTestText();
-        }
-
-        private void radioButtonDoubleClick_CheckedChanged(object sender, EventArgs e)
-        {
-            isDoubleClick = !isDoubleClick;
-            setTestText();
-        }
-
-        private void radioButtonMacro_CheckedChanged(object sender, EventArgs e)
-        {
-            isMacroCommand = !isMacroCommand;
-            setTestText();
-        }
-
         private void setTestText()
         {
             labelTest.Text = isSingleClick + " | " + isDoubleClick + " | " + isMacroCommand;
@@ -457,15 +445,7 @@ namespace CoordinateTrackerAndClicker
         }
 
 
-        private void ExecuteMacro(Macro macro)
-        {
-            POINT originalPos;
-            GetCursorPos(out originalPos);
-
-            //ExecuteAction(macro.Actions[currentActionIndex], originalPos);
-        }
-
-        private void ExecuteAction(MouseAction action)//, POINT originalPos)
+        private void ExecuteAction(MouseAction action)
         {
             SetCursorPos(action.Coordinates.X, action.Coordinates.Y);
 
@@ -487,51 +467,28 @@ namespace CoordinateTrackerAndClicker
             }
 
             System.Threading.Thread.Sleep(action.DelayAfter);
-
-            // Return to original position if needed
-            //if (action.ReturnToOriginal)
-            //{
-            //    SetCursorPos(originalPos.X, originalPos.Y);
-            //}
+       
         }
 
         private void btnSaveMacro_Click(object sender, EventArgs e)
         {
-            currentMacro.Name = textBoxMacroName.Text;
-            //currentMacro.Frequency = (int)FrequencyInput.Value;
-            //currentMacro.Duration = (int)DurationInput.Value;
-            //currentMacro.RepeatCount = (int)CountInput.Value;
-            // Save current macro
+            currentMacro.Name = textBoxMacroName.Text;     
             macros.Add(currentMacro);
-            //UpdateMacroListUI();  // Refresh the macro list display
-            lstMacros.Items.Add(currentMacro.Name);
+            lstMacros.Items.Add(currentMacro.Name); // Refresh the macro list display
 
             currentMacro = new Macro();
             lstActions.Items.Clear();
         }
 
-        private void ExecuteMultipleMacros(List<Macro> macrosToRun)
-        {
-            foreach (var macro in macrosToRun)
-            {
-                ExecuteMacro(macro);
-            }
-        }
-
         private void lstMacros_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var test = macros[lstMacros.SelectedIndex];
-            var textResult = new StringBuilder();
-            textResult.AppendLine(test.Name);
-            //textResult.AppendLine((test.Frequency).ToString());
-            //textResult.AppendLine((test.Duration).ToString());
-            //textResult.AppendLine((test.RepeatCount).ToString());
+            var selectedMacros = macros[lstMacros.SelectedIndex];
+            var textToPrint = new StringBuilder();
+            textToPrint.AppendLine(selectedMacros.Name);
 
-            //test.Actions.ForEach(a =>  textResult.AppendLine($"     {a.Name}"));
-            test.Actions.ForEach(a =>  textResult.AppendLine(printText(a)));
+            selectedMacros.Actions.ForEach(a => textToPrint.AppendLine(printText(a)));
 
-
-            textBoxDisplayInfo.Text = textResult.ToString();
+            textBoxDisplayInfo.Text = textToPrint.ToString();
         }
 
         private string printText(MouseAction action)
@@ -552,10 +509,8 @@ namespace CoordinateTrackerAndClicker
 
         private void lstActions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var test = macros.Where(m => m.Name == this.Name) as Macro;
             var test = currentMacro.Actions[lstActions.SelectedIndex];
-            //labelTest.Text = test.Name;
-            //labelTest.Text = macros[lstMacros.SelectedIndex].Name;
+         
             labelTest.Text = $"{lstActions.SelectedIndex}\nИме: {test.Name}\nДеиствия: " +
                 $"\n    Кординати: {test.Coordinates.X} : {test.Coordinates.Y}" +
                 $"\n    Действие: {test.ActionType}" +
@@ -570,25 +525,19 @@ namespace CoordinateTrackerAndClicker
         private void btnExecuteMacro_Click(object sender, EventArgs e)
         {
             Macro test = macros[lstMacros.SelectedIndex] ?? macros[0];
-            //currentMacro = new Macro();
+            test.RepeatCount = (int)countMacroRepeat.Value;
             currentMacro = test;
-
-            //int frequency = test.Frequency;//(int)FrequencyInput.Value;
-            //int duration = (int)DurationInput.Value;
-            //int count = (int)CountInput.Value;
 
             StartClickingButton.Enabled = false;
             StatusLabel.Text = "Автоматично кликане в прогрес...";
 
             endTime = DateTime.Now.AddMinutes(currentMacro.Actions[currentActionIndex].Duration);
-            countRepeat = currentMacro.Actions[currentActionIndex].RepeatCount;
+            countActionRepeat = currentMacro.Actions[currentActionIndex].RepeatCount;
 
             autoClickTimer = new Timer();
             autoClickTimer.Interval = currentMacro.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
             autoClickTimer.Tick += AutoClickTimer_Tick;
             autoClickTimer.Start();
-
-            //ExecuteMacro(test);
         }
     }
 }

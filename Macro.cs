@@ -12,6 +12,6 @@ namespace CoordinateTrackerAndClicker
         public List<MouseAction> Actions { get; set; } = new List<MouseAction>();
         //public int Frequency { get; set; } // How often to run the command 
         //public int Duration { get; set; } // How long to run the command, before stop  
-        //public int RepeatCount { get; set; }  // How many times to repeat this macro
+        public int RepeatCount { get; set; }  // How many times to repeat this macro
     }
 }
