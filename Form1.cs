@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CoordinateTrackerAndClicker
 {
@@ -17,7 +12,6 @@ namespace CoordinateTrackerAndClicker
         [DllImport("user32.dll")]
         private static extern bool GetCursorPos(out POINT lpPoint);
 
-        // Импортираме функцията от user32.dll
         [DllImport("user32.dll")]
         public static extern bool SetCursorPos(int x, int y);
 
@@ -44,18 +38,13 @@ namespace CoordinateTrackerAndClicker
         private List<Point> clickHistory = new List<Point>();
         private List<POINT> savedPoints = new List<POINT>();
         private Point lastCoordinate = new Point();
-        //private Rectangle formBounds;
 
         // Нови променливи за автоматично кликане
         private Timer autoClickTimer;
         private DateTime endTime;
         private int countActionRepeat;
-        private int countMacRepeat;
-
-        private bool isSingleClick = true;
-        private bool isDoubleClick = false;
-        private bool isMacroCommand = false;
-
+        //private int countMacRepeat;
+    
         private List<Macro> macros = new List<Macro>();
         private Macro currentMacro = new Macro();
         private int currentActionIndex = 0;
@@ -67,27 +56,14 @@ namespace CoordinateTrackerAndClicker
 
             SetupForm();
             SetupMouseTracking();
-
-            setTestText();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void SetupForm()
         {
             this.KeyPreview = true;
             this.KeyDown += MainForm_KeyDown;
-            //this.Shown += MainForm_Shown;
             SetupGlobalMouseHook();
         }
-
-        //private void MainForm_Shown(object sender, EventArgs e)
-        //{
-        //    formBounds = new Rectangle(this.Location, this.Size);
-        //}
 
         private void SetupMouseTracking()
         {
@@ -112,7 +88,7 @@ namespace CoordinateTrackerAndClicker
 
         private void OnGlobalMouseClick(Point clickPoint)
         {
-            if (isRecording)// && !IsClickInFormBounds(clickPoint))
+            if (isRecording)
             {
                 clickHistory.Add(clickPoint);
                 currentCoordinate = clickPoint;
@@ -131,33 +107,26 @@ namespace CoordinateTrackerAndClicker
             }    
         }
 
-        //private bool IsClickInFormBounds(Point clickPoint)
-        //{
-        //    return formBounds.Contains(clickPoint);
-        //}
-
         private void SaveLastValidCoordinate()
         {
             if (clickHistory.Count > 0)
             {
                 int clickCounts = clickHistory.Count;
                 lastCoordinate = clickHistory.Count == 1 ? clickHistory[clickCounts - 1] : clickHistory[clickCounts - 2];
-                Point lastClick = lastCoordinate;
+                //Point lastClick = lastCoordinate;
 
-                if (!isFirstCoordinateSet)
-                {
-                    firstSavedCoordinate = lastClick;
-                    isFirstCoordinateSet = true;
-                }
-                else
-                {
-                    secondSavedCoordinate = lastClick;
-                }
+                //if (!isFirstCoordinateSet)
+                //{
+                //    firstSavedCoordinate = lastClick;
+                //    isFirstCoordinateSet = true;
+                //}
+                //else
+                //{
+                //    secondSavedCoordinate = lastClick;
+                //}
 
-                //UpdateCoordinatesLabel();
                 UpdateCoordinatesBoxes(lastCoordinate);
                 UpdateLastClickLabel(false);
-                //LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";
             }
         }
 
@@ -194,7 +163,6 @@ namespace CoordinateTrackerAndClicker
             StartButton.Enabled = true;
             StopButton.Enabled = false;
             clickHistory.Clear();
-            //UpdateCoordinatesLabel();
             CurrentPositionLabel.Text = "Текуща позиция: ";
             StatusLabel.Text = "";
         }
@@ -214,7 +182,6 @@ namespace CoordinateTrackerAndClicker
             }
         }
 
-        // Нова функционалност за автоматично кликане
         private void StartClickingButton_Click(object sender, EventArgs e)
         {
             if (firstSavedCoordinate.IsEmpty)
@@ -273,100 +240,33 @@ namespace CoordinateTrackerAndClicker
             countActionRepeat--;
         }
 
-        private void SimulateClick(int x, int y)
-        {
-            // Запазваме текущата позиция на курсора
-            POINT originalPos;
-            GetCursorPos(out originalPos);
-
-            // Преместваме курсора на желаните координати
-            SetCursorPos(x, y);
-
-            // Изчакваме малко, за да симулираме нормалната пауза между кликванията
-            System.Threading.Thread.Sleep(100);
-
-            // Симулираме първия клик (натискане и освобождаване на левия бутон)
+        private void SimulateSingleClick()
+        {                   
+            // Симулираме клик (натискане и освобождаване на левия бутон)
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-
-
-
-            // Симулираме завъртане на колелото на мишката (нагоре или надолу)
-            // dwData: положителна стойност за завъртане нагоре, отрицателна за надолу
-            //mouse_event(MOUSEEVENTF_WHEEL, 0, 0, 520, 0); // Завъртане нагоре (120 е една стъпка)
-            //System.Threading.Thread.Sleep(500); // Изчакване за ефекта
-            //mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -720, 0); // Завъртане надолу
-
-            // Връщаме курсора на първоначалната позиция
-            SetCursorPos(originalPos.X, originalPos.Y);
         }
-
-        private void SimulateDoubleClick(int x, int y)
+        private void SimulateDoubleClick()
         {
-            // Запазваме текущата позиция на курсора
-            POINT originalPos;
-            GetCursorPos(out originalPos);
-
-            // Преместваме курсора на желаните координати
-            SetCursorPos(x, y);
-
             // Симулираме първия клик (натискане и освобождаване на левия бутон)
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
             // Изчакваме малко, за да симулираме нормалната пауза между кликванията
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(300);
 
             // Симулираме втория клик за двойния клик
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-
-            // Връщаме курсора на първоначалната позиция
-            SetCursorPos(originalPos.X, originalPos.Y);
+            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);      
         }
-
-        private void SimulateTwoActionsClick()
+        private void SimulateScrolling(int dwData = 520)
         {
-            // Запазваме текущата позиция на курсора
-            POINT originalPos;
-            GetCursorPos(out originalPos);
-
-            // Преместваме курсора на желаните координати
-            SetCursorPos(firstSavedCoordinate.X, firstSavedCoordinate.Y);
-
-            // Изчакваме, за да осъществи командата
-            System.Threading.Thread.Sleep(1000);
-
-            // Симулираме клик (натискане и освобождаване на левия бутон)
-            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-
-            // Изчакваме, за да осъществи командата
-            System.Threading.Thread.Sleep(7000);
-
-            // Преместваме курсора на желаните координати
-            SetCursorPos(secondSavedCoordinate.X, secondSavedCoordinate.Y);
-
-            // Изчакваме, за да осъществи командата
-            System.Threading.Thread.Sleep(1000);
-
-            // Симулираме клик (натискане и освобождаване на левия бутон)
-            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-
-            // Изчакваме, за да осъществи командата
-            System.Threading.Thread.Sleep(1000);
-
-            // Връщаме курсора на първоначалната позиция
-            SetCursorPos(originalPos.X, originalPos.Y);
-        }
-
-
-        private void setTestText()
-        {
-            labelTest.Text = isSingleClick + " | " + isDoubleClick + " | " + isMacroCommand;
-        }
-
+            // Симулираме завъртане на колелото на мишката (нагоре или надолу)
+            // dwData: положителна стойност за завъртане нагоре, отрицателна за надолу
+            mouse_event(MOUSEEVENTF_WHEEL, 0, 0, dwData, 0); // Завъртане нагоре (120 е една стъпка)
+            System.Threading.Thread.Sleep(500); // Изчакване за ефекта
+            //mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -720, 0); // Завъртане надолу
+        }        
 
         #region Global Mouse Hook
 
@@ -436,38 +336,31 @@ namespace CoordinateTrackerAndClicker
 
         private MouseActionType SetActionType()
         {
-            // Избор на крайно дейстрие
-            if (isSingleClick) return MouseActionType.SingleClick;// SimulateClick(firstSavedCoordinate.X, firstSavedCoordinate.Y);
-            else if (isDoubleClick) return MouseActionType.DoubleClick;// SimulateDoubleClick(firstSavedCoordinate.X, firstSavedCoordinate.Y);
-            else if (isMacroCommand) return MouseActionType.Scroll;// SimulateTwoActionsClick();
-
+            // Избор на крайно дейстрие           
             return (MouseActionType)cmbActionType.SelectedIndex;
         }
 
 
         private void ExecuteAction(MouseAction action)
         {
+            // Запазваме текущата позиция на курсора
+            POINT originalPos;
+            GetCursorPos(out originalPos);
+            
             SetCursorPos(action.Coordinates.X, action.Coordinates.Y);
 
             System.Threading.Thread.Sleep(action.DelayBefore);
 
             // Perform the action
-            if (action.ActionType == MouseActionType.SingleClick)
-            {
-                mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-            }
-            else if (action.ActionType == MouseActionType.DoubleClick)
-            {
-                // Double click logic
-            }
-            else if (action.ActionType == MouseActionType.Scroll)
-            {
-                // Scroll logic
-            }
+            if (action.ActionType == MouseActionType.SingleClick) SimulateSingleClick();
+            else if (action.ActionType == MouseActionType.DoubleClick) SimulateDoubleClick();
+            else if (action.ActionType == MouseActionType.Scroll) SimulateScrolling();
 
             System.Threading.Thread.Sleep(action.DelayAfter);
-       
+
+            // Връщаме курсора на първоначалната позиция ако е отбелязано
+            if (action.ReturnToOriginal == true) SetCursorPos(originalPos.X, originalPos.Y);
+
         }
 
         private void btnSaveMacro_Click(object sender, EventArgs e)
