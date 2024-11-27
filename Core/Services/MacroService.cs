@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CoordinateTrackerAndClicker.Core.Services
 {
@@ -117,7 +116,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                 endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
                 countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
-                //autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000;
+                ((Timer)sender).Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000;
             }
 
             // Избор на крайно дейстрие          

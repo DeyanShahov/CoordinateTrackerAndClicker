@@ -11,20 +11,20 @@ namespace CoordinateTrackerAndClicker
         {
             if (disposing)
             {
-                if (mouseTrackTimer != null)
-                {
-                    mouseTrackTimer.Stop();
-                    mouseTrackTimer.Dispose();
-                }
+                //if (mouseTrackTimer != null)
+                //{
+                //    mouseTrackTimer.Stop();
+                //    mouseTrackTimer.Dispose();
+                //}
                 if (autoClickTimer != null)
                 {
                     autoClickTimer.Stop();
                     autoClickTimer.Dispose();
                 }
-                if (hookHandle != IntPtr.Zero)
-                {
-                    UnhookWindowsHookEx(hookHandle);
-                }
+                //if (hookHandle != IntPtr.Zero)
+                //{
+                //    UnhookWindowsHookEx(hookHandle);
+                //}
             }
             base.Dispose(disposing);
         }
@@ -70,7 +70,7 @@ namespace CoordinateTrackerAndClicker
             ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countMacroRepeat)).BeginInit();
-            this.SuspendLayout();         
+            this.SuspendLayout();
             // 
             // StartButton
             // 
@@ -230,6 +230,7 @@ namespace CoordinateTrackerAndClicker
             this.txtX.Location = new System.Drawing.Point(15, 128);
             this.txtX.Multiline = true;
             this.txtX.Name = "txtX";
+            this.txtX.ReadOnly = true;
             this.txtX.Size = new System.Drawing.Size(62, 18);
             this.txtX.TabIndex = 17;
             // 
@@ -238,6 +239,7 @@ namespace CoordinateTrackerAndClicker
             this.txtY.Location = new System.Drawing.Point(94, 128);
             this.txtY.Multiline = true;
             this.txtY.Name = "txtY";
+            this.txtY.ReadOnly = true;
             this.txtY.Size = new System.Drawing.Size(62, 18);
             this.txtY.TabIndex = 18;
             // 
