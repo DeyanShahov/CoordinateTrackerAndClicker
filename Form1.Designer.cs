@@ -38,13 +38,12 @@ namespace CoordinateTrackerAndClicker
             this.FrequencyInput = new System.Windows.Forms.NumericUpDown();
             this.DurationLabel = new System.Windows.Forms.Label();
             this.DurationInput = new System.Windows.Forms.NumericUpDown();
-            this.StartClickingButton = new System.Windows.Forms.Button();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.labelTest = new System.Windows.Forms.Label();
             this.CountLabel = new System.Windows.Forms.Label();
             this.CountInput = new System.Windows.Forms.NumericUpDown();
             this.btnAddAction = new System.Windows.Forms.Button();
-            this.btnSaveMacro = new System.Windows.Forms.Button();
+            this.btnCreateMacro = new System.Windows.Forms.Button();
             this.txtX = new System.Windows.Forms.TextBox();
             this.txtY = new System.Windows.Forms.TextBox();
             this.cmbActionType = new System.Windows.Forms.ComboBox();
@@ -71,7 +70,7 @@ namespace CoordinateTrackerAndClicker
             ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countMacroRepeat)).BeginInit();
-            this.SuspendLayout();
+            this.SuspendLayout();         
             // 
             // StartButton
             // 
@@ -161,15 +160,6 @@ namespace CoordinateTrackerAndClicker
             0,
             0});
             // 
-            // StartClickingButton
-            // 
-            this.StartClickingButton.Location = new System.Drawing.Point(756, 498);
-            this.StartClickingButton.Name = "StartClickingButton";
-            this.StartClickingButton.Size = new System.Drawing.Size(150, 30);
-            this.StartClickingButton.TabIndex = 9;
-            this.StartClickingButton.Text = "Започни автоматично кликане";
-            this.StartClickingButton.Click += new System.EventHandler(this.StartClickingButton_Click);
-            // 
             // StatusLabel
             // 
             this.StatusLabel.Location = new System.Drawing.Point(753, 531);
@@ -225,15 +215,15 @@ namespace CoordinateTrackerAndClicker
             this.btnAddAction.UseVisualStyleBackColor = true;
             this.btnAddAction.Click += new System.EventHandler(this.btnAddAction_Click);
             // 
-            // btnSaveMacro
+            // btnCreateMacro
             // 
-            this.btnSaveMacro.Location = new System.Drawing.Point(490, 75);
-            this.btnSaveMacro.Name = "btnSaveMacro";
-            this.btnSaveMacro.Size = new System.Drawing.Size(100, 30);
-            this.btnSaveMacro.TabIndex = 16;
-            this.btnSaveMacro.Text = "Запамети";
-            this.btnSaveMacro.UseVisualStyleBackColor = true;
-            this.btnSaveMacro.Click += new System.EventHandler(this.btnSaveMacro_Click);
+            this.btnCreateMacro.Location = new System.Drawing.Point(490, 75);
+            this.btnCreateMacro.Name = "btnCreateMacro";
+            this.btnCreateMacro.Size = new System.Drawing.Size(116, 30);
+            this.btnCreateMacro.TabIndex = 16;
+            this.btnCreateMacro.Text = "Създаи Макрото";
+            this.btnCreateMacro.UseVisualStyleBackColor = true;
+            this.btnCreateMacro.Click += new System.EventHandler(this.btnCreateMacro_Click);
             // 
             // txtX
             // 
@@ -469,7 +459,7 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.cmbActionType);
             this.Controls.Add(this.txtY);
             this.Controls.Add(this.txtX);
-            this.Controls.Add(this.btnSaveMacro);
+            this.Controls.Add(this.btnCreateMacro);
             this.Controls.Add(this.btnAddAction);
             this.Controls.Add(this.CountInput);
             this.Controls.Add(this.CountLabel);
@@ -482,7 +472,6 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.FrequencyInput);
             this.Controls.Add(this.DurationLabel);
             this.Controls.Add(this.DurationInput);
-            this.Controls.Add(this.StartClickingButton);
             this.Controls.Add(this.StatusLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
@@ -507,13 +496,12 @@ namespace CoordinateTrackerAndClicker
         private NumericUpDown FrequencyInput;
         private Label DurationLabel;
         private NumericUpDown DurationInput;
-        private Button StartClickingButton;
         private Label StatusLabel;
         private Label labelTest;
         private Label CountLabel;
         private NumericUpDown CountInput;
         private Button btnAddAction;
-        private Button btnSaveMacro;
+        private Button btnCreateMacro;
         private TextBox txtX;
         private TextBox txtY;
         private ComboBox cmbActionType;
