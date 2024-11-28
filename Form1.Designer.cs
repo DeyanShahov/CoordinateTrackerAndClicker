@@ -10,29 +10,20 @@ namespace CoordinateTrackerAndClicker
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                //if (mouseTrackTimer != null)
-                //{
-                //    mouseTrackTimer.Stop();
-                //    mouseTrackTimer.Dispose();
-                //}
+            {             
                 if (autoClickTimer != null)
                 {
                     autoClickTimer.Stop();
                     autoClickTimer.Dispose();
-                }
-                //if (hookHandle != IntPtr.Zero)
-                //{
-                //    UnhookWindowsHookEx(hookHandle);
-                //}
+                }             
             }
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            this.StartButton = new System.Windows.Forms.Button();
-            this.StopButton = new System.Windows.Forms.Button();
+            this.btnStartRecording = new System.Windows.Forms.Button();
+            this.btnStopRecording = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
             this.FrequencyLabel = new System.Windows.Forms.Label();
             this.FrequencyInput = new System.Windows.Forms.NumericUpDown();
@@ -64,6 +55,9 @@ namespace CoordinateTrackerAndClicker
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.countMacroRepeat = new System.Windows.Forms.NumericUpDown();
+            this.btnPauseMacro = new System.Windows.Forms.Button();
+            this.btnContinueMacro = new System.Windows.Forms.Button();
+            this.btnStopMacro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
@@ -72,24 +66,24 @@ namespace CoordinateTrackerAndClicker
             ((System.ComponentModel.ISupportInitialize)(this.countMacroRepeat)).BeginInit();
             this.SuspendLayout();
             // 
-            // StartButton
+            // btnStartRecording
             // 
-            this.StartButton.Location = new System.Drawing.Point(10, 10);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(100, 30);
-            this.StartButton.TabIndex = 0;
-            this.StartButton.Text = "Старт запис";
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.btnStartRecording.Location = new System.Drawing.Point(10, 10);
+            this.btnStartRecording.Name = "btnStartRecording";
+            this.btnStartRecording.Size = new System.Drawing.Size(100, 30);
+            this.btnStartRecording.TabIndex = 0;
+            this.btnStartRecording.Text = "Старт запис";
+            this.btnStartRecording.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // StopButton
+            // btnStopRecording
             // 
-            this.StopButton.Enabled = false;
-            this.StopButton.Location = new System.Drawing.Point(120, 10);
-            this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(100, 30);
-            this.StopButton.TabIndex = 1;
-            this.StopButton.Text = "Стоп запис";
-            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            this.btnStopRecording.Enabled = false;
+            this.btnStopRecording.Location = new System.Drawing.Point(120, 10);
+            this.btnStopRecording.Name = "btnStopRecording";
+            this.btnStopRecording.Size = new System.Drawing.Size(100, 30);
+            this.btnStopRecording.TabIndex = 1;
+            this.btnStopRecording.Text = "Стоп запис";
+            this.btnStopRecording.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // ResetButton
             // 
@@ -207,6 +201,7 @@ namespace CoordinateTrackerAndClicker
             // 
             // btnAddAction
             // 
+            this.btnAddAction.Enabled = false;
             this.btnAddAction.Location = new System.Drawing.Point(15, 453);
             this.btnAddAction.Name = "btnAddAction";
             this.btnAddAction.Size = new System.Drawing.Size(100, 32);
@@ -217,6 +212,7 @@ namespace CoordinateTrackerAndClicker
             // 
             // btnCreateMacro
             // 
+            this.btnCreateMacro.Enabled = false;
             this.btnCreateMacro.Location = new System.Drawing.Point(490, 75);
             this.btnCreateMacro.Name = "btnCreateMacro";
             this.btnCreateMacro.Size = new System.Drawing.Size(116, 30);
@@ -291,11 +287,12 @@ namespace CoordinateTrackerAndClicker
             // 
             // btnExecuteMacro
             // 
+            this.btnExecuteMacro.Enabled = false;
             this.btnExecuteMacro.Location = new System.Drawing.Point(806, 403);
             this.btnExecuteMacro.Name = "btnExecuteMacro";
             this.btnExecuteMacro.Size = new System.Drawing.Size(100, 30);
             this.btnExecuteMacro.TabIndex = 22;
-            this.btnExecuteMacro.Text = "Изпълни Макро";
+            this.btnExecuteMacro.Text = "Изпълни";
             this.btnExecuteMacro.UseVisualStyleBackColor = true;
             this.btnExecuteMacro.Click += new System.EventHandler(this.btnExecuteMacro_Click);
             // 
@@ -439,9 +436,45 @@ namespace CoordinateTrackerAndClicker
             0,
             0});
             // 
+            // btnPauseMacro
+            // 
+            this.btnPauseMacro.Enabled = false;
+            this.btnPauseMacro.Location = new System.Drawing.Point(912, 403);
+            this.btnPauseMacro.Name = "btnPauseMacro";
+            this.btnPauseMacro.Size = new System.Drawing.Size(100, 30);
+            this.btnPauseMacro.TabIndex = 36;
+            this.btnPauseMacro.Text = "Пауза";
+            this.btnPauseMacro.UseVisualStyleBackColor = true;
+            this.btnPauseMacro.Click += new System.EventHandler(this.btnPauseMacro_Click);
+            // 
+            // btnContinueMacro
+            // 
+            this.btnContinueMacro.Enabled = false;
+            this.btnContinueMacro.Location = new System.Drawing.Point(1018, 403);
+            this.btnContinueMacro.Name = "btnContinueMacro";
+            this.btnContinueMacro.Size = new System.Drawing.Size(100, 30);
+            this.btnContinueMacro.TabIndex = 37;
+            this.btnContinueMacro.Text = "Продължи";
+            this.btnContinueMacro.UseVisualStyleBackColor = true;
+            this.btnContinueMacro.Click += new System.EventHandler(this.btnContinueMacro_Click);
+            // 
+            // btnStopMacro
+            // 
+            this.btnStopMacro.Enabled = false;
+            this.btnStopMacro.Location = new System.Drawing.Point(1124, 403);
+            this.btnStopMacro.Name = "btnStopMacro";
+            this.btnStopMacro.Size = new System.Drawing.Size(100, 30);
+            this.btnStopMacro.TabIndex = 38;
+            this.btnStopMacro.Text = "Спри";
+            this.btnStopMacro.UseVisualStyleBackColor = true;
+            this.btnStopMacro.Click += new System.EventHandler(this.btnStopMacro_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1269, 621);
+            this.Controls.Add(this.btnStopMacro);
+            this.Controls.Add(this.btnContinueMacro);
+            this.Controls.Add(this.btnPauseMacro);
             this.Controls.Add(this.countMacroRepeat);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -466,8 +499,8 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.CountInput);
             this.Controls.Add(this.CountLabel);
             this.Controls.Add(this.labelTest);
-            this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.StopButton);
+            this.Controls.Add(this.btnStartRecording);
+            this.Controls.Add(this.btnStopRecording);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.CurrentPositionLabel);
             this.Controls.Add(this.FrequencyLabel);
@@ -491,8 +524,8 @@ namespace CoordinateTrackerAndClicker
 
         }
 
-        private Button StartButton;
-        private Button StopButton;
+        private Button btnStartRecording;
+        private Button btnStopRecording;
         private Button ResetButton;
         private Label FrequencyLabel;
         private NumericUpDown FrequencyInput;
@@ -524,6 +557,9 @@ namespace CoordinateTrackerAndClicker
         private Label label4;
         private Label label5;
         private NumericUpDown countMacroRepeat;
+        private Button btnPauseMacro;
+        private Button btnContinueMacro;
+        private Button btnStopMacro;
 
         // Декларация на елементи
         //private TextBox txtX;

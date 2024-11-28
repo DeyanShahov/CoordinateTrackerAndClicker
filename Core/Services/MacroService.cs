@@ -18,7 +18,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private DateTime endTime;
         private int currentActionIndex = 0;
         private int countActionRepeat;
-
+        private bool isPauseMacroExecution = false;
+        
         private Macro macroToExecute;
 
         public MacroService()
@@ -94,6 +95,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
         private void AutoClickTimer_Tick(object sender, EventArgs e)
         {
+            if (isPauseMacroExecution) return; // Ако паузата е натисната да не прави лоопа
+
             if (DateTime.Now >= endTime || countActionRepeat <= 0)
             {
                 currentActionIndex++;
@@ -105,11 +108,10 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                     if (macroToExecute.RepeatCount <= 0)
                     {
-                        ((Timer)sender).Stop();
-                        
-                        // Изпращане на уведомление
+                        StopCurrentMacroExecution((Timer)sender);
+                       
+                        // Изпращане на уведомление 
                         OnTimerStopped();
-                        
                         return;
                     }
                 }
@@ -126,10 +128,17 @@ namespace CoordinateTrackerAndClicker.Core.Services
             countActionRepeat--;
         }
 
-        protected virtual void OnTimerStopped()
+        private void StopCurrentMacroExecution(Timer sender)
         {
-            // Проверка дали има абонирани слушатели
-            TimerStopped?.Invoke(this, EventArgs.Empty);
+            sender.Stop();
+            OnContinueClick();         
         }
+
+        public void OnPauseClick() => isPauseMacroExecution = true; 
+        public void OnContinueClick() => isPauseMacroExecution = false;
+        public void OnStopClick(Timer sender) => StopCurrentMacroExecution(sender);
+
+        // Проверка дали има абонирани слушатели
+        protected virtual void OnTimerStopped() => TimerStopped?.Invoke(this, EventArgs.Empty);
     }
 }
