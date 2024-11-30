@@ -91,6 +91,7 @@
     <Compile Include="UI\ButtonCommand.cs" />
     <Compile Include="Utils\ButtonHandler.cs" />
     <Compile Include="UI\ICommand.cs" />
+    <Compile Include="Utils\CustomException.cs" />
     <Compile Include="Utils\MouseHook.cs" />
     <Compile Include="Utils\MouseTracker.cs" />
     <Compile Include="Utils\Printer.cs" />

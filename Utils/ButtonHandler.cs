@@ -6,21 +6,32 @@ namespace CoordinateTrackerAndClicker.Utils
 {
     internal class ButtonHandler
     {
-        private readonly Dictionary<Button, ButtonCommand> commands = new Dictionary<Button, ButtonCommand>();
+        private readonly Dictionary<object, ButtonCommand> commands = new Dictionary<object, ButtonCommand>();
 
-        public ButtonHandler()
+        public void AddNewButton(object sender, Button[] buttonsToDisable, Button[] buttonsToEnable)
         {
-            
-        }
+            CheckForNull(sender);
 
-        public void AddNewButton(Button senderButton, Button[] buttonsToDisable, Button[] buttonsToEnable)
-        {
-            commands[senderButton] = new ButtonCommand(buttonsToDisable, buttonsToEnable);
+            if (commands.ContainsKey(sender)) throw new CustomException("Ключа вече съществува в колекцията. Действието се пропуска.");
+
+            commands[sender] = new ButtonCommand(buttonsToDisable, buttonsToEnable);
         }
 
         public void ClickButtonMechanicsExecute(object sender)
         {
-            if (sender is Button clickedButton && commands.ContainsKey(clickedButton)) commands[clickedButton].Execute();
+            CheckForNull(sender);
+
+            if (!commands.ContainsKey(sender)) throw new CustomException("Предоставения ключ не съществува в колекцията.");
+
+            commands[sender].Execute();
         }
+
+        private static void CheckForNull(object sender)
+        {
+            if (sender is null) throw new CustomException("Изпращача не може да е празен.");
+        }     
     }
 }
+
+
+

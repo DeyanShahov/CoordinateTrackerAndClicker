@@ -59,6 +59,7 @@ namespace CoordinateTrackerAndClicker
             this.btnContinueMacro = new System.Windows.Forms.Button();
             this.btnStopMacro = new System.Windows.Forms.Button();
             this.textBoxLogInfo = new System.Windows.Forms.TextBox();
+            this.btnActionDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
@@ -481,9 +482,22 @@ namespace CoordinateTrackerAndClicker
             this.textBoxLogInfo.Size = new System.Drawing.Size(459, 44);
             this.textBoxLogInfo.TabIndex = 39;
             // 
+            // btnActionDelete
+            // 
+            this.btnActionDelete.Enabled = false;
+            this.btnActionDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnActionDelete.Location = new System.Drawing.Point(189, 575);
+            this.btnActionDelete.Name = "btnActionDelete";
+            this.btnActionDelete.Size = new System.Drawing.Size(30, 30);
+            this.btnActionDelete.TabIndex = 40;
+            this.btnActionDelete.Text = "🐇";
+            this.btnActionDelete.UseVisualStyleBackColor = true;
+            this.btnActionDelete.Click += new System.EventHandler(this.btnActionDelete_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1269, 621);
+            this.Controls.Add(this.btnActionDelete);
             this.Controls.Add(this.textBoxLogInfo);
             this.Controls.Add(this.btnStopMacro);
             this.Controls.Add(this.btnContinueMacro);
@@ -574,6 +588,7 @@ namespace CoordinateTrackerAndClicker
         private Button btnContinueMacro;
         private Button btnStopMacro;
         private TextBox textBoxLogInfo;
+        private Button btnActionDelete;
 
         // Декларация на елементи
         //private TextBox txtX;

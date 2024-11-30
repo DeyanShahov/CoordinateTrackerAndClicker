@@ -27,9 +27,9 @@ namespace CoordinateTrackerAndClicker
         public Timer autoClickTimer;
 
         private MacroService macroService;
-        private PrintText printer;
-        private Printer _printer;
-        private ButtonHandler buttonHandler;
+        private readonly PrintText printer;
+        private readonly Printer _printer;
+        private readonly ButtonHandler buttonHandler;
 
         public Form1()
         {
@@ -45,23 +45,38 @@ namespace CoordinateTrackerAndClicker
 
             InitializeComponent();
 
-            _printer = new Printer((message, fontSize) => 
+            _printer = new Printer((message, fontSize) =>
             {
                 StatusLabel.Text = message;
                 textBoxLogInfo.Text = message;
                 //if (fontSize.HasValue) StatusLabel.Font.Size = fontSize.Value;            
             });
 
-            buttonHandler.AddNewButton(btnStartRecording, new Button[] { btnStartRecording }, new Button[] { btnStopRecording });
-            buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
-            buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
-            buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro }, new Button[] { btnExecuteMacro });
-            buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro }, new Button[] { btnPauseMacro, btnStopMacro });
-            buttonHandler.AddNewButton(btnPauseMacro, new Button[] { btnPauseMacro }, new Button[] { btnContinueMacro });
-            buttonHandler.AddNewButton(btnContinueMacro, new Button[] { btnContinueMacro }, new Button[] { btnPauseMacro });
-            buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro, btnPauseMacro, btnContinueMacro }, new Button[] { btnExecuteMacro });
+            InitializeButtonsBehavior();
 
             cmbActionType.SelectedIndex = 0;
+        }
+
+        private void InitializeButtonsBehavior()
+        {
+            try
+            {
+                buttonHandler.AddNewButton(btnStartRecording, new Button[] { btnStartRecording }, new Button[] { btnStopRecording });
+                buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
+                buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
+                buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro, btnActionDelete }, new Button[] { btnExecuteMacro });
+                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro }, new Button[] { btnPauseMacro, btnStopMacro });
+                buttonHandler.AddNewButton(btnPauseMacro, new Button[] { btnPauseMacro }, new Button[] { btnContinueMacro });
+                buttonHandler.AddNewButton(btnContinueMacro, new Button[] { btnContinueMacro }, new Button[] { btnPauseMacro });
+                buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro, btnPauseMacro, btnContinueMacro }, new Button[] { btnExecuteMacro });
+                buttonHandler.AddNewButton(lstActions, new Button[] { }, new Button[] { btnActionDelete });
+                buttonHandler.AddNewButton(lstActions, new Button[] { }, new Button[] { btnActionDelete });
+
+            }
+            catch (Exception ex)
+            {
+                _printer.Print("Грешка при добавяне на поведение към бутоните. " + ex.Message);
+            }          
         }
 
         private void MouseTrackTimer_Tick(Point mousePoint)
@@ -168,7 +183,7 @@ namespace CoordinateTrackerAndClicker
                 _printer.Print("Няма записани кординати в полетата");
                 return;
             }
-
+  
             buttonHandler.ClickButtonMechanicsExecute(sender);
 
             // Add to the macro's action list 
@@ -202,7 +217,14 @@ namespace CoordinateTrackerAndClicker
             => textBoxDisplayInfo.Text = printer.DisplayMacroInfo(macroService.macrosList[lstMacros.SelectedIndex]);
 
         private void lstActions_SelectedIndexChanged(object sender, EventArgs e)
-            => labelTest.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstActions.SelectedIndex]);
+        {
+            if (lstActions.Items.Count == 0 || lstActions.SelectedIndex == -1) return;
+
+            labelTest.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstActions.SelectedIndex]);
+            //btnActionDelete.Enabled = true;
+            //buttonHandler.ClickButtonMechanicsExecute("lstActions_SelectedIndexChanged");
+            buttonHandler.ClickButtonMechanicsExecute(sender);
+        }
 
         private void btnExecuteMacro_Click(object sender, EventArgs e)
         {
@@ -264,6 +286,20 @@ namespace CoordinateTrackerAndClicker
             macroService.OnStopClick(autoClickTimer);
             buttonHandler.ClickButtonMechanicsExecute(sender);
             _printer.Print("Автоматичното кликане беше спряно.");
-        }       
+        }
+
+        private void btnActionDelete_Click(object sender, EventArgs e)
+        {
+            int index = lstActions.SelectedIndex; ;
+            //var item = lstActions.Items[index];
+            var item2 = lstActions.SelectedItem;
+            lstActions.SelectedItems.Clear();
+
+            macroService.RemoveAction(index);
+
+            lstActions.Items.Remove(item2);
+
+            btnActionDelete.Enabled = false;
+        }
     }
 }

@@ -9,7 +9,8 @@ namespace CoordinateTrackerAndClicker.Core.Models
         void AddAction(string textBoxActionName, Point lastCoordinate, MouseActionType actionType,
             int numericDelayAfter, int numericDelayBefore, bool chkReturnToOriginal,
             int FrequencyInput, int DurationInput, int CountInput);
-        void RemoveAction(MouseAction action);
+        //void RemoveAction(MouseAction action);
+        void RemoveAction(int actionIndex);
         void SaveMacro(Macro macro);
         Macro LoadMacro(string name);
         void ExecuteMacro(Timer autoClickTimer, int macroIndex, int macroRepeatCount);

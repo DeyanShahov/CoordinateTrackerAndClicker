@@ -65,9 +65,9 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList.Add(action);
         }
 
-        public void RemoveAction(MouseAction action)
+        public void RemoveAction(int actionIndex)
         {
-            throw new NotImplementedException();
+            currentActionsList.RemoveAt(actionIndex);
         }
 
         public void ExecuteMacro(Timer autoClickTimer,int macroIndex, int macroRepeatCount = 1)
