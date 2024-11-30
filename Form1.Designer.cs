@@ -58,6 +58,7 @@ namespace CoordinateTrackerAndClicker
             this.btnPauseMacro = new System.Windows.Forms.Button();
             this.btnContinueMacro = new System.Windows.Forms.Button();
             this.btnStopMacro = new System.Windows.Forms.Button();
+            this.textBoxLogInfo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
@@ -156,10 +157,12 @@ namespace CoordinateTrackerAndClicker
             // 
             // StatusLabel
             // 
-            this.StatusLabel.Location = new System.Drawing.Point(753, 531);
+            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StatusLabel.Location = new System.Drawing.Point(753, 436);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(380, 20);
+            this.StatusLabel.Size = new System.Drawing.Size(471, 63);
             this.StatusLabel.TabIndex = 10;
+            this.StatusLabel.Text = "Лог информация:";
             // 
             // labelTest
             // 
@@ -469,9 +472,19 @@ namespace CoordinateTrackerAndClicker
             this.btnStopMacro.UseVisualStyleBackColor = true;
             this.btnStopMacro.Click += new System.EventHandler(this.btnStopMacro_Click);
             // 
+            // textBoxLogInfo
+            // 
+            this.textBoxLogInfo.Location = new System.Drawing.Point(759, 510);
+            this.textBoxLogInfo.Multiline = true;
+            this.textBoxLogInfo.Name = "textBoxLogInfo";
+            this.textBoxLogInfo.ReadOnly = true;
+            this.textBoxLogInfo.Size = new System.Drawing.Size(459, 44);
+            this.textBoxLogInfo.TabIndex = 39;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1269, 621);
+            this.Controls.Add(this.textBoxLogInfo);
             this.Controls.Add(this.btnStopMacro);
             this.Controls.Add(this.btnContinueMacro);
             this.Controls.Add(this.btnPauseMacro);
@@ -560,6 +573,7 @@ namespace CoordinateTrackerAndClicker
         private Button btnPauseMacro;
         private Button btnContinueMacro;
         private Button btnStopMacro;
+        private TextBox textBoxLogInfo;
 
         // Декларация на елементи
         //private TextBox txtX;

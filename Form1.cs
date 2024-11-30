@@ -4,6 +4,7 @@ using CoordinateTrackerAndClicker.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace CoordinateTrackerAndClicker
         private static extern bool GetCursorPos(out Point lpPoint);
 
         private bool isRecording = false;
+        private bool isRecordingOn = false;
         private Point currentCoordinate = new Point();
         private List<Point> clickHistory = new List<Point>();
         private Point lastCoordinate = new Point();
@@ -26,6 +28,7 @@ namespace CoordinateTrackerAndClicker
 
         private MacroService macroService;
         private PrintText printer;
+        private Printer _printer;
         private ButtonHandler buttonHandler;
 
         public Form1()
@@ -42,21 +45,31 @@ namespace CoordinateTrackerAndClicker
 
             InitializeComponent();
 
+            _printer = new Printer((message, fontSize) => 
+            {
+                StatusLabel.Text = message;
+                textBoxLogInfo.Text = message;
+                //if (fontSize.HasValue) StatusLabel.Font.Size = fontSize.Value;            
+            });
+
             buttonHandler.AddNewButton(btnStartRecording, new Button[] { btnStartRecording }, new Button[] { btnStopRecording });
             buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
-            buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });       
+            buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
             buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro }, new Button[] { btnExecuteMacro });
             buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro }, new Button[] { btnPauseMacro, btnStopMacro });
             buttonHandler.AddNewButton(btnPauseMacro, new Button[] { btnPauseMacro }, new Button[] { btnContinueMacro });
             buttonHandler.AddNewButton(btnContinueMacro, new Button[] { btnContinueMacro }, new Button[] { btnPauseMacro });
             buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro, btnPauseMacro, btnContinueMacro }, new Button[] { btnExecuteMacro });
-            
+
             cmbActionType.SelectedIndex = 0;
         }
 
         private void MouseTrackTimer_Tick(Point mousePoint)
         {
-            if (isRecording)
+            btnStopRecording.MouseEnter += (s, e) => isRecording = false;
+            btnStopRecording.MouseLeave += (s, e) => isRecording = true;
+
+            if (isRecording && isRecordingOn)
             {
                 Point point;
                 if (GetCursorPos(out point))
@@ -67,39 +80,35 @@ namespace CoordinateTrackerAndClicker
             }
         }
 
+
         private void OnGlobalMouseClick(Point clickPoint)
-        {
-            if (isRecording)
+        {                   
+            if (isRecording && isRecordingOn)
             {
                 clickHistory.Add(clickPoint);
                 currentCoordinate = clickPoint;
                 UpdateCurrentPositionLabel(clickPoint);
                 UpdateLastClickLabel(true);
+                _printer.Print("Отчетени нови кординати");
             }
         }
 
         private void UpdateLastClickLabel(bool fromMouseClick)
-        {
-            if (clickHistory.Count == 0)
-            {
-                StatusLabel.Text = "Няма записани кординати";
-                return;
-            }
-
-            if (clickHistory.Count > 0) 
+        {          
+            if (clickHistory.Count > 0)
             {
                 int clickCounts = clickHistory.Count;
-                lastCoordinate = clickHistory[clickCounts - (fromMouseClick ? 1 : 2)];
+                lastCoordinate = clickHistory[clickCounts - 1];
                 LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";
-            }    
+            }
         }
 
         private void SaveLastValidCoordinate()
         {
             if (clickHistory.Count > 0)
-            {
+            {               
                 int clickCounts = clickHistory.Count;
-                lastCoordinate = clickHistory.Count == 1 ? clickHistory[clickCounts - 1] : clickHistory[clickCounts - 2];              
+                lastCoordinate = clickHistory[clickCounts - 1];
 
                 UpdateCoordinatesBoxes(lastCoordinate);
                 UpdateLastClickLabel(false);
@@ -115,16 +124,21 @@ namespace CoordinateTrackerAndClicker
         private void StartButton_Click(object sender, EventArgs e)
         {
             buttonHandler.ClickButtonMechanicsExecute(sender);
-            isRecording = true;         
+            isRecording = true;
+            isRecordingOn = true;
             clickHistory.Clear();
             _mouseTracker.StartTracking();
+            _printer.Print("Следене на кординатите в процес ...");
+            //_printer.Print("🐇");
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
             buttonHandler.ClickButtonMechanicsExecute(sender);
             SaveLastValidCoordinate();
-            isRecording = false;           
+            isRecording = false;
+            isRecordingOn = false;
+            _printer.Print(clickHistory.Any() ? "Заредени кординати за действие" : "Няма записани кординати");
             clickHistory.Clear();
             _mouseTracker.StopTracking();
         }
@@ -138,20 +152,20 @@ namespace CoordinateTrackerAndClicker
             btnStopRecording.Enabled = false;
             clickHistory.Clear();
             CurrentPositionLabel.Text = "Текуща позиция: ";
-            StatusLabel.Text = string.Empty;
+            _printer.Print(string.Empty);
         }
 
         // UI
         private void UpdateCurrentPositionLabel(Point point)
         {
             CurrentPositionLabel.Text = $"Текуща позиция: X={point.X}, Y={point.Y}";
-        }         
+        }
 
         private void btnAddAction_Click(object sender, EventArgs e)
         {
             if (txtX.Text == string.Empty || txtY.Text == string.Empty)
             {
-                StatusLabel.Text = "Няма записани кординати в полетата";
+                _printer.Print("Няма записани кординати в полетата");
                 return;
             }
 
@@ -172,7 +186,7 @@ namespace CoordinateTrackerAndClicker
             // Спира изпълнението ако няма добавени действия
             if (lstActions.Items.Count == 0)
             {
-                StatusLabel.Text = "Няма Действия в списъка";
+                _printer.Print("Няма Действия в списъка");
                 return;
             }
 
@@ -193,9 +207,9 @@ namespace CoordinateTrackerAndClicker
         private void btnExecuteMacro_Click(object sender, EventArgs e)
         {
             // Спира изпълнението ако няма добавени макрота
-            if(lstMacros.Items.Count == 0)
+            if (lstMacros.Items.Count == 0)
             {
-                StatusLabel.Text = "Няма Макрота в списъка";
+                _printer.Print("Няма Макрота в списъка");
                 return;
             }
 
@@ -209,15 +223,16 @@ namespace CoordinateTrackerAndClicker
             if (currentSelectedIndex == -1) { lstMacros.SelectedIndex = 0; currentSelectedIndex = 0; }
 
             macroService.ExecuteMacro(autoClickTimer, currentSelectedIndex, (int)countMacroRepeat.Value);
-         
-            StatusLabel.Text = "Автоматично кликане в прогрес...";                
+
+            _printer.Print("Автоматично кликане в прогрес...");
         }
 
         private void AutoClicker_TimerStopped(object sender, EventArgs e)
         {
             // Актуализиране на UI
-            Invoke(new Action(() => {
-                StatusLabel.Text = "Автоматичното кликане приключи.";
+            Invoke(new Action(() =>
+            {
+                _printer.Print("Автоматичното кликане приключи.");
                 buttonHandler.ClickButtonMechanicsExecute(btnStopMacro);
             }));
         }
@@ -234,21 +249,21 @@ namespace CoordinateTrackerAndClicker
         {
             macroService.OnPauseClick();
             buttonHandler.ClickButtonMechanicsExecute(sender);
-            StatusLabel.Text = "Пауза ...";
+            _printer.Print("Пауза ...");
         }
 
         private void btnContinueMacro_Click(object sender, EventArgs e)
         {
             macroService.OnContinueClick();
             buttonHandler.ClickButtonMechanicsExecute(sender);
-            StatusLabel.Text = "Автоматично кликане в прогрес...";
+            _printer.Print("Автоматично кликане в прогрес...");
         }
 
         private void btnStopMacro_Click(object sender, EventArgs e)
         {
             macroService.OnStopClick(autoClickTimer);
             buttonHandler.ClickButtonMechanicsExecute(sender);
-            StatusLabel.Text = "Автоматичното кликане беше спряно.";
-        }
+            _printer.Print("Автоматичното кликане беше спряно.");
+        }       
     }
 }
