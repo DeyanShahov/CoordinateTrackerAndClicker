@@ -1,7 +1,9 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
+using CoordinateTrackerAndClicker.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CoordinateTrackerAndClicker.Core.Services
@@ -32,6 +34,11 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
         public string CreateMacro(string macroName)
         {
+            if (macrosList.Any(m => m.Name == macroName))
+            {
+                throw new CustomException("Неуспешна заявка. Макро с такова име вече съществува!");
+            }
+
             currentMacro = new Macro 
             {
                 Name = macroName,
@@ -70,13 +77,24 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList.RemoveAt(actionIndex);
         }
 
-        public void ExecuteMacro(Timer autoClickTimer,int macroIndex, int macroRepeatCount = 1)
-        {           
-            macroToExecute = macrosList[macroIndex];
+        public void ChangeActionPosition(int index, bool isMoveUp)
+        {
+            var temp = currentActionsList[index];
+            int targetElementIndexToSwap = index + (isMoveUp ? -1 : +1);
+            currentActionsList[index] = currentActionsList[targetElementIndexToSwap];
+            currentActionsList[targetElementIndexToSwap] = temp;
+        }
+
+        public void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount = 1)
+        {
+            //macroToExecute = macrosList[macroIndex];
+            macroToExecute = macrosList.FirstOrDefault(m => m.Name == macroName);
             macroToExecute.RepeatCount = macroRepeatCount;
 
             endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
-            countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
+            countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount; 
+            //endTime = DateTime.Now.AddMinutes(macroToExecute.Duration);
+            //countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
 
             autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
             autoClickTimer.Tick += AutoClickTimer_Tick;

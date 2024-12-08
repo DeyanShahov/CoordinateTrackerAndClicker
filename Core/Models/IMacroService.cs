@@ -13,6 +13,6 @@ namespace CoordinateTrackerAndClicker.Core.Models
         void RemoveAction(int actionIndex);
         void SaveMacro(Macro macro);
         Macro LoadMacro(string name);
-        void ExecuteMacro(Timer autoClickTimer, int macroIndex, int macroRepeatCount);
+        void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount);
     }
 }

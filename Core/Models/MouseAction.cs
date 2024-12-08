@@ -36,6 +36,7 @@ namespace CoordinateTrackerAndClicker.Core.Models
     {
         SingleClick,
         DoubleClick,
-        Scroll
+        Scroll,
+        RightClick
     }
 }

@@ -19,6 +19,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
         private const int MOUSEEVENTF_WHEEL = 0x0800;
      
         public void Execute(MouseAction action)
@@ -36,6 +38,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
                 case MouseActionType.DoubleClick: SimulateDoubleClick();
                     break;
                 case MouseActionType.Scroll: SimulateScroll();
+                    break;
+                case MouseActionType.RightClick: SimulateRightClick();
                     break;
             }
 
@@ -71,6 +75,13 @@ namespace CoordinateTrackerAndClicker.Core.Services
             mouse_event(MOUSEEVENTF_WHEEL, 0, 0, dwData, 0); // Завъртане нагоре (120 е една стъпка)
             Thread.Sleep(500); // Изчакване за ефекта
             //mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -720, 0); // Завъртане надолу
+        }
+
+        public void SimulateRightClick()
+        {
+            // Симулираме клик (натискане и освобождаване на десния бутон)
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+            mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
         }
     }
 }
