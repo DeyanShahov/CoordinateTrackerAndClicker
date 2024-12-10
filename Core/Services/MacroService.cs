@@ -15,12 +15,17 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private readonly MouseActionExecutor actionExecutor;
         public List<Macro> macrosList;
         public List<MouseAction> currentActionsList;
+        public List<KeyValuePair<string, int>> macrosNameToExecute;
         private Macro currentMacro;
 
         private DateTime endTime;
         private int currentActionIndex = 0;
         private int countActionRepeat;
+        private int countAllMacroRepeatCount = 0;
+        private int currentMacroRepeatCount = 0;
         private bool isPauseMacroExecution = false;
+        private bool isAllMacrosFromListToExecution = false;
+        private int currentAllMacroIndex = 0;
         
         private Macro macroToExecute;
 
@@ -29,6 +34,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
             macrosList = new List<Macro>();
             currentActionsList = new List<MouseAction>();
             actionExecutor = new MouseActionExecutor();
+            macrosNameToExecute = new List<KeyValuePair<string, int>>();
         }
 
 
@@ -85,16 +91,35 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList[targetElementIndexToSwap] = temp;
         }
 
-        public void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount = 1)
+        public void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount = 1, int macroAllRepeatCount = 1)
         {
-            //macroToExecute = macrosList[macroIndex];
             macroToExecute = macrosList.FirstOrDefault(m => m.Name == macroName);
             macroToExecute.RepeatCount = macroRepeatCount;
 
             endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
             countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount; 
-            //endTime = DateTime.Now.AddMinutes(macroToExecute.Duration);
-            //countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
+            currentMacroRepeatCount = macroRepeatCount;
+
+            countAllMacroRepeatCount = macroAllRepeatCount;
+
+            autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
+            autoClickTimer.Tick += AutoClickTimer_Tick;
+            autoClickTimer.Start();
+        }
+
+        public void ExecuteMacro(Timer autoClickTimer, List<KeyValuePair<string, int>> macrosNameRepeatList, int macroAllRepeatCount = 1)
+        {
+            currentAllMacroIndex = 0;
+            macrosNameToExecute = macrosNameRepeatList;
+            //macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
+            macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
+            macroToExecute.RepeatCount = macrosNameToExecute[currentAllMacroIndex].Value;
+
+            endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
+            countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
+            currentMacroRepeatCount = macroToExecute.RepeatCount;
+
+            countAllMacroRepeatCount = macroAllRepeatCount;
 
             autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
             autoClickTimer.Tick += AutoClickTimer_Tick;
@@ -126,11 +151,52 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                     if (macroToExecute.RepeatCount <= 0)
                     {
-                        StopCurrentMacroExecution((Timer)sender);
-                       
-                        // Изпращане на уведомление 
-                        OnTimerStopped();
-                        return;
+
+                        if (isAllMacrosFromListToExecution)
+                        {
+                            currentAllMacroIndex++;
+
+                            if (currentAllMacroIndex >= macrosNameToExecute.Count)
+                            {
+                                countAllMacroRepeatCount--;
+
+                                if (countAllMacroRepeatCount <= 0)
+                                {
+                                    StopCurrentMacroExecution((Timer)sender);
+
+                                    // Изпращане на уведомление 
+                                    OnTimerStopped();
+                                    return;
+                                }
+
+                                macroToExecute.RepeatCount = currentMacroRepeatCount;
+                                currentAllMacroIndex = 0;
+                            }
+
+                            macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
+                            macroToExecute.RepeatCount = macrosNameToExecute[currentAllMacroIndex].Value;
+
+                            endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
+                            countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
+                            currentMacroRepeatCount = macroToExecute.RepeatCount;
+
+                            ((Timer)sender).Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000;
+                        }
+                        else
+                        {
+                            countAllMacroRepeatCount--;
+
+                            if (countAllMacroRepeatCount <= 0)
+                            {
+                                StopCurrentMacroExecution((Timer)sender);
+
+                                // Изпращане на уведомление 
+                                OnTimerStopped();
+                                return;
+                            }
+
+                            macroToExecute.RepeatCount = currentMacroRepeatCount;
+                        }                                            
                     }
                 }
 
@@ -155,6 +221,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
         public void OnPauseClick() => isPauseMacroExecution = true; 
         public void OnContinueClick() => isPauseMacroExecution = false;
         public void OnStopClick(Timer sender) => StopCurrentMacroExecution(sender);
+
+        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;
 
         // Проверка дали има абонирани слушатели
         protected virtual void OnTimerStopped() => TimerStopped?.Invoke(this, EventArgs.Empty);

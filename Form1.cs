@@ -252,7 +252,7 @@ namespace CoordinateTrackerAndClicker
 
             // Add to the macro's action list 
             macroService.AddAction(textBoxActionName.Text, lastCoordinate, (MouseActionType)cmbActionType.SelectedIndex,
-                Convert.ToInt32(numericDelay.Value), Convert.ToInt32(numericDelayBefore.Value), chkReturnToOriginal.Checked,
+                Convert.ToInt32(numericDelay.Value), Convert.ToInt32(numericDelayBefore.Value), chkReturnMouseToOriginal.Checked,
                 Convert.ToInt32(FrequencyInput.Value), Convert.ToInt32(DurationInput.Value), Convert.ToInt32(CountInput.Value));
 
             // Refresh the UI to show the new action
@@ -380,8 +380,30 @@ namespace CoordinateTrackerAndClicker
                 autoClickTimer = new Timer();
                 macroService.TimerStopped += AutoClicker_TimerStopped;
 
-                //macroService.ExecuteMacro(autoClickTimer, currentSelectedIndex, (int)countMacroRepeat.Value);
-                macroService.ExecuteMacro(autoClickTimer, (string)lstMacrosForExecute.SelectedItem, (int)countMacroRepeat.Value);
+                if (chkAllMacrosToExecute.Checked)
+                {
+                    List<KeyValuePair<string, int>> macrosNameRepeatList = new List<KeyValuePair<string, int>>();
+
+                    for (int i = 0; i < lstMacrosForExecute.Items.Count; i++)
+                    {
+                        macrosNameRepeatList.Add(new KeyValuePair<string, int>(
+                            (string)lstMacrosForExecute.Items[i],
+                            (int)numericUpDownsForMacrosToExecute[i].Value));
+                    }
+
+                    macroService.ExecuteMacro(
+                        autoClickTimer,
+                        macrosNameRepeatList,
+                        (int)countAllMacroRepeat.Value);
+                }
+                else 
+                {
+                    macroService.ExecuteMacro(
+                        autoClickTimer,
+                        (string)lstMacrosForExecute.SelectedItem,
+                        (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value,
+                        (int)countAllMacroRepeat.Value);
+                }            
 
                 // Стартиране механика на бутона
                 buttonHandler.ClickButtonMechanicsExecute(sender);
@@ -495,7 +517,7 @@ namespace CoordinateTrackerAndClicker
         {
             if (lstAvailableActions.SelectedIndex == 0 || lstAvailableActions.Items.Count == 0 || lstAvailableActions.SelectedIndex == -1) return;
 
-            SwapElements(lstAvailableActions, lstAvailableActions.SelectedIndex, true);
+            SwapElementsInListBox(lstAvailableActions, lstAvailableActions.SelectedIndex, true);
             macroService.ChangeActionPosition(lstAvailableActions.SelectedIndex, true);
             lstAvailableActions.SelectedIndex --;
 
@@ -505,12 +527,12 @@ namespace CoordinateTrackerAndClicker
         {
             if (lstAvailableActions.SelectedIndex == lstAvailableActions.Items.Count - 1 || lstAvailableActions.Items.Count == 0 || lstAvailableActions.SelectedIndex == -1) return;
 
-            SwapElements(lstAvailableActions, lstAvailableActions.SelectedIndex, false);
+            SwapElementsInListBox(lstAvailableActions, lstAvailableActions.SelectedIndex, false);
             macroService.ChangeActionPosition(lstAvailableActions.SelectedIndex, false);
             lstAvailableActions.SelectedIndex ++;
         }
 
-        private static void SwapElements(ListBox list, int index, bool isMoveUp)
+        private static void SwapElementsInListBox(ListBox list, int index, bool isMoveUp)
         {
             var temp = list.Items[index];
             int targetElementIndexToSwap = index + (isMoveUp ? -1 : +1);
@@ -518,14 +540,48 @@ namespace CoordinateTrackerAndClicker
             list.Items[targetElementIndexToSwap] = temp;
         }
 
+        private void SwapNumericUpDown(ListBox list, int index, bool isMoveUp)
+        {
+            int targetElementIndexToSwap = index + (isMoveUp ? -1 : +1);
+
+            // Разменяне на NumericUpDown контролите
+            var tempNumericUpDown = numericUpDownsForMacrosToExecute[index];
+            numericUpDownsForMacrosToExecute[index] = numericUpDownsForMacrosToExecute[targetElementIndexToSwap];
+            numericUpDownsForMacrosToExecute[targetElementIndexToSwap] = tempNumericUpDown;
+
+            // Препозициониране на NaumericUpDown контролите
+            numericUpDownsForMacrosToExecute[index].Location = new Point(
+                list.Right + 10,
+                list.Top + (index * list.ItemHeight) + 5);
+            numericUpDownsForMacrosToExecute[targetElementIndexToSwap].Location = new Point(
+                list.Right + 10,
+                list.Top + (targetElementIndexToSwap * list.ItemHeight) + 5);
+        }
+
         private void btnMoveUpMacro_Click(object sender, EventArgs e)
         {
+            if (lstMacrosForExecute.SelectedIndex == 0 || lstMacrosForExecute.Items.Count == 0 || lstMacrosForExecute.SelectedIndex == -1) return;
 
+            SwapElementsInListBox(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, true);
+            SwapNumericUpDown(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, true);
+            lstMacrosForExecute.SelectedIndex--;
         }
 
         private void btnMoveDownMacro_Click(object sender, EventArgs e)
         {
+            if (lstMacrosForExecute.SelectedIndex == lstMacrosForExecute.Items.Count - 1 || lstMacrosForExecute.Items.Count == 0 || lstMacrosForExecute.SelectedIndex == -1) return;
 
+            SwapElementsInListBox(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, false);
+            SwapNumericUpDown(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, false);
+            lstMacrosForExecute.SelectedIndex++;
+        }
+
+        private void chkAllMacrosToExecute_CheckedChanged(object sender, EventArgs e)
+        {
+            macroService.OnAllMacroToExecuteClick();
+            _printer.Print(
+                chkAllMacrosToExecute.Checked ? "Всички Макрота от списъка са за изпълнение." : "Само избраното макро ще баде изпалнено.",
+                LogLevel.Info);
         }
     }
 }
