@@ -1,7 +1,9 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CoordinateTrackerAndClicker.Core.Services
@@ -22,40 +24,61 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
         private const int MOUSEEVENTF_RIGHTUP = 0x0010;
         private const int MOUSEEVENTF_WHEEL = 0x0800;
-     
-        public void Execute(MouseAction action)
+
+        //public async Task Execute(MouseAction action, CancellationToken cancellationToken, ManualResetEvent _pauseEvent)
+        public async Task Execute(MouseAction action, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             // Запазваме текущата позиция на курсора
             var originalPos = Cursor.Position;
 
+            // Чакаме, докато не се възобнови от пауза
+            //_pauseEvent.WaitOne();
+
             Cursor.Position = action.Coordinates;
-            Thread.Sleep(action.DelayBefore);
+
+            await Task.Delay(action.DelayBefore, cancellationToken);
+            //await WaitWithPause(action.DelayBefore, cancellationToken, _pauseEvent);
 
             switch (action.ActionType)
             {
-                case MouseActionType.SingleClick: SimulateSingleClick();
+                case MouseActionType.SingleClick:
+                    SimulateSingleClick();
                     break;
-                case MouseActionType.DoubleClick: SimulateDoubleClick();
+                case MouseActionType.DoubleClick:
+                    SimulateDoubleClick();
                     break;
-                case MouseActionType.Scroll: SimulateScroll();
+                case MouseActionType.Scroll:
+                    SimulateScroll();
                     break;
-                case MouseActionType.RightClick: SimulateRightClick();
+                case MouseActionType.RightClick:
+                    SimulateRightClick();
                     break;
             }
 
-            Thread.Sleep(action.DelayAfter);
+            //if(_pauseEvent.WaitOne(0))
+            //{
+            //    await WaitWithPause(action.DelayAfter, cancellationToken, _pauseEvent);
+            //}
+            await Task.Delay(action.DelayAfter, cancellationToken);
+           
 
             // Връщаме курсора на първоначалната позиция ако е отбелязано
-            if (action.ReturnToOriginal) Cursor.Position = originalPos;
+            if (action.ReturnToOriginal)
+            {
+                //_pauseEvent.WaitOne();
+                Cursor.Position = originalPos;
+            }
         }
 
-        public void SimulateSingleClick() 
+        public void SimulateSingleClick()
         {
             // Симулираме клик (натискане и освобождаване на левия бутон)
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
         }
-        public void SimulateDoubleClick() 
+        public void SimulateDoubleClick()
         {
             // Симулираме първия клик (натискане и освобождаване на левия бутон)
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
@@ -83,5 +106,23 @@ namespace CoordinateTrackerAndClicker.Core.Services
             mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
         }
+
+        //private async Task WaitWithPause(int milliseconds, CancellationToken cancellationToken, ManualResetEvent _pauseEvent)
+        //{
+        //    int interval = 100; // Проверка за пауза на всеки 100мс
+        //    int elapsed = 0;
+
+        //    while (elapsed < milliseconds)
+        //    {
+        //        // Чакаме за пауза и проверяваме за отмяна
+        //        _pauseEvent.WaitOne();
+        //        cancellationToken.ThrowIfCancellationRequested();
+
+        //        // Изчакваме малък интервал
+        //        int delay = Math.Min(interval, milliseconds - elapsed);
+        //        await Task.Delay(delay, cancellationToken);
+        //        elapsed += delay;
+        //    }
+        //}
     }
 }

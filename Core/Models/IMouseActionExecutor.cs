@@ -1,8 +1,12 @@
-﻿namespace CoordinateTrackerAndClicker.Core.Models
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace CoordinateTrackerAndClicker.Core.Models
 {
     internal interface IMouseActionExecutor
     {
-        void Execute(MouseAction action);
+        //Task Execute(MouseAction action, CancellationToken cancellationToken, ManualResetEvent pauseEvent);
+        Task Execute(MouseAction action, CancellationToken cancellationToken);
         void SimulateSingleClick();
         void SimulateDoubleClick();
         void SimulateScroll(int dwData = 520);

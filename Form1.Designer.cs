@@ -7,24 +7,23 @@ namespace CoordinateTrackerAndClicker
 {
     public partial class Form1
     {
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {             
-                if (autoClickTimer != null)
-                {
-                    autoClickTimer.Stop();
-                    autoClickTimer.Dispose();
-                }             
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {             
+        //        if (autoClickTimer != null)
+        //        {
+        //            autoClickTimer.Stop();
+        //            autoClickTimer.Dispose();
+        //        }             
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
         private void InitializeComponent()
         {
             this.btnStartRecording = new System.Windows.Forms.Button();
             this.btnStopRecording = new System.Windows.Forms.Button();
-            this.ResetButton = new System.Windows.Forms.Button();
             this.FrequencyLabel = new System.Windows.Forms.Label();
             this.FrequencyInput = new System.Windows.Forms.NumericUpDown();
             this.DurationLabel = new System.Windows.Forms.Label();
@@ -95,15 +94,6 @@ namespace CoordinateTrackerAndClicker
             this.btnStopRecording.Text = "Стоп запис";
             this.btnStopRecording.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // ResetButton
-            // 
-            this.ResetButton.Location = new System.Drawing.Point(230, 10);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(100, 30);
-            this.ResetButton.TabIndex = 2;
-            this.ResetButton.Text = "Ресет";
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
             // FrequencyLabel
             // 
             this.FrequencyLabel.Location = new System.Drawing.Point(12, 224);
@@ -167,19 +157,19 @@ namespace CoordinateTrackerAndClicker
             // StatusLabel
             // 
             this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.StatusLabel.Location = new System.Drawing.Point(759, 436);
+            this.StatusLabel.Location = new System.Drawing.Point(399, 418);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(465, 63);
+            this.StatusLabel.Size = new System.Drawing.Size(523, 63);
             this.StatusLabel.TabIndex = 10;
             this.StatusLabel.Text = "Полседно действие:";
             // 
             // labelDisplayActionInfo
             // 
-            this.labelDisplayActionInfo.Location = new System.Drawing.Point(237, 434);
+            this.labelDisplayActionInfo.Location = new System.Drawing.Point(237, 484);
             this.labelDisplayActionInfo.Name = "labelDisplayActionInfo";
-            this.labelDisplayActionInfo.Size = new System.Drawing.Size(333, 171);
+            this.labelDisplayActionInfo.Size = new System.Drawing.Size(247, 121);
             this.labelDisplayActionInfo.TabIndex = 12;
-            this.labelDisplayActionInfo.Text = "dfdfsdfsdf\\nfgdgdfgdfgdfgfdf";
+            this.labelDisplayActionInfo.Text = ". . .";
             // 
             // CountLabel
             // 
@@ -216,22 +206,22 @@ namespace CoordinateTrackerAndClicker
             this.btnAddAction.Enabled = false;
             this.btnAddAction.Location = new System.Drawing.Point(15, 453);
             this.btnAddAction.Name = "btnAddAction";
-            this.btnAddAction.Size = new System.Drawing.Size(100, 32);
+            this.btnAddAction.Size = new System.Drawing.Size(204, 32);
             this.btnAddAction.TabIndex = 15;
             this.btnAddAction.Text = "Добави";
             this.btnAddAction.UseVisualStyleBackColor = true;
-            this.btnAddAction.Click += new System.EventHandler(this.btnAddAction_Click);
+            this.btnAddAction.Click += new System.EventHandler(this.BtnAddAction_Click);
             // 
             // btnCreateMacro
             // 
             this.btnCreateMacro.Enabled = false;
-            this.btnCreateMacro.Location = new System.Drawing.Point(399, 75);
+            this.btnCreateMacro.Location = new System.Drawing.Point(399, 52);
             this.btnCreateMacro.Name = "btnCreateMacro";
             this.btnCreateMacro.Size = new System.Drawing.Size(116, 30);
             this.btnCreateMacro.TabIndex = 16;
             this.btnCreateMacro.Text = "Създаи Макрото";
             this.btnCreateMacro.UseVisualStyleBackColor = true;
-            this.btnCreateMacro.Click += new System.EventHandler(this.btnCreateMacro_Click);
+            this.btnCreateMacro.Click += new System.EventHandler(this.BtnCreateMacro_Click);
             // 
             // txtX
             // 
@@ -270,9 +260,9 @@ namespace CoordinateTrackerAndClicker
             this.chkReturnMouseToOriginal.AutoSize = true;
             this.chkReturnMouseToOriginal.Location = new System.Drawing.Point(207, 185);
             this.chkReturnMouseToOriginal.Name = "chkReturnMouseToOriginal";
-            this.chkReturnMouseToOriginal.Size = new System.Drawing.Size(148, 17);
+            this.chkReturnMouseToOriginal.Size = new System.Drawing.Size(132, 17);
             this.chkReturnMouseToOriginal.TabIndex = 20;
-            this.chkReturnMouseToOriginal.Text = "Return to Original Position";
+            this.chkReturnMouseToOriginal.Text = "Оригинална позиция";
             this.chkReturnMouseToOriginal.UseVisualStyleBackColor = true;
             // 
             // numericDelay
@@ -301,23 +291,23 @@ namespace CoordinateTrackerAndClicker
             // btnExecuteMacro
             // 
             this.btnExecuteMacro.Enabled = false;
-            this.btnExecuteMacro.Location = new System.Drawing.Point(806, 403);
+            this.btnExecuteMacro.Location = new System.Drawing.Point(657, 314);
             this.btnExecuteMacro.Name = "btnExecuteMacro";
             this.btnExecuteMacro.Size = new System.Drawing.Size(100, 30);
             this.btnExecuteMacro.TabIndex = 22;
             this.btnExecuteMacro.Text = "Изпълни";
             this.btnExecuteMacro.UseVisualStyleBackColor = true;
-            this.btnExecuteMacro.Click += new System.EventHandler(this.btnExecuteMacro_Click);
+            this.btnExecuteMacro.Click += new System.EventHandler(this.BtnExecuteMacro_Click);
             // 
             // lstAvailableMacros
             // 
             this.lstAvailableMacros.FormattingEnabled = true;
-            this.lstAvailableMacros.Location = new System.Drawing.Point(642, 75);
+            this.lstAvailableMacros.Location = new System.Drawing.Point(399, 128);
             this.lstAvailableMacros.Name = "lstAvailableMacros";
             this.lstAvailableMacros.Size = new System.Drawing.Size(200, 95);
             this.lstAvailableMacros.TabIndex = 23;
-            this.lstAvailableMacros.SelectedIndexChanged += new System.EventHandler(this.lstMacros_SelectedIndexChanged);
-            this.lstAvailableMacros.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstAvailableMacros_MouseDoubleClick);
+            this.lstAvailableMacros.SelectedIndexChanged += new System.EventHandler(this.LstMacros_SelectedIndexChanged);
+            this.lstAvailableMacros.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LstAvailableMacros_MouseDoubleClick);
             // 
             // lstAvailableActions
             // 
@@ -326,13 +316,13 @@ namespace CoordinateTrackerAndClicker
             this.lstAvailableActions.Name = "lstAvailableActions";
             this.lstAvailableActions.Size = new System.Drawing.Size(168, 108);
             this.lstAvailableActions.TabIndex = 24;
-            this.lstAvailableActions.SelectedIndexChanged += new System.EventHandler(this.lstActions_SelectedIndexChanged);
+            this.lstAvailableActions.SelectedIndexChanged += new System.EventHandler(this.LstActions_SelectedIndexChanged);
             // 
             // textBoxMacroName
             // 
-            this.textBoxMacroName.Location = new System.Drawing.Point(399, 49);
+            this.textBoxMacroName.Location = new System.Drawing.Point(399, 20);
             this.textBoxMacroName.Name = "textBoxMacroName";
-            this.textBoxMacroName.Size = new System.Drawing.Size(231, 20);
+            this.textBoxMacroName.Size = new System.Drawing.Size(200, 20);
             this.textBoxMacroName.TabIndex = 25;
             this.textBoxMacroName.Text = "Име на Макрото";
             // 
@@ -364,16 +354,17 @@ namespace CoordinateTrackerAndClicker
             this.textBoxActionName.Name = "textBoxActionName";
             this.textBoxActionName.Size = new System.Drawing.Size(231, 20);
             this.textBoxActionName.TabIndex = 27;
+            this.textBoxActionName.Tag = "";
             this.textBoxActionName.Text = "Име на действието";
             // 
             // textBoxDisplayMacroInfo
             // 
-            this.textBoxDisplayMacroInfo.Location = new System.Drawing.Point(806, 224);
+            this.textBoxDisplayMacroInfo.Location = new System.Drawing.Point(399, 238);
             this.textBoxDisplayMacroInfo.Multiline = true;
             this.textBoxDisplayMacroInfo.Name = "textBoxDisplayMacroInfo";
             this.textBoxDisplayMacroInfo.ReadOnly = true;
             this.textBoxDisplayMacroInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDisplayMacroInfo.Size = new System.Drawing.Size(270, 160);
+            this.textBoxDisplayMacroInfo.Size = new System.Drawing.Size(200, 160);
             this.textBoxDisplayMacroInfo.TabIndex = 28;
             this.textBoxDisplayMacroInfo.Text = "Макро информация";
             // 
@@ -419,7 +410,7 @@ namespace CoordinateTrackerAndClicker
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(859, 18);
+            this.label4.Location = new System.Drawing.Point(654, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 20);
             this.label4.TabIndex = 33;
@@ -427,7 +418,7 @@ namespace CoordinateTrackerAndClicker
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(639, 52);
+            this.label5.Location = new System.Drawing.Point(396, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(171, 17);
             this.label5.TabIndex = 34;
@@ -435,7 +426,7 @@ namespace CoordinateTrackerAndClicker
             // 
             // countAllMacroRepeat
             // 
-            this.countAllMacroRepeat.Location = new System.Drawing.Point(979, 16);
+            this.countAllMacroRepeat.Location = new System.Drawing.Point(774, 20);
             this.countAllMacroRepeat.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -453,35 +444,35 @@ namespace CoordinateTrackerAndClicker
             // btnPauseMacro
             // 
             this.btnPauseMacro.Enabled = false;
-            this.btnPauseMacro.Location = new System.Drawing.Point(912, 403);
+            this.btnPauseMacro.Location = new System.Drawing.Point(757, 314);
             this.btnPauseMacro.Name = "btnPauseMacro";
             this.btnPauseMacro.Size = new System.Drawing.Size(100, 30);
             this.btnPauseMacro.TabIndex = 36;
             this.btnPauseMacro.Text = "Пауза";
             this.btnPauseMacro.UseVisualStyleBackColor = true;
-            this.btnPauseMacro.Click += new System.EventHandler(this.btnPauseMacro_Click);
+            this.btnPauseMacro.Click += new System.EventHandler(this.BtnPauseMacro_Click);
             // 
             // btnContinueMacro
             // 
             this.btnContinueMacro.Enabled = false;
-            this.btnContinueMacro.Location = new System.Drawing.Point(1018, 403);
+            this.btnContinueMacro.Location = new System.Drawing.Point(757, 350);
             this.btnContinueMacro.Name = "btnContinueMacro";
             this.btnContinueMacro.Size = new System.Drawing.Size(100, 30);
             this.btnContinueMacro.TabIndex = 37;
             this.btnContinueMacro.Text = "Продължи";
             this.btnContinueMacro.UseVisualStyleBackColor = true;
-            this.btnContinueMacro.Click += new System.EventHandler(this.btnContinueMacro_Click);
+            this.btnContinueMacro.Click += new System.EventHandler(this.BtnContinueMacro_Click);
             // 
             // btnStopMacro
             // 
             this.btnStopMacro.Enabled = false;
-            this.btnStopMacro.Location = new System.Drawing.Point(1124, 403);
+            this.btnStopMacro.Location = new System.Drawing.Point(657, 350);
             this.btnStopMacro.Name = "btnStopMacro";
             this.btnStopMacro.Size = new System.Drawing.Size(100, 30);
             this.btnStopMacro.TabIndex = 38;
             this.btnStopMacro.Text = "Спри";
             this.btnStopMacro.UseVisualStyleBackColor = true;
-            this.btnStopMacro.Click += new System.EventHandler(this.btnStopMacro_Click);
+            this.btnStopMacro.Click += new System.EventHandler(this.BtnStopMacro_Click);
             // 
             // btnActionDelete
             // 
@@ -493,7 +484,7 @@ namespace CoordinateTrackerAndClicker
             this.btnActionDelete.TabIndex = 40;
             this.btnActionDelete.Text = "🐇";
             this.btnActionDelete.UseVisualStyleBackColor = true;
-            this.btnActionDelete.Click += new System.EventHandler(this.btnActionDelete_Click);
+            this.btnActionDelete.Click += new System.EventHandler(this.BtnActionDelete_Click);
             // 
             // btnMoveUpAction
             // 
@@ -503,7 +494,7 @@ namespace CoordinateTrackerAndClicker
             this.btnMoveUpAction.TabIndex = 41;
             this.btnMoveUpAction.Text = "UP";
             this.btnMoveUpAction.UseVisualStyleBackColor = true;
-            this.btnMoveUpAction.Click += new System.EventHandler(this.btnMoveUpAction_Click);
+            this.btnMoveUpAction.Click += new System.EventHandler(this.BtnMoveUpAction_Click);
             // 
             // btnMoveDownAction
             // 
@@ -513,22 +504,22 @@ namespace CoordinateTrackerAndClicker
             this.btnMoveDownAction.TabIndex = 42;
             this.btnMoveDownAction.Text = "D";
             this.btnMoveDownAction.UseVisualStyleBackColor = true;
-            this.btnMoveDownAction.Click += new System.EventHandler(this.btnMoveDownAction_Click);
+            this.btnMoveDownAction.Click += new System.EventHandler(this.BtnMoveDownAction_Click);
             // 
             // lstMacrosForExecute
             // 
             this.lstMacrosForExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lstMacrosForExecute.FormattingEnabled = true;
             this.lstMacrosForExecute.ItemHeight = 20;
-            this.lstMacrosForExecute.Location = new System.Drawing.Point(862, 75);
+            this.lstMacrosForExecute.Location = new System.Drawing.Point(657, 75);
             this.lstMacrosForExecute.Name = "lstMacrosForExecute";
             this.lstMacrosForExecute.Size = new System.Drawing.Size(200, 144);
             this.lstMacrosForExecute.TabIndex = 43;
-            this.lstMacrosForExecute.SelectedIndexChanged += new System.EventHandler(this.lstMacrosForExecute_SelectedIndexChanged);
+            this.lstMacrosForExecute.SelectedIndexChanged += new System.EventHandler(this.LstMacrosForExecute_SelectedIndexChanged);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(859, 52);
+            this.label6.Location = new System.Drawing.Point(654, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(171, 17);
             this.label6.TabIndex = 44;
@@ -540,58 +531,58 @@ namespace CoordinateTrackerAndClicker
             this.btnMacroForExecuteDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacroForExecuteDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMacroForExecuteDelete.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacroForExecuteDelete.Location = new System.Drawing.Point(1151, 158);
+            this.btnMacroForExecuteDelete.Location = new System.Drawing.Point(820, 225);
             this.btnMacroForExecuteDelete.Name = "btnMacroForExecuteDelete";
             this.btnMacroForExecuteDelete.Size = new System.Drawing.Size(37, 61);
             this.btnMacroForExecuteDelete.TabIndex = 45;
             this.btnMacroForExecuteDelete.Text = "𓀃";
             this.btnMacroForExecuteDelete.UseVisualStyleBackColor = true;
-            this.btnMacroForExecuteDelete.Click += new System.EventHandler(this.btnMacroForExecuteDelete_Click);
+            this.btnMacroForExecuteDelete.Click += new System.EventHandler(this.BtnMacroForExecuteDelete_Click);
             // 
             // richTextBoxLogInfo
             // 
-            this.richTextBoxLogInfo.Location = new System.Drawing.Point(759, 516);
+            this.richTextBoxLogInfo.Location = new System.Drawing.Point(491, 484);
             this.richTextBoxLogInfo.Name = "richTextBoxLogInfo";
             this.richTextBoxLogInfo.ReadOnly = true;
             this.richTextBoxLogInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxLogInfo.Size = new System.Drawing.Size(465, 95);
+            this.richTextBoxLogInfo.Size = new System.Drawing.Size(431, 125);
             this.richTextBoxLogInfo.TabIndex = 46;
             this.richTextBoxLogInfo.Text = "Хронология . . .";
             // 
             // btnMoveUpMacro
             // 
-            this.btnMoveUpMacro.Location = new System.Drawing.Point(1151, 75);
+            this.btnMoveUpMacro.Location = new System.Drawing.Point(657, 225);
             this.btnMoveUpMacro.Name = "btnMoveUpMacro";
             this.btnMoveUpMacro.Size = new System.Drawing.Size(30, 30);
             this.btnMoveUpMacro.TabIndex = 47;
             this.btnMoveUpMacro.Text = "UP";
             this.btnMoveUpMacro.UseVisualStyleBackColor = true;
-            this.btnMoveUpMacro.Click += new System.EventHandler(this.btnMoveUpMacro_Click);
+            this.btnMoveUpMacro.Click += new System.EventHandler(this.BtnMoveUpMacro_Click);
             // 
             // btnMoveDownMacro
             // 
-            this.btnMoveDownMacro.Location = new System.Drawing.Point(1151, 111);
+            this.btnMoveDownMacro.Location = new System.Drawing.Point(693, 225);
             this.btnMoveDownMacro.Name = "btnMoveDownMacro";
             this.btnMoveDownMacro.Size = new System.Drawing.Size(30, 30);
             this.btnMoveDownMacro.TabIndex = 48;
             this.btnMoveDownMacro.Text = "D";
             this.btnMoveDownMacro.UseVisualStyleBackColor = true;
-            this.btnMoveDownMacro.Click += new System.EventHandler(this.btnMoveDownMacro_Click);
+            this.btnMoveDownMacro.Click += new System.EventHandler(this.BtnMoveDownMacro_Click);
             // 
             // chkAllMacrosToExecute
             // 
             this.chkAllMacrosToExecute.AutoSize = true;
-            this.chkAllMacrosToExecute.Location = new System.Drawing.Point(1078, 17);
+            this.chkAllMacrosToExecute.Location = new System.Drawing.Point(657, 285);
             this.chkAllMacrosToExecute.Name = "chkAllMacrosToExecute";
             this.chkAllMacrosToExecute.Size = new System.Drawing.Size(122, 17);
             this.chkAllMacrosToExecute.TabIndex = 49;
             this.chkAllMacrosToExecute.Text = "Всички от списъка";
             this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
-            this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.chkAllMacrosToExecute_CheckedChanged);
+            this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.ChkAllMacrosToExecute_CheckedChanged);
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1269, 621);
+            this.ClientSize = new System.Drawing.Size(934, 621);
             this.Controls.Add(this.chkAllMacrosToExecute);
             this.Controls.Add(this.btnMoveDownMacro);
             this.Controls.Add(this.btnMoveUpMacro);
@@ -631,7 +622,6 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.labelDisplayActionInfo);
             this.Controls.Add(this.btnStartRecording);
             this.Controls.Add(this.btnStopRecording);
-            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.CurrentPositionLabel);
             this.Controls.Add(this.FrequencyLabel);
             this.Controls.Add(this.FrequencyInput);
@@ -639,8 +629,8 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.DurationInput);
             this.Controls.Add(this.StatusLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(1285, 660);
-            this.MinimumSize = new System.Drawing.Size(1285, 660);
+            this.MaximumSize = new System.Drawing.Size(950, 660);
+            this.MinimumSize = new System.Drawing.Size(950, 660);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Координатен тракер и кликер";
@@ -658,7 +648,6 @@ namespace CoordinateTrackerAndClicker
 
         private Button btnStartRecording;
         private Button btnStopRecording;
-        private Button ResetButton;
         private Label FrequencyLabel;
         private NumericUpDown FrequencyInput;
         private Label DurationLabel;

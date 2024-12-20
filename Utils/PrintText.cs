@@ -4,32 +4,19 @@ using System.Text;
 namespace CoordinateTrackerAndClicker.Utils
 {
     internal class PrintText
-    {
+    {  
         public string DisplayActionInfo(MouseAction action)
         {
-            return $"Име: {action.Name}" +
-                            $"\nКординати: {action.Coordinates.X} : {action.Coordinates.Y}" +
-                            $"\nДействие: {action.ActionType}" +
-                            $"\nЗабавяне преди: {action.DelayBefore}" +
-                            $"\nЗабавяне след: {action.DelayAfter}" +
-                            $"\nЧестота: {action.Frequency}" +
-                            $"\nПродължителност: {action.Duration}" +
-                            $"\nПовторения: {action.RepeatCount}" +
-                            $"\nОригинална позиция: {action.ReturnToOriginal}";
-        }
-
-        public string DisplayActionInfo1(MouseAction action)
-        {
             var textResult = new StringBuilder();
-            textResult.AppendLine($"     {action.Name}");
-            textResult.AppendLine($"     {action.Coordinates.ToString()}");
-            textResult.AppendLine($"     {action.ActionType.ToString()}");
-            textResult.AppendLine($"     {action.DelayBefore.ToString()}");
-            textResult.AppendLine($"     {action.DelayAfter.ToString()}");
-            textResult.AppendLine($"     {action.ReturnToOriginal.ToString()}");
-            textResult.AppendLine($"     {action.Frequency.ToString()}");
-            textResult.AppendLine($"     {action.Duration.ToString()}");
-            textResult.AppendLine($"     {action.RepeatCount.ToString()}");
+            textResult.AppendLine($"{action.Name}");
+            textResult.AppendLine($"     Кординати: X {action.Coordinates.X} : Y {action.Coordinates.Y}");
+            textResult.AppendLine($"     Действие: {action.ActionType}");
+            textResult.AppendLine($"     Забавяне преди: {action.DelayBefore}");
+            textResult.AppendLine($"     Забавяне след: {action.DelayAfter}");
+            textResult.AppendLine($"     Честота: {action.RepeatCount}");
+            textResult.AppendLine($"     Продължителност: {action.Frequency}");
+            textResult.AppendLine($"     Повторения: {action.Duration}");
+            textResult.AppendLine($"     Оригинална позиция: {action.ReturnToOriginal}");
 
             return textResult.ToString();
         }
@@ -39,7 +26,7 @@ namespace CoordinateTrackerAndClicker.Utils
             var textToPrint = new StringBuilder();
             textToPrint.AppendLine(macro.Name);
 
-            macro.Actions.ForEach(action => textToPrint.AppendLine(DisplayActionInfo1(action)));
+            macro.Actions.ForEach(action => textToPrint.AppendLine(DisplayActionInfo(action)));
 
             return textToPrint.ToString();
         }
