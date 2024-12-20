@@ -13,9 +13,9 @@ namespace CoordinateTrackerAndClicker.Utils
             textResult.AppendLine($"     Действие: {action.ActionType}");
             textResult.AppendLine($"     Забавяне преди: {action.DelayBefore}");
             textResult.AppendLine($"     Забавяне след: {action.DelayAfter}");
-            textResult.AppendLine($"     Честота: {action.RepeatCount}");
-            textResult.AppendLine($"     Продължителност: {action.Frequency}");
-            textResult.AppendLine($"     Повторения: {action.Duration}");
+            textResult.AppendLine($"     Честота: {action.Frequency}");
+            textResult.AppendLine($"     Продължителност: {action.Duration}");
+            textResult.AppendLine($"     Повторения: {action.RepeatCount}");
             textResult.AppendLine($"     Оригинална позиция: {action.ReturnToOriginal}");
 
             return textResult.ToString();

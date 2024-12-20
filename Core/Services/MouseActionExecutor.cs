@@ -1,5 +1,4 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
-using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -25,7 +24,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private const int MOUSEEVENTF_RIGHTUP = 0x0010;
         private const int MOUSEEVENTF_WHEEL = 0x0800;
 
-        //public async Task Execute(MouseAction action, CancellationToken cancellationToken, ManualResetEvent _pauseEvent)
         public async Task Execute(MouseAction action, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -33,13 +31,9 @@ namespace CoordinateTrackerAndClicker.Core.Services
             // Запазваме текущата позиция на курсора
             var originalPos = Cursor.Position;
 
-            // Чакаме, докато не се възобнови от пауза
-            //_pauseEvent.WaitOne();
-
             Cursor.Position = action.Coordinates;
 
             await Task.Delay(action.DelayBefore, cancellationToken);
-            //await WaitWithPause(action.DelayBefore, cancellationToken, _pauseEvent);
 
             switch (action.ActionType)
             {
@@ -57,19 +51,10 @@ namespace CoordinateTrackerAndClicker.Core.Services
                     break;
             }
 
-            //if(_pauseEvent.WaitOne(0))
-            //{
-            //    await WaitWithPause(action.DelayAfter, cancellationToken, _pauseEvent);
-            //}
             await Task.Delay(action.DelayAfter, cancellationToken);
            
-
             // Връщаме курсора на първоначалната позиция ако е отбелязано
-            if (action.ReturnToOriginal)
-            {
-                //_pauseEvent.WaitOne();
-                Cursor.Position = originalPos;
-            }
+            if (action.ReturnToOriginal) Cursor.Position = originalPos;
         }
 
         public void SimulateSingleClick()
@@ -105,24 +90,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
             // Симулираме клик (натискане и освобождаване на десния бутон)
             mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
-        }
-
-        //private async Task WaitWithPause(int milliseconds, CancellationToken cancellationToken, ManualResetEvent _pauseEvent)
-        //{
-        //    int interval = 100; // Проверка за пауза на всеки 100мс
-        //    int elapsed = 0;
-
-        //    while (elapsed < milliseconds)
-        //    {
-        //        // Чакаме за пауза и проверяваме за отмяна
-        //        _pauseEvent.WaitOne();
-        //        cancellationToken.ThrowIfCancellationRequested();
-
-        //        // Изчакваме малък интервал
-        //        int delay = Math.Min(interval, milliseconds - elapsed);
-        //        await Task.Delay(delay, cancellationToken);
-        //        elapsed += delay;
-        //    }
-        //}
+        }      
     }
 }

@@ -5,7 +5,6 @@ namespace CoordinateTrackerAndClicker.Core.Models
 {
     internal interface IMouseActionExecutor
     {
-        //Task Execute(MouseAction action, CancellationToken cancellationToken, ManualResetEvent pauseEvent);
         Task Execute(MouseAction action, CancellationToken cancellationToken);
         void SimulateSingleClick();
         void SimulateDoubleClick();

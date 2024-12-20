@@ -260,47 +260,33 @@ namespace CoordinateTrackerAndClicker
 
             try
             {
-                // Създаване на AutoClicker и абониране за събитието
-                //autoClickTimer = new Timer();
-                //TimerStopped += AutoClicker_TimerStopped;
-
                 // Стартиране механика на бутона
                 buttonHandler.ClickButtonMechanicsExecute(sender);
 
                 _printer.Print("Автоматично кликане в прогрес...", LogLevel.Info);
 
+                List<KeyValuePair<string, int>> macrosNameRepeatList = new List<KeyValuePair<string, int>>();
+
                 if (chkAllMacrosToExecute.Checked)
                 {
-                    List<KeyValuePair<string, int>> macrosNameRepeatList = new List<KeyValuePair<string, int>>();
-
                     for (int i = 0; i < lstMacrosForExecute.Items.Count; i++)
                     {
                         macrosNameRepeatList.Add(new KeyValuePair<string, int>(
                             (string)lstMacrosForExecute.Items[i],
                             (int)numericUpDownsForMacrosToExecute[i].Value));
                     }
-
-                    //macroService.ExecuteMacro(
-                    //    autoClickTimer,
-                    //    macrosNameRepeatList,
-                    //    (int)countAllMacroRepeat.Value);
                 }
-                else 
+                else
                 {
-                    await macroService.ExecuteMacroAsync(
-                        _printer,
-                        (string)lstMacrosForExecute.SelectedItem,
-                        (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value,
-                        (int)countAllMacroRepeat.Value);
+                    macrosNameRepeatList.Add(new KeyValuePair<string, int>(
+                            (string)lstMacrosForExecute.SelectedItem,
+                            (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value));
+                }
 
-                    //macroService.ExecuteMacro(
-                    //   autoClickTimer,
-                    //   (string)lstMacrosForExecute.SelectedItem,
-                    //   (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value,
-                    //   (int)countAllMacroRepeat.Value);
-                }            
-
-                
+                await macroService.ExecuteMacroAsync(
+                    _printer,
+                    macrosNameRepeatList,
+                    (int)countAllMacroRepeat.Value);
             }
             catch (Exception ex)
             {
@@ -319,17 +305,10 @@ namespace CoordinateTrackerAndClicker
             LastClickLabel.Text = "Последно кликане: ";
             txtX.Text = string.Empty;
             txtY.Text = string.Empty;
-        }
-
-        
-
-        
+        }           
 
         private void BtnStopMacro_Click(object sender, EventArgs e)
         {
-            //if(autoClickTimer != null) macroService.OnStopClick(autoClickTimer);
-            //else macroService.OnStopClick2();
-
             macroService.OnStopClick2();
 
             buttonHandler.ClickButtonMechanicsExecute(sender);
@@ -507,18 +486,7 @@ namespace CoordinateTrackerAndClicker
             numericUpDownsForMacrosToExecute[targetElementIndexToSwap].Location = new Point(
                 list.Right + 10,
                 list.Top + (targetElementIndexToSwap * list.ItemHeight) + 5);
-        }
-
-        //private void AutoClicker_TimerStopped(object sender, EventArgs e)
-        //{
-        //    Invoke(new Action(() =>
-        //    {
-        //        _printer.Print("Автоматичното кликане приключи.", LogLevel.Info);
-        //        buttonHandler.ClickButtonMechanicsExecute(btnStopMacro);
-        //    }));
-
-        //    macroService.TimerStopped -= AutoClicker_TimerStopped;
-        //}
+        }    
 
         //--------------------------------------------------------
 
@@ -586,6 +554,6 @@ namespace CoordinateTrackerAndClicker
             {
                 _printer.Print("Грешка при добавяне на поведение към бутоните. " + ex.Message, LogLevel.Error);
             }
-        }
+        }     
     }
 }

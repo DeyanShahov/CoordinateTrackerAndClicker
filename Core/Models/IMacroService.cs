@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CoordinateTrackerAndClicker.Utils;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace CoordinateTrackerAndClicker.Core.Models
 {
@@ -13,7 +14,6 @@ namespace CoordinateTrackerAndClicker.Core.Models
         void RemoveAction(int actionIndex);
         void SaveMacro(Macro macro);
         Macro LoadMacro(string name);
-        void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount, int macroAllRepeatCount);
-        void ExecuteMacro(Timer autoClickTimer, List<KeyValuePair<string, int>> macrosNameRepeatList, int macroAllRepeatCount);
+        Task ExecuteMacroAsync(Printer _printer, List<KeyValuePair<string, int>> macrosNameRepeatList, int macroAllRepeatCount);
     }
 }

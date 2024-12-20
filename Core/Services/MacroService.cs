@@ -7,11 +7,10 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CoordinateTrackerAndClicker.Core.Services
 {
-    internal class MacroService //: IMacroService
+    internal class MacroService : IMacroService
     {
         private readonly MouseActionExecutor actionExecutor;
         public List<Macro> macrosList;
@@ -20,9 +19,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private Macro currentMacro;
 
         private CancellationTokenSource _cancellationTokenSource;
-
         private bool isAllMacrosFromListToExecution = false;
-        private int currentAllMacroIndex = 0;
      
         public MacroService()
         {
@@ -85,62 +82,32 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList[targetElementIndexToSwap] = temp;
         }
 
-        //public void ExecuteMacro(Timer autoClickTimer, string macroName, int macroRepeatCount = 1, int macroAllRepeatCount = 1)
-        //{
-        //    macroToExecute = macrosList.FirstOrDefault(m => m.Name == macroName);
-        //    macroToExecute.RepeatCount = macroRepeatCount;
-
-        //    endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
-        //    countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount; 
-        //    currentMacroRepeatCount = macroRepeatCount;
-
-        //    countAllMacroRepeatCount = macroAllRepeatCount;
-
-        //    autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
-        //    autoClickTimer.Tick += AutoClickTimer_Tick;
-        //    autoClickTimer.Start();
-        //}
-
-        //public void ExecuteMacro(Timer autoClickTimer, List<KeyValuePair<string, int>> macrosNameRepeatList, int macroAllRepeatCount = 1)
-        //{
-        //    currentAllMacroIndex = 0;
-        //    macrosNameToExecute = macrosNameRepeatList;
-        //    //macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
-        //    macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
-        //    macroToExecute.RepeatCount = macrosNameToExecute[currentAllMacroIndex].Value;
-
-        //    endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
-        //    countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
-        //    currentMacroRepeatCount = macroToExecute.RepeatCount;
-
-        //    countAllMacroRepeatCount = macroAllRepeatCount;
-
-        //    autoClickTimer.Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000; // Convert to milliseconds
-        //    autoClickTimer.Tick += AutoClickTimer_Tick;
-        //    autoClickTimer.Start();
-        //}
-
-        public void ResetCancellationToken()
-        {
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
-
-        public async Task ExecuteMacroAsync(Printer _printer, string macroName, int macroRepeatCount = 1, int macroAllRepeatCount = 1)
+        public async Task ExecuteMacroAsync(Printer _printer, List<KeyValuePair<string, int>> macrosNameList, int macroAllRepeatCount = 1)
         {
             ResetCancellationToken();
-
-            Macro macro = macrosList.FirstOrDefault(m => m.Name == macroName);
-            int totalActions = macro.Actions.Sum(action => action.RepeatCount) * macroRepeatCount * macroAllRepeatCount;
+            int totalActions = 0;
+            int totalDurationMs = 0;
+            int estemidateTimeToExecute = 0;
             int completedActions = 0;
-            int totalDurationMs = macro.Actions.Sum(action
-                => action.Duration * 60 * 1000)
-                * macroRepeatCount
-                * macroAllRepeatCount;
-            int estemidateTimeToExecute = macro.Actions.Sum(action
-                => action.RepeatCount * (action.Frequency * 1000 + action.DelayBefore + action.DelayAfter))
-                * macroRepeatCount
-                * macroAllRepeatCount;
+
+            List<Macro> macros = new List<Macro>();
+
+            foreach (var element in macrosNameList)
+            {
+                Macro macro = macrosList.FirstOrDefault(m => m.Name == element.Key);
+                macro.RepeatCount = element.Value;
+                macros.Add(macro);
+
+                totalActions += macro.Actions.Sum(action => action.RepeatCount) * macro.RepeatCount * macroAllRepeatCount;
+                totalDurationMs += macro.Actions.Sum(action
+                    => action.Duration * 60 * 1000)
+                    * element.Value
+                    * macroAllRepeatCount;
+                estemidateTimeToExecute += macro.Actions.Sum(action
+                    => action.RepeatCount * (action.Frequency * 1000 + action.DelayBefore + action.DelayAfter))
+                    * element.Value
+                    * macroAllRepeatCount;
+            }          
 
             _printer.Print($"Повторения: {totalActions} - " +
                 $"Продължителност: {TimeSpan.FromMilliseconds(totalDurationMs):hh\\:mm\\:ss} - " +
@@ -152,30 +119,33 @@ namespace CoordinateTrackerAndClicker.Core.Services
             {
                 for (int macroAllRepeat = 0; macroAllRepeat < macroAllRepeatCount; macroAllRepeat++)
                 {
-                    for (int macroRepeat = 0; macroRepeat < macroRepeatCount; macroRepeat++)
+                    foreach (var macro in macros)
                     {
-                        foreach (var action in macro.Actions)
+                        for (int macroRepeat = 0; macroRepeat < macro.RepeatCount; macroRepeat++)
                         {
-                            for (int actionRepeat = 0; actionRepeat < action.RepeatCount; actionRepeat++)
+                            foreach (var action in macro.Actions)
                             {
-                                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                                for (int actionRepeat = 0; actionRepeat < action.RepeatCount; actionRepeat++)
+                                {
+                                    _cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
 
-                                await Task.Delay(action.Frequency * 1000, _cancellationTokenSource.Token);
-                                await actionExecutor.Execute(action, _cancellationTokenSource.Token);
-                                completedActions++;
+                                    await Task.Delay(action.Frequency * 1000, _cancellationTokenSource.Token);
+                                    await actionExecutor.Execute(action, _cancellationTokenSource.Token);
+                                    completedActions++;
 
-                                double progressPercentage = (completedActions / (double)totalActions) * 100;
-                                int elapsedMs = (int)stopwatch.Elapsed.TotalMilliseconds;
-                                int remainingMsDuration = totalDurationMs - elapsedMs;
-                                int remainingMsToExecute = estemidateTimeToExecute - elapsedMs;
+                                    double progressPercentage = (completedActions / (double)totalActions) * 100;
+                                    int elapsedMs = (int)stopwatch.Elapsed.TotalMilliseconds;
+                                    int remainingMsDuration = totalDurationMs - elapsedMs;
+                                    int remainingMsToExecute = estemidateTimeToExecute - elapsedMs;
 
-                                _printer.Print($"Прогрес: {completedActions}/{totalActions} ({progressPercentage:F2}%) - " +
-                                    $"Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss} - " +
-                                    $"Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}", LogLevel.Info);
+                                    _printer.Print($"Прогрес: {completedActions}/{totalActions} ({progressPercentage:F2}%) - " +
+                                        $"Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss} - " +
+                                        $"Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}", LogLevel.Info);
+                                }
                             }
                         }
-                    }
+                    }                  
                 }
 
                 stopwatch.Stop();
@@ -187,7 +157,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
                 _printer.Print("Макросът беше прекъснат!");
             }
         }
-
+       
         public Macro LoadMacro(string name)
         {
             return new Macro();
@@ -196,90 +166,17 @@ namespace CoordinateTrackerAndClicker.Core.Services
         public void SaveMacro(Macro macro)
         {
             throw new NotImplementedException();
+        }   
+
+        public void ResetCancellationToken()
+        {
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
         }
-
-        //private void AutoClickTimer_Tick(object sender, EventArgs e)
-        //{
-        //    if (isPauseMacroExecution) return; // Ако паузата е натисната да не прави лоопа
-
-        //    if (DateTime.Now >= endTime || countActionRepeat <= 0)
-        //    {
-        //        currentActionIndex++;
-
-        //        if (macroToExecute.Actions.Count <= currentActionIndex)
-        //        {
-        //            macroToExecute.RepeatCount--;
-        //            currentActionIndex = 0;
-
-        //            if (macroToExecute.RepeatCount <= 0)
-        //            {
-
-        //                if (isAllMacrosFromListToExecution)
-        //                {
-        //                    currentAllMacroIndex++;
-
-        //                    if (currentAllMacroIndex >= macrosNameToExecute.Count)
-        //                    {
-        //                        countAllMacroRepeatCount--;
-
-        //                        if (countAllMacroRepeatCount <= 0)
-        //                        {
-        //                            StopCurrentMacroExecution((Timer)sender);
-
-        //                            // Изпращане на уведомление 
-        //                            OnTimerStopped();
-        //                            return;
-        //                        }
-
-        //                        macroToExecute.RepeatCount = currentMacroRepeatCount;
-        //                        currentAllMacroIndex = 0;
-        //                    }
-
-        //                    macroToExecute = macrosList.FirstOrDefault(m => m.Name == macrosNameToExecute[currentAllMacroIndex].Key);
-        //                    macroToExecute.RepeatCount = macrosNameToExecute[currentAllMacroIndex].Value;
-
-        //                    endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
-        //                    countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
-        //                    currentMacroRepeatCount = macroToExecute.RepeatCount;
-
-        //                    ((Timer)sender).Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000;
-        //                }
-        //                else
-        //                {
-        //                    countAllMacroRepeatCount--;
-
-        //                    if (countAllMacroRepeatCount <= 0)
-        //                    {
-        //                        StopCurrentMacroExecution((Timer)sender);
-
-        //                        // Изпращане на уведомление 
-        //                        OnTimerStopped();
-        //                        return;
-        //                    }
-
-        //                    macroToExecute.RepeatCount = currentMacroRepeatCount;
-        //                }                                            
-        //            }
-        //        }
-
-        //        endTime = DateTime.Now.AddMinutes(macroToExecute.Actions[currentActionIndex].Duration);
-        //        countActionRepeat = macroToExecute.Actions[currentActionIndex].RepeatCount;
-        //        ((Timer)sender).Interval = macroToExecute.Actions[currentActionIndex].Frequency * 1000;
-        //    }
-
-        //    // Избор на крайно дейстрие          
-        //    actionExecutor.Execute(macroToExecute.Actions[currentActionIndex]);
-
-        //    // Намаля максималния брои на повторения
-        //    countActionRepeat--;
-        //}
-
-
-
         public void OnStopClick2() => StopExecution();
 
         public void StopExecution() => _cancellationTokenSource.Cancel();
 
-        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;
+        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;     
     }
 }
