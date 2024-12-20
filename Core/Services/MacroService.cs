@@ -13,8 +13,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
 {
     internal class MacroService //: IMacroService
     {
-        //public event EventHandler TimerStopped;// Събитие, което уведомява за спиране
-
         private readonly MouseActionExecutor actionExecutor;
         public List<Macro> macrosList;
         public List<MouseAction> currentActionsList;
@@ -22,21 +20,10 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private Macro currentMacro;
 
         private CancellationTokenSource _cancellationTokenSource;
-        //private ManualResetEvent _pauseEvent;
 
-        //private DateTime endTime;
-        //private int currentActionIndex = 0;
-        //private int countActionRepeat;
-        //private int countAllMacroRepeatCount = 0;
-        //private int currentMacroRepeatCount = 0;
-        private bool isPauseMacroExecution = false;
         private bool isAllMacrosFromListToExecution = false;
         private int currentAllMacroIndex = 0;
-
-        private bool toStop = false;
-        
-        //private Macro macroToExecute;
-
+     
         public MacroService()
         {
             macrosList = new List<Macro>();
@@ -44,7 +31,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
             actionExecutor = new MouseActionExecutor();
             macrosNameToExecute = new List<KeyValuePair<string, int>>();
             _cancellationTokenSource = new CancellationTokenSource();
-            //_pauseEvent = new ManualResetEvent(true); // Започва в "не пауза" състояние
         }
 
 
@@ -134,18 +120,11 @@ namespace CoordinateTrackerAndClicker.Core.Services
         //    autoClickTimer.Start();
         //}
 
-        public void StopExecution() => _cancellationTokenSource.Cancel();
-
         public void ResetCancellationToken()
         {
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
         }
-
-        //public void PauseExecution() => _pauseEvent.Reset(); // Спира изпълнението
-
-        //public void ResumeExecution() => _pauseEvent.Set(); // Продължава изпълнението
-
 
         public async Task ExecuteMacroAsync(Printer _printer, string macroName, int macroRepeatCount = 1, int macroAllRepeatCount = 1)
         {
@@ -182,31 +161,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
                                 _cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
 
-                                //_pauseEvent.Wait(_cancellationTokenSource.Token); // Чака ако е в пауза
-                                //if (_cancellationTokenSource.Token.IsCancellationRequested)
-                                //{
-                                //    await Task.Delay(2000);
-                                //}
-
-
-                                //_pauseEvent.WaitOne();
-
-                                //if(_pauseEvent.WaitOne(0))
-                                //{
-                                //    await Task.Delay(100);
-                                //}
-                                ////else if (_cancellationTokenSource.IsCancellationRequested)
-                                ////{
-                                ////    // Проверка за прекратяване на задачата по време на пауза
-                                ////    break; // Прекратете изпълнението на цикъла
-                                ////}
-                                //else
-                                //{
-                                   
-                                //}
-
                                 await Task.Delay(action.Frequency * 1000, _cancellationTokenSource.Token);
-                                //await actionExecutor.Execute(action, _cancellationTokenSource.Token, _pauseEvent);
                                 await actionExecutor.Execute(action, _cancellationTokenSource.Token);
                                 completedActions++;
 
@@ -232,69 +187,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
                 _printer.Print("Макросът беше прекъснат!");
             }
         }
-
-        //public async Task ExecuteMacroAsync(Printer printer, string macroName, int macroRepeatCount = 1, int macroAllRepeatCount = 1)
-        //{
-        //    Macro macro = macrosList.FirstOrDefault(m => m.Name == macroName);
-        //    int totalActions = macro.Actions.Sum(action => action.RepeatCount) * macroRepeatCount * macroAllRepeatCount;
-        //    int completedActions = 0;
-        //    int totalDurationMs = macro.Actions.Sum(action 
-        //        => action.Duration * 60 * 1000) 
-        //        * macroRepeatCount 
-        //        * macroAllRepeatCount;
-        //    int estemidateTimeToExecute = macro.Actions.Sum(action 
-        //        => action.RepeatCount * (action.Frequency * 1000 + action.DelayBefore + action.DelayAfter))
-        //        * macroRepeatCount
-        //        * macroAllRepeatCount;       
-
-        //    printer.Print($"Повторения: {totalActions} - " +
-        //        $"Продължителност: {TimeSpan.FromMilliseconds(totalDurationMs):hh\\:mm\\:ss} - " +
-        //        $"Очаквана продалжителност: {TimeSpan.FromMilliseconds(estemidateTimeToExecute):hh\\:mm\\:ss}", LogLevel.Info);
-
-        //    Stopwatch stopwatch = Stopwatch.StartNew();
-
-        //    for (int macroAllRepeat = 0; macroAllRepeat < macroAllRepeatCount; macroAllRepeat++)
-        //    {
-        //        if (toStop) break;
-
-        //        for (int macroRepeat = 0; macroRepeat < macroRepeatCount; macroRepeat++)
-        //        {
-        //            if (toStop) break;
-
-        //            foreach (var action in macro.Actions)
-        //            {
-        //                if (toStop) break;
-
-        //                for (int actionRepeat = 0; actionRepeat < action.RepeatCount; actionRepeat++)
-        //                {
-        //                    if (toStop) break;
-
-        //                    if(!toStop)
-        //                    {
-        //                        await Task.Delay(action.Frequency * 1000); // Frequency of command to click
-        //                        await actionExecutor.Execute(action); // Execute the action (simulate mouse action here)
-        //                        completedActions++;
-
-        //                        double progressPercentage = (completedActions / (double)totalActions) * 100;
-        //                        int elapsedMs = (int)stopwatch.Elapsed.TotalMilliseconds;
-        //                        int remainingMsDuration = totalDurationMs - elapsedMs;
-        //                        int remainingMsToExecute = estemidateTimeToExecute - elapsedMs;
-
-        //                        printer.Print($"Прогрес: {completedActions}/{totalActions} ({progressPercentage:F2}%) - " +
-        //                            $"Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss} - " +
-        //                            $"Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}", LogLevel.Info);
-        //                    }
-                                                   
-        //                    if (toStop) break;
-        //                }
-        //            }
-        //        }
-        //    }
-         
-        //    stopwatch.Stop();
-        //    printer.Print( !toStop ? "Макросът е завършен!" : "Maкрото е спряно.");
-        //    OnStopClick2();
-        //}
 
         public Macro LoadMacro(string name)
         {
@@ -382,29 +274,12 @@ namespace CoordinateTrackerAndClicker.Core.Services
         //    countActionRepeat--;
         //}
 
-        //private void StopCurrentMacroExecution(Timer sender)
-        //{
-        //    sender.Stop();
-        //    OnContinueClick();         
-        //}
 
-        private void StopCurrentMacroExecution2()
-        {
-            OnContinueClick();
-        }
 
-        public void OnPauseClick() => isPauseMacroExecution = true; 
-        //public void OnPauseClick() => PauseExecution();
-        public void OnContinueClick() => isPauseMacroExecution = false;
-        //public void OnContinueClick() => ResumeExecution();
-        //public void OnStopClick(Timer sender) => StopCurrentMacroExecution(sender);
-        //public void OnStopClick2() => StopCurrentMacroExecution2();
-        //public void OnStopClick2() => toStop = !toStop;
         public void OnStopClick2() => StopExecution();
 
-        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;
+        public void StopExecution() => _cancellationTokenSource.Cancel();
 
-        // Проверка дали има абонирани слушатели
-        //protected virtual void OnTimerStopped() => TimerStopped?.Invoke(this, EventArgs.Empty);
+        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;
     }
 }

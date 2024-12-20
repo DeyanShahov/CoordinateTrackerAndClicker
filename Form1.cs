@@ -321,19 +321,9 @@ namespace CoordinateTrackerAndClicker
             txtY.Text = string.Empty;
         }
 
-        private void BtnPauseMacro_Click(object sender, EventArgs e)
-        {
-            macroService.OnPauseClick();
-            buttonHandler.ClickButtonMechanicsExecute(sender);
-            _printer.Print("Пауза ...", LogLevel.Info);
-        }
+        
 
-        private void BtnContinueMacro_Click(object sender, EventArgs e)
-        {
-            macroService.OnContinueClick();
-            buttonHandler.ClickButtonMechanicsExecute(sender);
-            _printer.Print("Автоматично кликане е възстановено ...", LogLevel.Info);
-        }
+        
 
         private void BtnStopMacro_Click(object sender, EventArgs e)
         {
@@ -587,10 +577,8 @@ namespace CoordinateTrackerAndClicker
                 buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
                 buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
                 buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro, btnActionDelete }, new Button[] { btnExecuteMacro });
-                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro }, new Button[] { btnPauseMacro, btnStopMacro });
-                buttonHandler.AddNewButton(btnPauseMacro, new Button[] { btnPauseMacro }, new Button[] { btnContinueMacro });
-                buttonHandler.AddNewButton(btnContinueMacro, new Button[] { btnContinueMacro }, new Button[] { btnPauseMacro });
-                buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro, btnPauseMacro, btnContinueMacro }, new Button[] { btnExecuteMacro });
+                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro }, new Button[] { btnStopMacro });   
+                buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro }, new Button[] { btnExecuteMacro });
                 buttonHandler.AddNewButton(lstAvailableActions, new Button[] { }, new Button[] { btnActionDelete });
                 buttonHandler.AddNewButton(lstMacrosForExecute, new Button[] { }, new Button[] { btnMacroForExecuteDelete });
             }

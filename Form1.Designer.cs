@@ -7,19 +7,6 @@ namespace CoordinateTrackerAndClicker
 {
     public partial class Form1
     {
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {             
-        //        if (autoClickTimer != null)
-        //        {
-        //            autoClickTimer.Stop();
-        //            autoClickTimer.Dispose();
-        //        }             
-        //    }
-        //    base.Dispose(disposing);
-        //}
-
         private void InitializeComponent()
         {
             this.btnStartRecording = new System.Windows.Forms.Button();
@@ -54,8 +41,6 @@ namespace CoordinateTrackerAndClicker
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.countAllMacroRepeat = new System.Windows.Forms.NumericUpDown();
-            this.btnPauseMacro = new System.Windows.Forms.Button();
-            this.btnContinueMacro = new System.Windows.Forms.Button();
             this.btnStopMacro = new System.Windows.Forms.Button();
             this.btnActionDelete = new System.Windows.Forms.Button();
             this.btnMoveUpAction = new System.Windows.Forms.Button();
@@ -441,32 +426,10 @@ namespace CoordinateTrackerAndClicker
             0,
             0});
             // 
-            // btnPauseMacro
-            // 
-            this.btnPauseMacro.Enabled = false;
-            this.btnPauseMacro.Location = new System.Drawing.Point(757, 314);
-            this.btnPauseMacro.Name = "btnPauseMacro";
-            this.btnPauseMacro.Size = new System.Drawing.Size(100, 30);
-            this.btnPauseMacro.TabIndex = 36;
-            this.btnPauseMacro.Text = "Пауза";
-            this.btnPauseMacro.UseVisualStyleBackColor = true;
-            this.btnPauseMacro.Click += new System.EventHandler(this.BtnPauseMacro_Click);
-            // 
-            // btnContinueMacro
-            // 
-            this.btnContinueMacro.Enabled = false;
-            this.btnContinueMacro.Location = new System.Drawing.Point(757, 350);
-            this.btnContinueMacro.Name = "btnContinueMacro";
-            this.btnContinueMacro.Size = new System.Drawing.Size(100, 30);
-            this.btnContinueMacro.TabIndex = 37;
-            this.btnContinueMacro.Text = "Продължи";
-            this.btnContinueMacro.UseVisualStyleBackColor = true;
-            this.btnContinueMacro.Click += new System.EventHandler(this.BtnContinueMacro_Click);
-            // 
             // btnStopMacro
             // 
             this.btnStopMacro.Enabled = false;
-            this.btnStopMacro.Location = new System.Drawing.Point(657, 350);
+            this.btnStopMacro.Location = new System.Drawing.Point(763, 315);
             this.btnStopMacro.Name = "btnStopMacro";
             this.btnStopMacro.Size = new System.Drawing.Size(100, 30);
             this.btnStopMacro.TabIndex = 38;
@@ -594,8 +557,6 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.btnMoveUpAction);
             this.Controls.Add(this.btnActionDelete);
             this.Controls.Add(this.btnStopMacro);
-            this.Controls.Add(this.btnContinueMacro);
-            this.Controls.Add(this.btnPauseMacro);
             this.Controls.Add(this.countAllMacroRepeat);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -678,8 +639,6 @@ namespace CoordinateTrackerAndClicker
         private Label label4;
         private Label label5;
         private NumericUpDown countAllMacroRepeat;
-        private Button btnPauseMacro;
-        private Button btnContinueMacro;
         private Button btnStopMacro;
         private Button btnActionDelete;
         private Button btnMoveUpAction;
@@ -690,20 +649,6 @@ namespace CoordinateTrackerAndClicker
         private RichTextBox richTextBoxLogInfo;
         private Button btnMoveUpMacro;
         private Button btnMoveDownMacro;
-        private CheckBox chkAllMacrosToExecute;
-
-        // Декларация на елементи
-        //private TextBox txtX;
-        //private TextBox txtY;
-        //private ComboBox cmbActionType;
-        //private CheckBox chkReturnToOriginal;
-        //private NumericUpDown numericDelay;
-
-        //private Button btnAddAction;
-        //private Button btnSaveMacro;
-
-        //private Button btnExecuteMacro;
-        //private ListBox lstMacros;
-        //private ListBox lstActions;
+        private CheckBox chkAllMacrosToExecute;      
     }
 }
