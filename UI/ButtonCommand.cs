@@ -2,7 +2,7 @@
 
 namespace CoordinateTrackerAndClicker.UI
 {
-    internal class ButtonCommand //: ICommand
+    internal class ButtonCommand : ICommand
     {
         public Button[] _buttonsToDisable;
         private readonly Button[] _buttonsToEnable;

@@ -1,4 +1,5 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
+using CoordinateTrackerAndClicker.Db_Json;
 using CoordinateTrackerAndClicker.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,25 @@ namespace CoordinateTrackerAndClicker.Core.Services
         private readonly MouseActionExecutor actionExecutor;
         public List<Macro> macrosList;
         public List<MouseAction> currentActionsList;
-        public List<KeyValuePair<string, int>> macrosNameToExecute;
         private Macro currentMacro;
 
         private CancellationTokenSource _cancellationTokenSource;
         private bool isAllMacrosFromListToExecution = false;
-     
+
+        private readonly IDataStorageStrategy _storageStrategy;
+        private readonly MacroStorageManager macroStorageManager;
+
         public MacroService()
         {
             macrosList = new List<Macro>();
             currentActionsList = new List<MouseAction>();
             actionExecutor = new MouseActionExecutor();
-            macrosNameToExecute = new List<KeyValuePair<string, int>>();
             _cancellationTokenSource = new CancellationTokenSource();
+
+            //Избиране на стратегия за запаметяване на информацията - JSON
+            _storageStrategy = new JsonDataStorage();
+            //Инициялизиране на записващия мениджер
+            macroStorageManager = new MacroStorageManager(_storageStrategy);
         }
 
 
@@ -72,6 +79,11 @@ namespace CoordinateTrackerAndClicker.Core.Services
         public void RemoveAction(int actionIndex)
         {
             currentActionsList.RemoveAt(actionIndex);
+        }
+
+        public void RemoveMacro(int macroIndex)
+        {
+            macrosList.RemoveAt(macroIndex);
         }
 
         public void ChangeActionPosition(int index, bool isMoveUp)
@@ -158,21 +170,54 @@ namespace CoordinateTrackerAndClicker.Core.Services
             }
         }
        
-        public Macro LoadMacro(string name)
+        public async Task<List<string>> LoadMacroFromDBAsync()
         {
-            return new Macro();
+            //List<Macro> macros = macroStorageManager.LoadMacros();
+            List<Macro> macros = await macroStorageManager.LoadMacroAsync();
+
+            // Добавяне към реялния списък с всички макрота готови за употреба
+            macros.ForEach(macro => macrosList.Add(macro));
+
+            return macros.Select(m => m.Name).ToList();
         }
 
-        public void SaveMacro(Macro macro)
+        public async Task<bool> SaveMacroToDBAsync(Macro macro)
         {
-            throw new NotImplementedException();
-        }   
+            // Зареждане на текущия списък с макрота
+            List<Macro> macros = await macroStorageManager.LoadMacroAsync();
+
+            // Проверка дали вече макрото не съществува в записите
+            Macro macroToCheck = macros.Find(m => m.Name == macro.Name);
+
+            if (macroToCheck != null) return false;
+
+            // Добавяне на новото макро към стария списък от Jsona
+            macros.Add(macro);
+
+            // запазване на макротата в Json списъка
+            return await macroStorageManager.SaveMacros(macros);
+        }
+
+        public async Task<bool> DeleteMacroFromDBAsync(string macroName)
+        {
+            // Зареждане на текущия списък с макрота
+            List<Macro> macros = await macroStorageManager.LoadMacroAsync();         
+
+            // Проверка дали макрото въобще съществува в записите
+            Macro macroForDelete = macros.Find(m => m.Name == macroName);
+
+            if (macroForDelete == null) return false;
+
+            // Изтриване на макрото от Json списъка
+            return await macroStorageManager.DeleteMacro(macroForDelete);
+        }
 
         public void ResetCancellationToken()
         {
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
         }
+
         public void OnStopClick2() => StopExecution();
 
         public void StopExecution() => _cancellationTokenSource.Cancel();

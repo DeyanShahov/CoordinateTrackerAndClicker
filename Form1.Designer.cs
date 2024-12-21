@@ -52,6 +52,8 @@ namespace CoordinateTrackerAndClicker
             this.btnMoveUpMacro = new System.Windows.Forms.Button();
             this.btnMoveDownMacro = new System.Windows.Forms.Button();
             this.chkAllMacrosToExecute = new System.Windows.Forms.CheckBox();
+            this.btnMacroSave = new System.Windows.Forms.Button();
+            this.btnMacroDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
@@ -291,7 +293,7 @@ namespace CoordinateTrackerAndClicker
             this.lstAvailableMacros.Name = "lstAvailableMacros";
             this.lstAvailableMacros.Size = new System.Drawing.Size(200, 95);
             this.lstAvailableMacros.TabIndex = 23;
-            this.lstAvailableMacros.SelectedIndexChanged += new System.EventHandler(this.LstMacros_SelectedIndexChanged);
+            this.lstAvailableMacros.SelectedIndexChanged += new System.EventHandler(this.LstAvailableMacros_SelectedIndexChanged);
             this.lstAvailableMacros.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LstAvailableMacros_MouseDoubleClick);
             // 
             // lstAvailableActions
@@ -424,7 +426,7 @@ namespace CoordinateTrackerAndClicker
             1,
             0,
             0,
-            0});           
+            0});
             // 
             // btnStopMacro
             // 
@@ -543,9 +545,31 @@ namespace CoordinateTrackerAndClicker
             this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
             this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.ChkAllMacrosToExecute_CheckedChanged);
             // 
+            // btnMacroSave
+            // 
+            this.btnMacroSave.Location = new System.Drawing.Point(274, 213);
+            this.btnMacroSave.Name = "btnMacroSave";
+            this.btnMacroSave.Size = new System.Drawing.Size(119, 35);
+            this.btnMacroSave.TabIndex = 50;
+            this.btnMacroSave.Text = "Запази Макрото";
+            this.btnMacroSave.UseVisualStyleBackColor = true;
+            this.btnMacroSave.Click += new System.EventHandler(this.BtnMacroSave_Click);
+            // 
+            // btnMacroDelete
+            // 
+            this.btnMacroDelete.Location = new System.Drawing.Point(274, 254);
+            this.btnMacroDelete.Name = "btnMacroDelete";
+            this.btnMacroDelete.Size = new System.Drawing.Size(119, 35);
+            this.btnMacroDelete.TabIndex = 51;
+            this.btnMacroDelete.Text = "Изтрии Макрото";
+            this.btnMacroDelete.UseVisualStyleBackColor = true;
+            this.btnMacroDelete.Click += new System.EventHandler(this.BtnMacroDelete_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(934, 621);
+            this.Controls.Add(this.btnMacroDelete);
+            this.Controls.Add(this.btnMacroSave);
             this.Controls.Add(this.chkAllMacrosToExecute);
             this.Controls.Add(this.btnMoveDownMacro);
             this.Controls.Add(this.btnMoveUpMacro);
@@ -649,6 +673,8 @@ namespace CoordinateTrackerAndClicker
         private RichTextBox richTextBoxLogInfo;
         private Button btnMoveUpMacro;
         private Button btnMoveDownMacro;
-        private CheckBox chkAllMacrosToExecute;      
+        private CheckBox chkAllMacrosToExecute;
+        private Button btnMacroSave;
+        private Button btnMacroDelete;
     }
 }
