@@ -11,5 +11,9 @@ namespace CoordinateTrackerAndClicker.Db_Json
         Task<bool> SaveMacrosAsync(List<Macro> macros);
 
         Task<bool> DeleteMacroAsync(Macro macro);
+
+        void SetSaveDirectory();
+
+        bool CheckForDirectoryFileExists();
     }
 }

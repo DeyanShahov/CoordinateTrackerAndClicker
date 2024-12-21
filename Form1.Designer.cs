@@ -9,6 +9,7 @@ namespace CoordinateTrackerAndClicker
     {
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnStartRecording = new System.Windows.Forms.Button();
             this.btnStopRecording = new System.Windows.Forms.Button();
             this.FrequencyLabel = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@ namespace CoordinateTrackerAndClicker
             this.chkAllMacrosToExecute = new System.Windows.Forms.CheckBox();
             this.btnMacroSave = new System.Windows.Forms.Button();
             this.btnMacroDelete = new System.Windows.Forms.Button();
+            this.btnNewSavePath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
@@ -565,9 +567,20 @@ namespace CoordinateTrackerAndClicker
             this.btnMacroDelete.UseVisualStyleBackColor = true;
             this.btnMacroDelete.Click += new System.EventHandler(this.BtnMacroDelete_Click);
             // 
+            // btnNewSavePath
+            // 
+            this.btnNewSavePath.Location = new System.Drawing.Point(274, 295);
+            this.btnNewSavePath.Name = "btnNewSavePath";
+            this.btnNewSavePath.Size = new System.Drawing.Size(119, 34);
+            this.btnNewSavePath.TabIndex = 52;
+            this.btnNewSavePath.Text = "Избери локация";
+            this.btnNewSavePath.UseVisualStyleBackColor = true;
+            this.btnNewSavePath.Click += new System.EventHandler(this.BtnNewSavePath_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(934, 621);
+            this.Controls.Add(this.btnNewSavePath);
             this.Controls.Add(this.btnMacroDelete);
             this.Controls.Add(this.btnMacroSave);
             this.Controls.Add(this.chkAllMacrosToExecute);
@@ -614,6 +627,7 @@ namespace CoordinateTrackerAndClicker
             this.Controls.Add(this.DurationInput);
             this.Controls.Add(this.StatusLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(950, 660);
             this.MinimumSize = new System.Drawing.Size(950, 660);
             this.Name = "Form1";
@@ -676,5 +690,6 @@ namespace CoordinateTrackerAndClicker
         private CheckBox chkAllMacrosToExecute;
         private Button btnMacroSave;
         private Button btnMacroDelete;
+        private Button btnNewSavePath;
     }
 }

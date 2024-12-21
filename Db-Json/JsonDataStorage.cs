@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CoordinateTrackerAndClicker.Db_Json
 {
-    internal class JsonDataStorage : IDataStorageStrategy
+    internal class JsonDataStorage //: IDataStorageStrategy
     {
         private readonly string SaveFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Save");
         private readonly string SaveFilePath;
@@ -18,7 +18,7 @@ namespace CoordinateTrackerAndClicker.Db_Json
             SaveFilePath = Path.Combine(SaveFolder, "SaveMacros.json");
             if (!Directory.Exists(SaveFolder)) Directory.CreateDirectory(SaveFolder);
             if (!File.Exists(SaveFilePath)) File.WriteAllText(SaveFilePath, "[]");
-        }
+        }   
 
         public async Task<bool> DeleteMacroAsync(Macro macro)
         {
@@ -37,7 +37,7 @@ namespace CoordinateTrackerAndClicker.Db_Json
             catch (Exception)
             {
                 return false;
-            }                      
+            }
         }
 
         public async Task<List<Macro>> LoadMacrosAsync()

@@ -32,7 +32,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
             _cancellationTokenSource = new CancellationTokenSource();
 
             //Избиране на стратегия за запаметяване на информацията - JSON
-            _storageStrategy = new JsonDataStorage();
+            //_storageStrategy = new JsonDataStorage();
+            _storageStrategy = new JsonDataStorageManualSelect();
             //Инициялизиране на записващия мениджер
             macroStorageManager = new MacroStorageManager(_storageStrategy);
         }
@@ -222,6 +223,16 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
         public void StopExecution() => _cancellationTokenSource.Cancel();
 
-        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;     
+        public void OnAllMacroToExecuteClick() => isAllMacrosFromListToExecution = !isAllMacrosFromListToExecution;  
+        
+        public void ChangeSavePath()
+        {
+            macroStorageManager.SetNewSavePath();
+        }
+
+        public bool CheckPathFile()
+        {
+            return macroStorageManager.CheckValidPath();
+        }
     }
 }

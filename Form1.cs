@@ -1,5 +1,6 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
 using CoordinateTrackerAndClicker.Core.Services;
+using CoordinateTrackerAndClicker.Db_Json;
 using CoordinateTrackerAndClicker.Utils;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace CoordinateTrackerAndClicker
 
 
         private void OnGlobalMouseClick(Point clickPoint)
-        {     
+        {
             if (clickPoint == null) return;
 
             if (isRecording && isRecordingOn)
@@ -91,23 +92,23 @@ namespace CoordinateTrackerAndClicker
         }
 
         private void UpdateLastClickLabel()
-        {          
+        {
             if (clickHistory.Count <= 0) return;
-           
+
             int clickCounts = clickHistory.Count;
             lastCoordinate = clickHistory[clickCounts - 1];
-            LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";           
+            LastClickLabel.Text = $"Последно кликане: X : {lastCoordinate.X}  Y = {lastCoordinate.Y}";
         }
 
         private void SaveLastValidCoordinate()
         {
             if (clickHistory.Count <= 0) return;
-                         
+
             int clickCounts = clickHistory.Count;
             lastCoordinate = clickHistory[clickCounts - 1];
 
             UpdateCoordinatesBoxes(lastCoordinate);
-            UpdateLastClickLabel();         
+            UpdateLastClickLabel();
         }
 
         private void UpdateCoordinatesBoxes(Point lastClick)
@@ -150,11 +151,11 @@ namespace CoordinateTrackerAndClicker
 
         private void BtnAddAction_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtX.Text)|| String.IsNullOrEmpty(txtY.Text))
+            if (String.IsNullOrEmpty(txtX.Text) || String.IsNullOrEmpty(txtY.Text))
             {
                 _printer.Print("Няма записани кординати в полетата", LogLevel.Error);
                 return;
-            }         
+            }
 
             if (IsNameInvalid(textBoxActionName.Text)) return;
 
@@ -177,7 +178,7 @@ namespace CoordinateTrackerAndClicker
         {
             // Спира изпълнението       
             if (IsListEmpty(lstAvailableActions) || IsNameInvalid(textBoxMacroName.Text)) return;
-          
+
             try
             {
                 macroService.CreateMacro(textBoxMacroName.Text);
@@ -200,7 +201,7 @@ namespace CoordinateTrackerAndClicker
 
         private void LstAvailableMacros_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!isSommeCommandIsActive)
+            if (!isSommeCommandIsActive)
             {
                 if (IsListEmpty(lstAvailableMacros) || IsIndexNegative(lstAvailableMacros)) return;
 
@@ -210,8 +211,8 @@ namespace CoordinateTrackerAndClicker
 
                 btnExecuteMacro.Enabled = true;
             }
-            isSommeCommandIsActive = false;        
-        }       
+            isSommeCommandIsActive = false;
+        }
 
         private void LstMacrosForExecute_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -228,13 +229,13 @@ namespace CoordinateTrackerAndClicker
             int maxMacrosInList = lstMacrosForExecute.Height / lstMacrosForExecute.ItemHeight;
             int currentMacrosInList = lstMacrosForExecute.Items.Count;
 
-            if(maxMacrosInList <= currentMacrosInList)
+            if (maxMacrosInList <= currentMacrosInList)
             {
                 _printer.Print("Списъка с макрота е пълен.", LogLevel.Error);
                 return;
             }
 
-            lstMacrosForExecute.Items.Add(lstAvailableMacros.SelectedItem.ToString().Remove(0,5));
+            lstMacrosForExecute.Items.Add(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
             AddNumericUpDown(lstMacrosForExecute.Items.Count - 1);
             lstMacrosForExecute.TopIndex = lstMacrosForExecute.Items.Count - 1; // Scroll to bottom of list if is necessary
         }
@@ -255,17 +256,17 @@ namespace CoordinateTrackerAndClicker
             // Ако няма избрарно макро от списъка с налични макрота, автоматично маркирва и избира първото ( индекс 0 )
             int currentSelectedIndex1 = lstAvailableMacros.SelectedIndex;
             if (currentSelectedIndex1 == -1) { lstAvailableMacros.SelectedIndex = 0; currentSelectedIndex1 = 0; }
-            
+
 
             // Ако няам добаевно макро за изпълнение добавя маркираното макро от списъка с макрота
             if (lstMacrosForExecute.Items.Count == 0)
             {
-                lstMacrosForExecute.Items.Add(lstAvailableMacros.SelectedItem.ToString().Remove(0,5));
+                lstMacrosForExecute.Items.Add(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
             }
             // Ако няма избрарно макро от списъка за изпълнения на макрота, автоматично маркирва и избира първото ( индекс 0 )
             //int currentSelectedMacroToExecuteIndex = lstMacrosForExecute.SelectedIndex;
             //if (currentSelectedMacroToExecuteIndex == -1) { lstMacrosForExecute.SelectedIndex = 0; currentSelectedMacroToExecuteIndex = 0; }
-            if (lstMacrosForExecute.SelectedIndex == -1) 
+            if (lstMacrosForExecute.SelectedIndex == -1)
             {
                 if (lstAvailableMacros.SelectedIndex == -1)
                 {
@@ -276,7 +277,7 @@ namespace CoordinateTrackerAndClicker
                     //lstMacrosForExecute.SelectedIndex = 
                 }
 
-                lstMacrosForExecute.SelectedIndex = 0; 
+                lstMacrosForExecute.SelectedIndex = 0;
                 //currentSelectedMacroToExecuteIndex = 0;
                 AddNumericUpDown(0);
             }
@@ -329,7 +330,7 @@ namespace CoordinateTrackerAndClicker
             LastClickLabel.Text = "Последно кликане: ";
             txtX.Text = string.Empty;
             txtY.Text = string.Empty;
-        }           
+        }
 
         private void BtnStopMacro_Click(object sender, EventArgs e)
         {
@@ -341,7 +342,7 @@ namespace CoordinateTrackerAndClicker
 
         private void BtnActionDelete_Click(object sender, EventArgs e)
         {
-            if (IsListEmpty(lstAvailableActions) || IsIndexNegative(lstAvailableActions)) return;        
+            if (IsListEmpty(lstAvailableActions) || IsIndexNegative(lstAvailableActions)) return;
 
             int index = lstAvailableActions.SelectedIndex; // Индекс на маркираното действие
             lstAvailableActions.SelectedItems.Clear(); // Демаркирване на избрания елемент от списъка
@@ -378,12 +379,12 @@ namespace CoordinateTrackerAndClicker
         }
 
         private void BtnMoveUpAction_Click(object sender, EventArgs e)
-        {          
+        {
             if (lstAvailableActions.SelectedIndex == 0 || CheckForIncorrectCountOrIndex(lstAvailableActions)) return;
 
             SwapElementsInListBox(lstAvailableActions, lstAvailableActions.SelectedIndex, true);
             macroService.ChangeActionPosition(lstAvailableActions.SelectedIndex, true);
-            lstAvailableActions.SelectedIndex --;
+            lstAvailableActions.SelectedIndex--;
         }
 
         private void BtnMoveDownAction_Click(object sender, EventArgs e)
@@ -392,8 +393,8 @@ namespace CoordinateTrackerAndClicker
 
             SwapElementsInListBox(lstAvailableActions, lstAvailableActions.SelectedIndex, false);
             macroService.ChangeActionPosition(lstAvailableActions.SelectedIndex, false);
-            lstAvailableActions.SelectedIndex ++;
-        }      
+            lstAvailableActions.SelectedIndex++;
+        }
 
         private void BtnMoveUpMacro_Click(object sender, EventArgs e)
         {
@@ -510,7 +511,7 @@ namespace CoordinateTrackerAndClicker
             numericUpDownsForMacrosToExecute[targetElementIndexToSwap].Location = new Point(
                 list.Right + 10,
                 list.Top + (targetElementIndexToSwap * list.ItemHeight) + 2);
-        }    
+        }
 
         //--------------------------------------------------------
 
@@ -569,7 +570,7 @@ namespace CoordinateTrackerAndClicker
                 buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
                 buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
                 buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro, btnActionDelete }, new Button[] { btnExecuteMacro });
-                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro, btnMoveUpMacro, btnMoveDownMacro, btnMacroForExecuteDelete, btnMacroDelete }, new Button[] { btnStopMacro });   
+                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro, btnMoveUpMacro, btnMoveDownMacro, btnMacroForExecuteDelete, btnMacroDelete }, new Button[] { btnStopMacro });
                 buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro }, new Button[] { btnExecuteMacro, btnMoveUpMacro, btnMoveDownMacro, btnMacroForExecuteDelete, btnMacroDelete });
                 buttonHandler.AddNewButton(lstAvailableActions, new Button[] { }, new Button[] { btnActionDelete });
                 buttonHandler.AddNewButton(lstMacrosForExecute, new Button[] { }, new Button[] { btnMacroForExecuteDelete });
@@ -582,11 +583,19 @@ namespace CoordinateTrackerAndClicker
 
         private async void LoadSavedMacros()
         {
-            _printer.Print("Зареждане на макрота ...");
+            _printer.Print("Базова директория на приложението: " + AppDomain.CurrentDomain.BaseDirectory);
+            _printer.Print("Път до файла със записите: " + JsonDataStorageManualSelect.SaveFilePath);
+
             var loadedMacrosName = await macroService.LoadMacroFromDBAsync();
-            loadedMacrosName.ForEach(m => lstAvailableMacros.Items.Add("🗹 - " + m));
-            _printer.Print(String.Join(", ", loadedMacrosName));
-            _printer.Print("Макротата са заредени!");
+            if (loadedMacrosName.Any())
+            {
+                _printer.Print("Зареждане на макрота ...");
+                loadedMacrosName.ForEach(m => lstAvailableMacros.Items.Add("🗹 - " + m));
+                _printer.Print(String.Join(", ", loadedMacrosName));
+                _printer.Print("Макротата са заредени!");
+            }
+            else
+                _printer.Print("Списъка е празен и няма запаметени макрота.");
         }
 
         private async void BtnMacroSave_Click(object sender, EventArgs e)
@@ -594,6 +603,12 @@ namespace CoordinateTrackerAndClicker
             if (lstAvailableMacros.SelectedIndex == -1)
             {
                 _printer.Print("Няма избрано Макро", LogLevel.Error);
+                return;
+            }
+
+            if (!macroService.CheckPathFile())
+            {
+                _printer.Print("Проблем с директорията или файла за запаметяване.", LogLevel.Error);
                 return;
             }
 
@@ -610,7 +625,7 @@ namespace CoordinateTrackerAndClicker
                 _printer.Print("Има такова Макро в архива или Възникна грешка при записа.", LogLevel.Error);
 
             isSommeCommandIsActive = false;
-        }     
+        }
 
         private async void BtnMacroDelete_Click(object sender, EventArgs e)
         {
@@ -620,7 +635,13 @@ namespace CoordinateTrackerAndClicker
                 return;
             }
 
-            var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.ToString().Remove(0,5));
+            if (!macroService.CheckPathFile())
+            {
+                _printer.Print("Проблем с директорията или файла за запаметяване.", LogLevel.Error);
+                return;
+            }
+
+            var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
 
             if (result)
             {
@@ -663,14 +684,19 @@ namespace CoordinateTrackerAndClicker
                 macroService.RemoveMacro(index); // Премахване на елемент със същия индекс от работната колекция
 
                 _printer.Print("Uspeshen delete", LogLevel.Success);
-            }        
+            }
             else
                 _printer.Print("Neuspeshna zaqwka", LogLevel.Error);
 
             // Спира флага на команда
             isSommeCommandIsActive = false;
             // Спира бутона за изпълнение ако няма записи в листа с възможните макрота
-            if(lstAvailableMacros.Items.Count == 0) btnExecuteMacro.Enabled = false;
+            if (lstAvailableMacros.Items.Count == 0) btnExecuteMacro.Enabled = false;
+        }
+
+        private void BtnNewSavePath_Click(object sender, EventArgs e)
+        {
+            macroService.ChangeSavePath();
         }
     }
 }

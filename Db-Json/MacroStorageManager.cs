@@ -17,5 +17,7 @@ namespace CoordinateTrackerAndClicker.Db_Json
         public Task <List<Macro>> LoadMacroAsync() =>  _dataStorageStrategy.LoadMacrosAsync();
         public Task<bool> SaveMacros(List<Macro> macros) => _dataStorageStrategy.SaveMacrosAsync(macros);
         public Task<bool> DeleteMacro(Macro macro) => _dataStorageStrategy.DeleteMacroAsync(macro);
+        public void SetNewSavePath() => _dataStorageStrategy.SetSaveDirectory();
+        public bool CheckValidPath() => _dataStorageStrategy.CheckForDirectoryFileExists();
     }
 }
