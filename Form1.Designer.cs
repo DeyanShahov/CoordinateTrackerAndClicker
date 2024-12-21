@@ -95,7 +95,7 @@ namespace CoordinateTrackerAndClicker
             // 
             this.FrequencyInput.Location = new System.Drawing.Point(153, 224);
             this.FrequencyInput.Maximum = new decimal(new int[] {
-            3600,
+            9999,
             0,
             0,
             0});
@@ -125,7 +125,7 @@ namespace CoordinateTrackerAndClicker
             // 
             this.DurationInput.Location = new System.Drawing.Point(153, 254);
             this.DurationInput.Maximum = new decimal(new int[] {
-            1440,
+            9999,
             0,
             0,
             0});
@@ -172,7 +172,7 @@ namespace CoordinateTrackerAndClicker
             // 
             this.CountInput.Location = new System.Drawing.Point(153, 284);
             this.CountInput.Maximum = new decimal(new int[] {
-            1440,
+            9999,
             0,
             0,
             0});
