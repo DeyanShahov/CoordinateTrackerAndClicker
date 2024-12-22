@@ -33,6 +33,18 @@
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnCreateMacro = new MaterialSkin.Controls.MaterialButton();
+            this.textBoxMacroName = new MaterialSkin.Controls.MaterialMaskedTextBox();
+            this.btnActionDelete = new MaterialSkin.Controls.MaterialButton();
+            this.btnMoveDownAction = new MaterialSkin.Controls.MaterialButton();
+            this.btnMoveUpAction = new MaterialSkin.Controls.MaterialButton();
+            this.lstAvailableActions = new MaterialSkin.Controls.MaterialListBox();
+            this.btnAddAction = new MaterialSkin.Controls.MaterialButton();
+            this.numericDelayBefore = new System.Windows.Forms.NumericUpDown();
+            this.numericDelay = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.textBoxActionName = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.CountInput = new System.Windows.Forms.NumericUpDown();
             this.FrequencyInput = new System.Windows.Forms.NumericUpDown();
             this.DurationInput = new System.Windows.Forms.NumericUpDown();
@@ -48,41 +60,32 @@
             this.btnStopRecording = new MaterialSkin.Controls.MaterialButton();
             this.btnStartRecording = new MaterialSkin.Controls.MaterialButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.textBoxActionName = new MaterialSkin.Controls.MaterialMaskedTextBox();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.numericDelayBefore = new System.Windows.Forms.NumericUpDown();
-            this.numericDelay = new System.Windows.Forms.NumericUpDown();
-            this.btnAddAction = new MaterialSkin.Controls.MaterialButton();
-            this.lstAvailableActions = new MaterialSkin.Controls.MaterialListBox();
-            this.btnActionDelete = new MaterialSkin.Controls.MaterialButton();
-            this.btnMoveDownAction = new MaterialSkin.Controls.MaterialButton();
-            this.btnMoveUpAction = new MaterialSkin.Controls.MaterialButton();
-            this.textBoxMacroName = new MaterialSkin.Controls.MaterialMaskedTextBox();
-            this.btnCreateMacro = new MaterialSkin.Controls.MaterialButton();
-            this.lstAvailableMacros = new MaterialSkin.Controls.MaterialListBox();
-            this.textBoxDisplayMacroInfo = new MaterialSkin.Controls.MaterialMultiLineTextBox();
-            this.countAllMacroRepeat = new System.Windows.Forms.NumericUpDown();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            this.lstMacrosForExecute = new MaterialSkin.Controls.MaterialListBox();
+            this.richTextBoxLogInfo = new System.Windows.Forms.RichTextBox();
+            this.StatusLabel = new MaterialSkin.Controls.MaterialMultiLineTextBox();
+            this.btnStopMacro = new MaterialSkin.Controls.MaterialButton();
+            this.btnExecuteMacro = new MaterialSkin.Controls.MaterialButton();
+            this.chkAllMacrosToExecute = new MaterialSkin.Controls.MaterialCheckbox();
             this.btnMacroForExecuteDelete = new MaterialSkin.Controls.MaterialButton();
             this.btnMoveDownMacro = new MaterialSkin.Controls.MaterialButton();
             this.btnMoveUpMacro = new MaterialSkin.Controls.MaterialButton();
-            this.chkAllMacrosToExecute = new MaterialSkin.Controls.MaterialCheckbox();
-            this.btnStopMacro = new MaterialSkin.Controls.MaterialButton();
-            this.btnExecuteMacro = new MaterialSkin.Controls.MaterialButton();
-            this.StatusLabel = new MaterialSkin.Controls.MaterialMultiLineTextBox();
-            this.richTextBoxLogInfo = new System.Windows.Forms.RichTextBox();
+            this.lstMacrosForExecute = new MaterialSkin.Controls.MaterialListBox();
+            this.countAllMacroRepeat = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.textBoxDisplayMacroInfo = new MaterialSkin.Controls.MaterialMultiLineTextBox();
+            this.lstAvailableMacros = new MaterialSkin.Controls.MaterialListBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnMacroSave = new MaterialSkin.Controls.MaterialButton();
+            this.btnMacroDelete = new MaterialSkin.Controls.MaterialButton();
+            this.btnNewSavePath = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countAllMacroRepeat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +103,7 @@
             this.materialTabControl1.Multiline = true;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(387, 883);
+            this.materialTabControl1.Size = new System.Drawing.Size(387, 1083);
             this.materialTabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -110,7 +113,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 74);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(379, 835);
+            this.tabPage1.Size = new System.Drawing.Size(379, 1005);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Влизане";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -147,10 +150,282 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 74);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(379, 805);
+            this.tabPage2.Size = new System.Drawing.Size(379, 1005);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Създай макро";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnCreateMacro
+            // 
+            this.btnCreateMacro.AutoSize = false;
+            this.btnCreateMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreateMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCreateMacro.Depth = 0;
+            this.btnCreateMacro.HighEmphasis = true;
+            this.btnCreateMacro.Icon = null;
+            this.btnCreateMacro.Location = new System.Drawing.Point(40, 837);
+            this.btnCreateMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCreateMacro.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCreateMacro.Name = "btnCreateMacro";
+            this.btnCreateMacro.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCreateMacro.Size = new System.Drawing.Size(328, 40);
+            this.btnCreateMacro.TabIndex = 48;
+            this.btnCreateMacro.Text = "Създай Макрото";
+            this.btnCreateMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCreateMacro.UseAccentColor = false;
+            this.btnCreateMacro.UseVisualStyleBackColor = true;
+            this.btnCreateMacro.Click += new System.EventHandler(this.BtnCreateMacro_Click);
+            // 
+            // textBoxMacroName
+            // 
+            this.textBoxMacroName.AllowPromptAsInput = true;
+            this.textBoxMacroName.AnimateReadOnly = false;
+            this.textBoxMacroName.AsciiOnly = false;
+            this.textBoxMacroName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textBoxMacroName.BeepOnError = false;
+            this.textBoxMacroName.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.textBoxMacroName.Depth = 0;
+            this.textBoxMacroName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxMacroName.HidePromptOnLeave = false;
+            this.textBoxMacroName.HideSelection = true;
+            this.textBoxMacroName.Hint = "Име на Макрото";
+            this.textBoxMacroName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
+            this.textBoxMacroName.LeadingIcon = null;
+            this.textBoxMacroName.Location = new System.Drawing.Point(40, 777);
+            this.textBoxMacroName.Mask = "";
+            this.textBoxMacroName.MaxLength = 32767;
+            this.textBoxMacroName.MouseState = MaterialSkin.MouseState.OUT;
+            this.textBoxMacroName.Name = "textBoxMacroName";
+            this.textBoxMacroName.PasswordChar = '\0';
+            this.textBoxMacroName.PrefixSuffixText = null;
+            this.textBoxMacroName.PromptChar = '_';
+            this.textBoxMacroName.ReadOnly = false;
+            this.textBoxMacroName.RejectInputOnFirstFailure = false;
+            this.textBoxMacroName.ResetOnPrompt = true;
+            this.textBoxMacroName.ResetOnSpace = true;
+            this.textBoxMacroName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxMacroName.SelectedText = "";
+            this.textBoxMacroName.SelectionLength = 0;
+            this.textBoxMacroName.SelectionStart = 0;
+            this.textBoxMacroName.ShortcutsEnabled = true;
+            this.textBoxMacroName.Size = new System.Drawing.Size(328, 48);
+            this.textBoxMacroName.SkipLiterals = true;
+            this.textBoxMacroName.TabIndex = 47;
+            this.textBoxMacroName.TabStop = false;
+            this.textBoxMacroName.Text = "Макро 1";
+            this.textBoxMacroName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.textBoxMacroName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.textBoxMacroName.TrailingIcon = null;
+            this.textBoxMacroName.UseSystemPasswordChar = false;
+            this.textBoxMacroName.ValidatingType = null;
+            // 
+            // btnActionDelete
+            // 
+            this.btnActionDelete.AutoSize = false;
+            this.btnActionDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActionDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnActionDelete.Depth = 0;
+            this.btnActionDelete.HighEmphasis = true;
+            this.btnActionDelete.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_delete_32;
+            this.btnActionDelete.Location = new System.Drawing.Point(41, 719);
+            this.btnActionDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnActionDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnActionDelete.Name = "btnActionDelete";
+            this.btnActionDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnActionDelete.Size = new System.Drawing.Size(40, 40);
+            this.btnActionDelete.TabIndex = 46;
+            this.btnActionDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnActionDelete.UseAccentColor = false;
+            this.btnActionDelete.UseVisualStyleBackColor = true;
+            this.btnActionDelete.Click += new System.EventHandler(this.BtnActionDelete_Click);
+            // 
+            // btnMoveDownAction
+            // 
+            this.btnMoveDownAction.AutoSize = false;
+            this.btnMoveDownAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMoveDownAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMoveDownAction.Depth = 0;
+            this.btnMoveDownAction.HighEmphasis = true;
+            this.btnMoveDownAction.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_down_32;
+            this.btnMoveDownAction.Location = new System.Drawing.Point(40, 670);
+            this.btnMoveDownAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMoveDownAction.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMoveDownAction.Name = "btnMoveDownAction";
+            this.btnMoveDownAction.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMoveDownAction.Size = new System.Drawing.Size(40, 40);
+            this.btnMoveDownAction.TabIndex = 45;
+            this.btnMoveDownAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMoveDownAction.UseAccentColor = false;
+            this.btnMoveDownAction.UseVisualStyleBackColor = true;
+            this.btnMoveDownAction.Click += new System.EventHandler(this.BtnMoveDownAction_Click);
+            // 
+            // btnMoveUpAction
+            // 
+            this.btnMoveUpAction.AutoSize = false;
+            this.btnMoveUpAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMoveUpAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMoveUpAction.Depth = 0;
+            this.btnMoveUpAction.HighEmphasis = true;
+            this.btnMoveUpAction.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_up_32;
+            this.btnMoveUpAction.Location = new System.Drawing.Point(40, 622);
+            this.btnMoveUpAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMoveUpAction.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMoveUpAction.Name = "btnMoveUpAction";
+            this.btnMoveUpAction.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMoveUpAction.Size = new System.Drawing.Size(40, 40);
+            this.btnMoveUpAction.TabIndex = 44;
+            this.btnMoveUpAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMoveUpAction.UseAccentColor = false;
+            this.btnMoveUpAction.UseVisualStyleBackColor = true;
+            this.btnMoveUpAction.Click += new System.EventHandler(this.BtnMoveUpAction_Click);
+            // 
+            // lstAvailableActions
+            // 
+            this.lstAvailableActions.BackColor = System.Drawing.Color.White;
+            this.lstAvailableActions.BorderColor = System.Drawing.Color.LightGray;
+            this.lstAvailableActions.Depth = 0;
+            this.lstAvailableActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstAvailableActions.Location = new System.Drawing.Point(88, 622);
+            this.lstAvailableActions.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lstAvailableActions.Name = "lstAvailableActions";
+            this.lstAvailableActions.SelectedIndex = -1;
+            this.lstAvailableActions.SelectedItem = null;
+            this.lstAvailableActions.Size = new System.Drawing.Size(280, 137);
+            this.lstAvailableActions.TabIndex = 43;
+            this.lstAvailableActions.SelectedIndexChanged += new MaterialSkin.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.LstActions_SelectedIndexChanged);
+            // 
+            // btnAddAction
+            // 
+            this.btnAddAction.AutoSize = false;
+            this.btnAddAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAddAction.Depth = 0;
+            this.btnAddAction.HighEmphasis = true;
+            this.btnAddAction.Icon = null;
+            this.btnAddAction.Location = new System.Drawing.Point(40, 563);
+            this.btnAddAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAddAction.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAddAction.Name = "btnAddAction";
+            this.btnAddAction.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAddAction.Size = new System.Drawing.Size(328, 40);
+            this.btnAddAction.TabIndex = 42;
+            this.btnAddAction.Text = "Добави като ново действие";
+            this.btnAddAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAddAction.UseAccentColor = false;
+            this.btnAddAction.UseVisualStyleBackColor = true;
+            this.btnAddAction.Click += new System.EventHandler(this.BtnAddAction_Click);
+            // 
+            // numericDelayBefore
+            // 
+            this.numericDelayBefore.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDelayBefore.Location = new System.Drawing.Point(250, 489);
+            this.numericDelayBefore.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericDelayBefore.Name = "numericDelayBefore";
+            this.numericDelayBefore.Size = new System.Drawing.Size(60, 22);
+            this.numericDelayBefore.TabIndex = 41;
+            this.numericDelayBefore.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // numericDelay
+            // 
+            this.numericDelay.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.numericDelay.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDelay.Location = new System.Drawing.Point(250, 523);
+            this.numericDelay.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericDelay.Name = "numericDelay";
+            this.numericDelay.Size = new System.Drawing.Size(60, 22);
+            this.numericDelay.TabIndex = 40;
+            this.numericDelay.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(38, 523);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(234, 22);
+            this.materialLabel4.TabIndex = 39;
+            this.materialLabel4.Text = "Забавяне след (мс.):";
+            this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(38, 489);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(234, 22);
+            this.materialLabel5.TabIndex = 38;
+            this.materialLabel5.Text = "Забавяне преди (мс.):";
+            this.materialLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxActionName
+            // 
+            this.textBoxActionName.AllowPromptAsInput = true;
+            this.textBoxActionName.AnimateReadOnly = false;
+            this.textBoxActionName.AsciiOnly = false;
+            this.textBoxActionName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textBoxActionName.BeepOnError = false;
+            this.textBoxActionName.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.textBoxActionName.Depth = 0;
+            this.textBoxActionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxActionName.HidePromptOnLeave = false;
+            this.textBoxActionName.HideSelection = true;
+            this.textBoxActionName.Hint = "Въведете име за действието";
+            this.textBoxActionName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
+            this.textBoxActionName.LeadingIcon = null;
+            this.textBoxActionName.Location = new System.Drawing.Point(40, 424);
+            this.textBoxActionName.Mask = "";
+            this.textBoxActionName.MaxLength = 32767;
+            this.textBoxActionName.MouseState = MaterialSkin.MouseState.OUT;
+            this.textBoxActionName.Name = "textBoxActionName";
+            this.textBoxActionName.PasswordChar = '\0';
+            this.textBoxActionName.PrefixSuffixText = null;
+            this.textBoxActionName.PromptChar = '_';
+            this.textBoxActionName.ReadOnly = false;
+            this.textBoxActionName.RejectInputOnFirstFailure = false;
+            this.textBoxActionName.ResetOnPrompt = true;
+            this.textBoxActionName.ResetOnSpace = true;
+            this.textBoxActionName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxActionName.SelectedText = "";
+            this.textBoxActionName.SelectionLength = 0;
+            this.textBoxActionName.SelectionStart = 0;
+            this.textBoxActionName.ShortcutsEnabled = true;
+            this.textBoxActionName.Size = new System.Drawing.Size(328, 48);
+            this.textBoxActionName.SkipLiterals = true;
+            this.textBoxActionName.TabIndex = 37;
+            this.textBoxActionName.TabStop = false;
+            this.textBoxActionName.Text = "Действие 1";
+            this.textBoxActionName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.textBoxActionName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.textBoxActionName.TrailingIcon = null;
+            this.textBoxActionName.UseSystemPasswordChar = false;
+            this.textBoxActionName.ValidatingType = null;
             // 
             // CountInput
             // 
@@ -425,6 +700,7 @@
             this.btnStopRecording.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnStopRecording.UseAccentColor = false;
             this.btnStopRecording.UseVisualStyleBackColor = true;
+            this.btnStopRecording.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // btnStartRecording
             // 
@@ -446,9 +722,13 @@
             this.btnStartRecording.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnStartRecording.UseAccentColor = false;
             this.btnStartRecording.UseVisualStyleBackColor = true;
+            this.btnStartRecording.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnNewSavePath);
+            this.tabPage3.Controls.Add(this.btnMacroDelete);
+            this.tabPage3.Controls.Add(this.btnMacroSave);
             this.tabPage3.Controls.Add(this.richTextBoxLogInfo);
             this.tabPage3.Controls.Add(this.StatusLabel);
             this.tabPage3.Controls.Add(this.btnStopMacro);
@@ -466,328 +746,170 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 74);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(379, 805);
+            this.tabPage3.Size = new System.Drawing.Size(379, 1005);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Използвай макро";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // richTextBoxLogInfo
             // 
-            this.tabPage4.ImageKey = "icons8-settings-32.png";
-            this.tabPage4.Location = new System.Drawing.Point(4, 74);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(379, 835);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Настройки";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.richTextBoxLogInfo.Location = new System.Drawing.Point(42, 685);
+            this.richTextBoxLogInfo.Name = "richTextBoxLogInfo";
+            this.richTextBoxLogInfo.ReadOnly = true;
+            this.richTextBoxLogInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBoxLogInfo.Size = new System.Drawing.Size(320, 141);
+            this.richTextBoxLogInfo.TabIndex = 54;
+            this.richTextBoxLogInfo.Text = "Хронология . . .";
             // 
-            // imageList1
+            // StatusLabel
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-home-page-32.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-tune-32.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-settings-32.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-work-32.png");
-            this.imageList1.Images.SetKeyName(4, "icons8-delete-32.png");
-            this.imageList1.Images.SetKeyName(5, "icons8-down-32.png");
-            this.imageList1.Images.SetKeyName(6, "icons8-up-32.png");
+            this.StatusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.StatusLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.StatusLabel.Depth = 0;
+            this.StatusLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StatusLabel.Location = new System.Drawing.Point(43, 598);
+            this.StatusLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(319, 64);
+            this.StatusLabel.TabIndex = 53;
+            this.StatusLabel.Text = "Полседно действие:";
             // 
-            // textBoxActionName
+            // btnStopMacro
             // 
-            this.textBoxActionName.AllowPromptAsInput = true;
-            this.textBoxActionName.AnimateReadOnly = false;
-            this.textBoxActionName.AsciiOnly = false;
-            this.textBoxActionName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.textBoxActionName.BeepOnError = false;
-            this.textBoxActionName.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.textBoxActionName.Depth = 0;
-            this.textBoxActionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxActionName.HidePromptOnLeave = false;
-            this.textBoxActionName.HideSelection = true;
-            this.textBoxActionName.Hint = "Въведете име за действието";
-            this.textBoxActionName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.textBoxActionName.LeadingIcon = null;
-            this.textBoxActionName.Location = new System.Drawing.Point(40, 424);
-            this.textBoxActionName.Mask = "";
-            this.textBoxActionName.MaxLength = 32767;
-            this.textBoxActionName.MouseState = MaterialSkin.MouseState.OUT;
-            this.textBoxActionName.Name = "textBoxActionName";
-            this.textBoxActionName.PasswordChar = '\0';
-            this.textBoxActionName.PrefixSuffixText = null;
-            this.textBoxActionName.PromptChar = '_';
-            this.textBoxActionName.ReadOnly = false;
-            this.textBoxActionName.RejectInputOnFirstFailure = false;
-            this.textBoxActionName.ResetOnPrompt = true;
-            this.textBoxActionName.ResetOnSpace = true;
-            this.textBoxActionName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBoxActionName.SelectedText = "";
-            this.textBoxActionName.SelectionLength = 0;
-            this.textBoxActionName.SelectionStart = 0;
-            this.textBoxActionName.ShortcutsEnabled = true;
-            this.textBoxActionName.Size = new System.Drawing.Size(328, 48);
-            this.textBoxActionName.SkipLiterals = true;
-            this.textBoxActionName.TabIndex = 37;
-            this.textBoxActionName.TabStop = false;
-            this.textBoxActionName.Text = "Действие 1";
-            this.textBoxActionName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxActionName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.textBoxActionName.TrailingIcon = null;
-            this.textBoxActionName.UseSystemPasswordChar = false;
-            this.textBoxActionName.ValidatingType = null;
+            this.btnStopMacro.AutoSize = false;
+            this.btnStopMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStopMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnStopMacro.Depth = 0;
+            this.btnStopMacro.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStopMacro.HighEmphasis = true;
+            this.btnStopMacro.Icon = null;
+            this.btnStopMacro.Location = new System.Drawing.Point(212, 539);
+            this.btnStopMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStopMacro.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnStopMacro.Name = "btnStopMacro";
+            this.btnStopMacro.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnStopMacro.Size = new System.Drawing.Size(150, 40);
+            this.btnStopMacro.TabIndex = 52;
+            this.btnStopMacro.Text = "Спри";
+            this.btnStopMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnStopMacro.UseAccentColor = false;
+            this.btnStopMacro.UseVisualStyleBackColor = true;
+            this.btnStopMacro.Click += new System.EventHandler(this.BtnStopMacro_Click);
             // 
-            // materialLabel4
+            // btnExecuteMacro
             // 
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(38, 523);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(234, 22);
-            this.materialLabel4.TabIndex = 39;
-            this.materialLabel4.Text = "Забавяне след (мс.):";
-            this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExecuteMacro.AutoSize = false;
+            this.btnExecuteMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExecuteMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExecuteMacro.Depth = 0;
+            this.btnExecuteMacro.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExecuteMacro.HighEmphasis = true;
+            this.btnExecuteMacro.Icon = null;
+            this.btnExecuteMacro.Location = new System.Drawing.Point(44, 539);
+            this.btnExecuteMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExecuteMacro.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExecuteMacro.Name = "btnExecuteMacro";
+            this.btnExecuteMacro.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExecuteMacro.Size = new System.Drawing.Size(150, 40);
+            this.btnExecuteMacro.TabIndex = 51;
+            this.btnExecuteMacro.Text = "Изпълни";
+            this.btnExecuteMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExecuteMacro.UseAccentColor = false;
+            this.btnExecuteMacro.UseVisualStyleBackColor = true;
+            this.btnExecuteMacro.Click += new System.EventHandler(this.BtnExecuteMacro_Click);
             // 
-            // materialLabel5
+            // chkAllMacrosToExecute
             // 
-            this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(38, 489);
-            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(234, 22);
-            this.materialLabel5.TabIndex = 38;
-            this.materialLabel5.Text = "Забавяне преди (мс.):";
-            this.materialLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.chkAllMacrosToExecute.Depth = 0;
+            this.chkAllMacrosToExecute.Location = new System.Drawing.Point(92, 484);
+            this.chkAllMacrosToExecute.Margin = new System.Windows.Forms.Padding(0);
+            this.chkAllMacrosToExecute.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chkAllMacrosToExecute.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chkAllMacrosToExecute.Name = "chkAllMacrosToExecute";
+            this.chkAllMacrosToExecute.ReadOnly = false;
+            this.chkAllMacrosToExecute.Ripple = true;
+            this.chkAllMacrosToExecute.Size = new System.Drawing.Size(271, 40);
+            this.chkAllMacrosToExecute.TabIndex = 50;
+            this.chkAllMacrosToExecute.Text = "Изпълни всички от списъка ";
+            this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
+            this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.ChkAllMacrosToExecute_CheckedChanged);
             // 
-            // numericDelayBefore
+            // btnMacroForExecuteDelete
             // 
-            this.numericDelayBefore.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDelayBefore.Location = new System.Drawing.Point(250, 489);
-            this.numericDelayBefore.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericDelayBefore.Name = "numericDelayBefore";
-            this.numericDelayBefore.Size = new System.Drawing.Size(60, 22);
-            this.numericDelayBefore.TabIndex = 41;
-            this.numericDelayBefore.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            this.btnMacroForExecuteDelete.AutoSize = false;
+            this.btnMacroForExecuteDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacroForExecuteDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMacroForExecuteDelete.Depth = 0;
+            this.btnMacroForExecuteDelete.HighEmphasis = true;
+            this.btnMacroForExecuteDelete.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_delete_32;
+            this.btnMacroForExecuteDelete.Location = new System.Drawing.Point(47, 438);
+            this.btnMacroForExecuteDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMacroForExecuteDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMacroForExecuteDelete.Name = "btnMacroForExecuteDelete";
+            this.btnMacroForExecuteDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMacroForExecuteDelete.Size = new System.Drawing.Size(40, 40);
+            this.btnMacroForExecuteDelete.TabIndex = 49;
+            this.btnMacroForExecuteDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMacroForExecuteDelete.UseAccentColor = false;
+            this.btnMacroForExecuteDelete.UseVisualStyleBackColor = true;
+            this.btnMacroForExecuteDelete.Click += new System.EventHandler(this.BtnMacroForExecuteDelete_Click);
             // 
-            // numericDelay
+            // btnMoveDownMacro
             // 
-            this.numericDelay.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.numericDelay.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDelay.Location = new System.Drawing.Point(250, 523);
-            this.numericDelay.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericDelay.Name = "numericDelay";
-            this.numericDelay.Size = new System.Drawing.Size(60, 22);
-            this.numericDelay.TabIndex = 40;
-            this.numericDelay.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            this.btnMoveDownMacro.AutoSize = false;
+            this.btnMoveDownMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMoveDownMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMoveDownMacro.Depth = 0;
+            this.btnMoveDownMacro.HighEmphasis = true;
+            this.btnMoveDownMacro.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_down_32;
+            this.btnMoveDownMacro.Location = new System.Drawing.Point(47, 390);
+            this.btnMoveDownMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMoveDownMacro.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMoveDownMacro.Name = "btnMoveDownMacro";
+            this.btnMoveDownMacro.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMoveDownMacro.Size = new System.Drawing.Size(40, 40);
+            this.btnMoveDownMacro.TabIndex = 48;
+            this.btnMoveDownMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMoveDownMacro.UseAccentColor = false;
+            this.btnMoveDownMacro.UseVisualStyleBackColor = true;
+            this.btnMoveDownMacro.Click += new System.EventHandler(this.BtnMoveDownMacro_Click);
             // 
-            // btnAddAction
+            // btnMoveUpMacro
             // 
-            this.btnAddAction.AutoSize = false;
-            this.btnAddAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAddAction.Depth = 0;
-            this.btnAddAction.HighEmphasis = true;
-            this.btnAddAction.Icon = null;
-            this.btnAddAction.Location = new System.Drawing.Point(40, 563);
-            this.btnAddAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnAddAction.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAddAction.Name = "btnAddAction";
-            this.btnAddAction.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAddAction.Size = new System.Drawing.Size(328, 40);
-            this.btnAddAction.TabIndex = 42;
-            this.btnAddAction.Text = "Добави като ново действие";
-            this.btnAddAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAddAction.UseAccentColor = false;
-            this.btnAddAction.UseVisualStyleBackColor = true;
+            this.btnMoveUpMacro.AutoSize = false;
+            this.btnMoveUpMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMoveUpMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMoveUpMacro.Depth = 0;
+            this.btnMoveUpMacro.HighEmphasis = true;
+            this.btnMoveUpMacro.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_up_32;
+            this.btnMoveUpMacro.Location = new System.Drawing.Point(47, 341);
+            this.btnMoveUpMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMoveUpMacro.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMoveUpMacro.Name = "btnMoveUpMacro";
+            this.btnMoveUpMacro.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMoveUpMacro.Size = new System.Drawing.Size(40, 40);
+            this.btnMoveUpMacro.TabIndex = 47;
+            this.btnMoveUpMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMoveUpMacro.UseAccentColor = false;
+            this.btnMoveUpMacro.UseVisualStyleBackColor = true;
+            this.btnMoveUpMacro.Click += new System.EventHandler(this.BtnMoveUpMacro_Click);
             // 
-            // lstAvailableActions
+            // lstMacrosForExecute
             // 
-            this.lstAvailableActions.BackColor = System.Drawing.Color.White;
-            this.lstAvailableActions.BorderColor = System.Drawing.Color.LightGray;
-            this.lstAvailableActions.Depth = 0;
-            this.lstAvailableActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lstAvailableActions.Location = new System.Drawing.Point(88, 622);
-            this.lstAvailableActions.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lstAvailableActions.Name = "lstAvailableActions";
-            this.lstAvailableActions.SelectedIndex = -1;
-            this.lstAvailableActions.SelectedItem = null;
-            this.lstAvailableActions.Size = new System.Drawing.Size(280, 137);
-            this.lstAvailableActions.TabIndex = 43;
-            // 
-            // btnActionDelete
-            // 
-            this.btnActionDelete.AutoSize = false;
-            this.btnActionDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnActionDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnActionDelete.Depth = 0;
-            this.btnActionDelete.HighEmphasis = true;
-            this.btnActionDelete.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_delete_32;
-            this.btnActionDelete.Location = new System.Drawing.Point(41, 719);
-            this.btnActionDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnActionDelete.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnActionDelete.Name = "btnActionDelete";
-            this.btnActionDelete.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnActionDelete.Size = new System.Drawing.Size(40, 40);
-            this.btnActionDelete.TabIndex = 46;
-            this.btnActionDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnActionDelete.UseAccentColor = false;
-            this.btnActionDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnMoveDownAction
-            // 
-            this.btnMoveDownAction.AutoSize = false;
-            this.btnMoveDownAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMoveDownAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnMoveDownAction.Depth = 0;
-            this.btnMoveDownAction.HighEmphasis = true;
-            this.btnMoveDownAction.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_down_32;
-            this.btnMoveDownAction.Location = new System.Drawing.Point(40, 670);
-            this.btnMoveDownAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnMoveDownAction.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnMoveDownAction.Name = "btnMoveDownAction";
-            this.btnMoveDownAction.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMoveDownAction.Size = new System.Drawing.Size(40, 40);
-            this.btnMoveDownAction.TabIndex = 45;
-            this.btnMoveDownAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnMoveDownAction.UseAccentColor = false;
-            this.btnMoveDownAction.UseVisualStyleBackColor = true;
-            // 
-            // btnMoveUpAction
-            // 
-            this.btnMoveUpAction.AutoSize = false;
-            this.btnMoveUpAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMoveUpAction.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnMoveUpAction.Depth = 0;
-            this.btnMoveUpAction.HighEmphasis = true;
-            this.btnMoveUpAction.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_up_32;
-            this.btnMoveUpAction.Location = new System.Drawing.Point(40, 622);
-            this.btnMoveUpAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnMoveUpAction.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnMoveUpAction.Name = "btnMoveUpAction";
-            this.btnMoveUpAction.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMoveUpAction.Size = new System.Drawing.Size(40, 40);
-            this.btnMoveUpAction.TabIndex = 44;
-            this.btnMoveUpAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnMoveUpAction.UseAccentColor = false;
-            this.btnMoveUpAction.UseVisualStyleBackColor = true;
-            // 
-            // textBoxMacroName
-            // 
-            this.textBoxMacroName.AllowPromptAsInput = true;
-            this.textBoxMacroName.AnimateReadOnly = false;
-            this.textBoxMacroName.AsciiOnly = false;
-            this.textBoxMacroName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.textBoxMacroName.BeepOnError = false;
-            this.textBoxMacroName.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.textBoxMacroName.Depth = 0;
-            this.textBoxMacroName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxMacroName.HidePromptOnLeave = false;
-            this.textBoxMacroName.HideSelection = true;
-            this.textBoxMacroName.Hint = "Име на Макрото";
-            this.textBoxMacroName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.textBoxMacroName.LeadingIcon = null;
-            this.textBoxMacroName.Location = new System.Drawing.Point(40, 777);
-            this.textBoxMacroName.Mask = "";
-            this.textBoxMacroName.MaxLength = 32767;
-            this.textBoxMacroName.MouseState = MaterialSkin.MouseState.OUT;
-            this.textBoxMacroName.Name = "textBoxMacroName";
-            this.textBoxMacroName.PasswordChar = '\0';
-            this.textBoxMacroName.PrefixSuffixText = null;
-            this.textBoxMacroName.PromptChar = '_';
-            this.textBoxMacroName.ReadOnly = false;
-            this.textBoxMacroName.RejectInputOnFirstFailure = false;
-            this.textBoxMacroName.ResetOnPrompt = true;
-            this.textBoxMacroName.ResetOnSpace = true;
-            this.textBoxMacroName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBoxMacroName.SelectedText = "";
-            this.textBoxMacroName.SelectionLength = 0;
-            this.textBoxMacroName.SelectionStart = 0;
-            this.textBoxMacroName.ShortcutsEnabled = true;
-            this.textBoxMacroName.Size = new System.Drawing.Size(328, 48);
-            this.textBoxMacroName.SkipLiterals = true;
-            this.textBoxMacroName.TabIndex = 47;
-            this.textBoxMacroName.TabStop = false;
-            this.textBoxMacroName.Text = "Макро 1";
-            this.textBoxMacroName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxMacroName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.textBoxMacroName.TrailingIcon = null;
-            this.textBoxMacroName.UseSystemPasswordChar = false;
-            this.textBoxMacroName.ValidatingType = null;
-            // 
-            // btnCreateMacro
-            // 
-            this.btnCreateMacro.AutoSize = false;
-            this.btnCreateMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCreateMacro.Depth = 0;
-            this.btnCreateMacro.HighEmphasis = true;
-            this.btnCreateMacro.Icon = null;
-            this.btnCreateMacro.Location = new System.Drawing.Point(40, 837);
-            this.btnCreateMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCreateMacro.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCreateMacro.Name = "btnCreateMacro";
-            this.btnCreateMacro.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCreateMacro.Size = new System.Drawing.Size(328, 40);
-            this.btnCreateMacro.TabIndex = 48;
-            this.btnCreateMacro.Text = "Създай Макрото";
-            this.btnCreateMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnCreateMacro.UseAccentColor = false;
-            this.btnCreateMacro.UseVisualStyleBackColor = true;
-            // 
-            // lstAvailableMacros
-            // 
-            this.lstAvailableMacros.BackColor = System.Drawing.Color.White;
-            this.lstAvailableMacros.BorderColor = System.Drawing.Color.LightGray;
-            this.lstAvailableMacros.Depth = 0;
-            this.lstAvailableMacros.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lstAvailableMacros.Location = new System.Drawing.Point(44, 19);
-            this.lstAvailableMacros.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lstAvailableMacros.Name = "lstAvailableMacros";
-            this.lstAvailableMacros.SelectedIndex = -1;
-            this.lstAvailableMacros.SelectedItem = null;
-            this.lstAvailableMacros.Size = new System.Drawing.Size(319, 102);
-            this.lstAvailableMacros.TabIndex = 0;
-            // 
-            // textBoxDisplayMacroInfo
-            // 
-            this.textBoxDisplayMacroInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.textBoxDisplayMacroInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxDisplayMacroInfo.Depth = 0;
-            this.textBoxDisplayMacroInfo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxDisplayMacroInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBoxDisplayMacroInfo.Location = new System.Drawing.Point(44, 137);
-            this.textBoxDisplayMacroInfo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.textBoxDisplayMacroInfo.Name = "textBoxDisplayMacroInfo";
-            this.textBoxDisplayMacroInfo.ReadOnly = true;
-            this.textBoxDisplayMacroInfo.Size = new System.Drawing.Size(319, 149);
-            this.textBoxDisplayMacroInfo.TabIndex = 2;
-            this.textBoxDisplayMacroInfo.Text = "Макро информация:";
+            this.lstMacrosForExecute.AccessibleDescription = "";
+            this.lstMacrosForExecute.BackColor = System.Drawing.Color.White;
+            this.lstMacrosForExecute.BorderColor = System.Drawing.Color.LightGray;
+            this.lstMacrosForExecute.Depth = 0;
+            this.lstMacrosForExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstMacrosForExecute.Location = new System.Drawing.Point(92, 341);
+            this.lstMacrosForExecute.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lstMacrosForExecute.Name = "lstMacrosForExecute";
+            this.lstMacrosForExecute.SelectedIndex = -1;
+            this.lstMacrosForExecute.SelectedItem = null;
+            this.lstMacrosForExecute.Size = new System.Drawing.Size(186, 137);
+            this.lstMacrosForExecute.TabIndex = 37;
+            this.lstMacrosForExecute.SelectedIndexChanged += new MaterialSkin.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.LstMacrosForExecute_SelectedIndexChanged);
             // 
             // countAllMacroRepeat
             // 
@@ -823,164 +945,128 @@
             this.materialLabel6.Text = "Пъти на изпълнение:";
             this.materialLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lstMacrosForExecute
+            // textBoxDisplayMacroInfo
             // 
-            this.lstMacrosForExecute.AccessibleDescription = "";
-            this.lstMacrosForExecute.BackColor = System.Drawing.Color.White;
-            this.lstMacrosForExecute.BorderColor = System.Drawing.Color.LightGray;
-            this.lstMacrosForExecute.Depth = 0;
-            this.lstMacrosForExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lstMacrosForExecute.Location = new System.Drawing.Point(92, 341);
-            this.lstMacrosForExecute.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lstMacrosForExecute.Name = "lstMacrosForExecute";
-            this.lstMacrosForExecute.SelectedIndex = -1;
-            this.lstMacrosForExecute.SelectedItem = null;
-            this.lstMacrosForExecute.Size = new System.Drawing.Size(186, 137);
-            this.lstMacrosForExecute.TabIndex = 37;
+            this.textBoxDisplayMacroInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.textBoxDisplayMacroInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxDisplayMacroInfo.Depth = 0;
+            this.textBoxDisplayMacroInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxDisplayMacroInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.textBoxDisplayMacroInfo.Location = new System.Drawing.Point(44, 137);
+            this.textBoxDisplayMacroInfo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.textBoxDisplayMacroInfo.Name = "textBoxDisplayMacroInfo";
+            this.textBoxDisplayMacroInfo.ReadOnly = true;
+            this.textBoxDisplayMacroInfo.Size = new System.Drawing.Size(319, 149);
+            this.textBoxDisplayMacroInfo.TabIndex = 2;
+            this.textBoxDisplayMacroInfo.Text = "Макро информация:";
             // 
-            // btnMacroForExecuteDelete
+            // lstAvailableMacros
             // 
-            this.btnMacroForExecuteDelete.AutoSize = false;
-            this.btnMacroForExecuteDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacroForExecuteDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnMacroForExecuteDelete.Depth = 0;
-            this.btnMacroForExecuteDelete.HighEmphasis = true;
-            this.btnMacroForExecuteDelete.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_delete_32;
-            this.btnMacroForExecuteDelete.Location = new System.Drawing.Point(47, 438);
-            this.btnMacroForExecuteDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnMacroForExecuteDelete.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnMacroForExecuteDelete.Name = "btnMacroForExecuteDelete";
-            this.btnMacroForExecuteDelete.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMacroForExecuteDelete.Size = new System.Drawing.Size(40, 40);
-            this.btnMacroForExecuteDelete.TabIndex = 49;
-            this.btnMacroForExecuteDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnMacroForExecuteDelete.UseAccentColor = false;
-            this.btnMacroForExecuteDelete.UseVisualStyleBackColor = true;
+            this.lstAvailableMacros.BackColor = System.Drawing.Color.White;
+            this.lstAvailableMacros.BorderColor = System.Drawing.Color.LightGray;
+            this.lstAvailableMacros.Depth = 0;
+            this.lstAvailableMacros.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstAvailableMacros.Location = new System.Drawing.Point(129, 19);
+            this.lstAvailableMacros.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lstAvailableMacros.Name = "lstAvailableMacros";
+            this.lstAvailableMacros.SelectedIndex = -1;
+            this.lstAvailableMacros.SelectedItem = null;
+            this.lstAvailableMacros.Size = new System.Drawing.Size(234, 102);
+            this.lstAvailableMacros.TabIndex = 0;
+            this.lstAvailableMacros.SelectedIndexChanged += new MaterialSkin.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.LstAvailableMacros_SelectedIndexChanged);
+            this.lstAvailableMacros.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LstAvailableMacros_MouseDoubleClick);
             // 
-            // btnMoveDownMacro
+            // tabPage4
             // 
-            this.btnMoveDownMacro.AutoSize = false;
-            this.btnMoveDownMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMoveDownMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnMoveDownMacro.Depth = 0;
-            this.btnMoveDownMacro.HighEmphasis = true;
-            this.btnMoveDownMacro.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_down_32;
-            this.btnMoveDownMacro.Location = new System.Drawing.Point(47, 390);
-            this.btnMoveDownMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnMoveDownMacro.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnMoveDownMacro.Name = "btnMoveDownMacro";
-            this.btnMoveDownMacro.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMoveDownMacro.Size = new System.Drawing.Size(40, 40);
-            this.btnMoveDownMacro.TabIndex = 48;
-            this.btnMoveDownMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnMoveDownMacro.UseAccentColor = false;
-            this.btnMoveDownMacro.UseVisualStyleBackColor = true;
+            this.tabPage4.ImageKey = "icons8-settings-32.png";
+            this.tabPage4.Location = new System.Drawing.Point(4, 74);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(379, 1005);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Настройки";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // btnMoveUpMacro
+            // imageList1
             // 
-            this.btnMoveUpMacro.AutoSize = false;
-            this.btnMoveUpMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMoveUpMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnMoveUpMacro.Depth = 0;
-            this.btnMoveUpMacro.HighEmphasis = true;
-            this.btnMoveUpMacro.Icon = global::CoordinateTrackerAndClicker.Properties.Resources.icons8_up_32;
-            this.btnMoveUpMacro.Location = new System.Drawing.Point(47, 341);
-            this.btnMoveUpMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnMoveUpMacro.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnMoveUpMacro.Name = "btnMoveUpMacro";
-            this.btnMoveUpMacro.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMoveUpMacro.Size = new System.Drawing.Size(40, 40);
-            this.btnMoveUpMacro.TabIndex = 47;
-            this.btnMoveUpMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnMoveUpMacro.UseAccentColor = false;
-            this.btnMoveUpMacro.UseVisualStyleBackColor = true;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-home-page-32.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-tune-32.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-settings-32.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-work-32.png");
+            this.imageList1.Images.SetKeyName(4, "icons8-delete-32.png");
+            this.imageList1.Images.SetKeyName(5, "icons8-down-32.png");
+            this.imageList1.Images.SetKeyName(6, "icons8-up-32.png");
             // 
-            // chkAllMacrosToExecute
+            // btnMacroSave
             // 
-            this.chkAllMacrosToExecute.Depth = 0;
-            this.chkAllMacrosToExecute.Location = new System.Drawing.Point(92, 484);
-            this.chkAllMacrosToExecute.Margin = new System.Windows.Forms.Padding(0);
-            this.chkAllMacrosToExecute.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chkAllMacrosToExecute.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chkAllMacrosToExecute.Name = "chkAllMacrosToExecute";
-            this.chkAllMacrosToExecute.ReadOnly = false;
-            this.chkAllMacrosToExecute.Ripple = true;
-            this.chkAllMacrosToExecute.Size = new System.Drawing.Size(271, 40);
-            this.chkAllMacrosToExecute.TabIndex = 50;
-            this.chkAllMacrosToExecute.Text = "Изпълни всички от списъка ";
-            this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
+            this.btnMacroSave.AutoSize = false;
+            this.btnMacroSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacroSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMacroSave.Depth = 0;
+            this.btnMacroSave.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnMacroSave.HighEmphasis = true;
+            this.btnMacroSave.Icon = null;
+            this.btnMacroSave.Location = new System.Drawing.Point(44, 19);
+            this.btnMacroSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMacroSave.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMacroSave.Name = "btnMacroSave";
+            this.btnMacroSave.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMacroSave.Size = new System.Drawing.Size(78, 30);
+            this.btnMacroSave.TabIndex = 55;
+            this.btnMacroSave.Text = "Запази Макрото";
+            this.btnMacroSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMacroSave.UseAccentColor = false;
+            this.btnMacroSave.UseVisualStyleBackColor = true;
             // 
-            // btnStopMacro
+            // btnMacroDelete
             // 
-            this.btnStopMacro.AutoSize = false;
-            this.btnStopMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStopMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnStopMacro.Depth = 0;
-            this.btnStopMacro.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnStopMacro.HighEmphasis = true;
-            this.btnStopMacro.Icon = null;
-            this.btnStopMacro.Location = new System.Drawing.Point(212, 539);
-            this.btnStopMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnStopMacro.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnStopMacro.Name = "btnStopMacro";
-            this.btnStopMacro.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnStopMacro.Size = new System.Drawing.Size(150, 40);
-            this.btnStopMacro.TabIndex = 52;
-            this.btnStopMacro.Text = "Спри";
-            this.btnStopMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnStopMacro.UseAccentColor = false;
-            this.btnStopMacro.UseVisualStyleBackColor = true;
+            this.btnMacroDelete.AutoSize = false;
+            this.btnMacroDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacroDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnMacroDelete.Depth = 0;
+            this.btnMacroDelete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnMacroDelete.HighEmphasis = true;
+            this.btnMacroDelete.Icon = null;
+            this.btnMacroDelete.Location = new System.Drawing.Point(44, 55);
+            this.btnMacroDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnMacroDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnMacroDelete.Name = "btnMacroDelete";
+            this.btnMacroDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnMacroDelete.Size = new System.Drawing.Size(78, 30);
+            this.btnMacroDelete.TabIndex = 56;
+            this.btnMacroDelete.Text = "Изтрии Макрото";
+            this.btnMacroDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnMacroDelete.UseAccentColor = false;
+            this.btnMacroDelete.UseVisualStyleBackColor = true;
             // 
-            // btnExecuteMacro
+            // btnNewSavePath
             // 
-            this.btnExecuteMacro.AutoSize = false;
-            this.btnExecuteMacro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnExecuteMacro.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnExecuteMacro.Depth = 0;
-            this.btnExecuteMacro.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExecuteMacro.HighEmphasis = true;
-            this.btnExecuteMacro.Icon = null;
-            this.btnExecuteMacro.Location = new System.Drawing.Point(44, 539);
-            this.btnExecuteMacro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnExecuteMacro.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnExecuteMacro.Name = "btnExecuteMacro";
-            this.btnExecuteMacro.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnExecuteMacro.Size = new System.Drawing.Size(150, 40);
-            this.btnExecuteMacro.TabIndex = 51;
-            this.btnExecuteMacro.Text = "Изпълни";
-            this.btnExecuteMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnExecuteMacro.UseAccentColor = false;
-            this.btnExecuteMacro.UseVisualStyleBackColor = true;
-            // 
-            // StatusLabel
-            // 
-            this.StatusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.StatusLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.StatusLabel.Depth = 0;
-            this.StatusLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.StatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.StatusLabel.Location = new System.Drawing.Point(43, 598);
-            this.StatusLabel.MouseState = MaterialSkin.MouseState.HOVER;
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(319, 64);
-            this.StatusLabel.TabIndex = 53;
-            this.StatusLabel.Text = "Полседно действие:";
-            // 
-            // richTextBoxLogInfo
-            // 
-            this.richTextBoxLogInfo.Location = new System.Drawing.Point(42, 685);
-            this.richTextBoxLogInfo.Name = "richTextBoxLogInfo";
-            this.richTextBoxLogInfo.ReadOnly = true;
-            this.richTextBoxLogInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxLogInfo.Size = new System.Drawing.Size(320, 141);
-            this.richTextBoxLogInfo.TabIndex = 54;
-            this.richTextBoxLogInfo.Text = "Хронология . . .";
+            this.btnNewSavePath.AutoSize = false;
+            this.btnNewSavePath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNewSavePath.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnNewSavePath.Depth = 0;
+            this.btnNewSavePath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnNewSavePath.HighEmphasis = true;
+            this.btnNewSavePath.Icon = null;
+            this.btnNewSavePath.Location = new System.Drawing.Point(44, 91);
+            this.btnNewSavePath.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNewSavePath.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnNewSavePath.Name = "btnNewSavePath";
+            this.btnNewSavePath.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnNewSavePath.Size = new System.Drawing.Size(78, 30);
+            this.btnNewSavePath.TabIndex = 57;
+            this.btnNewSavePath.Text = "Избери локация";
+            this.btnNewSavePath.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnNewSavePath.UseAccentColor = false;
+            this.btnNewSavePath.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 950);
+            this.ClientSize = new System.Drawing.Size(440, 1150);
             this.Controls.Add(this.materialTabControl1);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
@@ -991,12 +1077,12 @@
             this.Text = "Кликер";
             this.materialTabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CountInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrequencyInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationInput)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericDelayBefore)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countAllMacroRepeat)).EndInit();
             this.ResumeLayout(false);
 
@@ -1049,5 +1135,8 @@
         private MaterialSkin.Controls.MaterialButton btnExecuteMacro;
         private MaterialSkin.Controls.MaterialMultiLineTextBox StatusLabel;
         private System.Windows.Forms.RichTextBox richTextBoxLogInfo;
+        private MaterialSkin.Controls.MaterialButton btnNewSavePath;
+        private MaterialSkin.Controls.MaterialButton btnMacroDelete;
+        private MaterialSkin.Controls.MaterialButton btnMacroSave;
     }
 }
