@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using CoordinateTrackerAndClicker.UI;
 
 namespace CoordinateTrackerAndClicker
 {
@@ -24,6 +25,7 @@ namespace CoordinateTrackerAndClicker
         private readonly List<Point> clickHistory = new List<Point>();
         private Point lastCoordinate = new Point();
         private bool isSommeCommandIsActive = false;
+        private bool modalAlertOn = false;
 
         private readonly MouseHook _mouseHook;
         private readonly MouseTracker _mouseTracker;
@@ -32,6 +34,9 @@ namespace CoordinateTrackerAndClicker
         private readonly PrintText printer;
         private readonly Printer _printer;
         private readonly ButtonHandler buttonHandler;
+
+        private readonly SettingsCommand settingsCommand;
+        private readonly MaterialSkinManager materialSkinManager;
 
         private readonly List<NumericUpDown> numericUpDownsForMacrosToExecute = new List<NumericUpDown>();
 
@@ -44,20 +49,23 @@ namespace CoordinateTrackerAndClicker
             _mouseHook = new MouseHook();
             _mouseTracker = new MouseTracker();
 
+            settingsCommand = new SettingsCommand();
+
             _mouseHook.OnMouseClick += OnGlobalMouseClick;
             _mouseTracker.OnPositionChanged += MouseTrackTimer_Tick;
 
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Cyan800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
             _printer = new Printer((message, fontSize, logLevel) =>
             {
                 StatusLabel.Text = message;
                 LogMessagePrint(message, logLevel);
+                if (modalAlertOn) Alert(message, logLevel);
             });
 
             InitializeButtonsBehavior();
@@ -124,7 +132,7 @@ namespace CoordinateTrackerAndClicker
             if (lastClick == null) return;
 
             txtX.Text = lastClick.X.ToString();
-            txtY.Text = lastClick.Y.ToString();
+            txtY.Text = lastClick.Y.ToString();          
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -171,14 +179,11 @@ namespace CoordinateTrackerAndClicker
 
             // Add to the macro's action list 
             macroService.AddAction(textBoxActionName.Text, lastCoordinate, (MouseActionType)cmbActionType.SelectedIndex,
-                Convert.ToInt32(numericDelay.Value), Convert.ToInt32(numericDelayBefore.Value), chkReturnMouseToOriginal.Checked,
-                Convert.ToInt32(FrequencyInput.Value), Convert.ToInt32(DurationInput.Value), Convert.ToInt32(CountInput.Value));
+                numericDelaySlider.Value, numericDelayBeforeSlider.Value, chkReturnMouseToOriginal.Checked,
+                FrequencyInputSlider.Value, DurationInputSlider.Value, CountInputSlider.Value);            
 
             // Refresh the UI to show the new action
-            lstAvailableActions.Items.Add(new MaterialListBoxItem { Text = textBoxActionName.Text });
-            //lstAvailableActions.TopIndex = lstAvailableActions.Items.Count - 1; // Скрол до последния елемент
-            lstAvailableActions.SelectedIndex = lstAvailableActions.Items.Count - 1; // Скрол до последния елемент
-            lstAvailableActions.Focus();
+            lstAvailableActions.AddItem(textBoxActionName.Text);
 
             ClearAllVisualMessages();
 
@@ -212,7 +217,7 @@ namespace CoordinateTrackerAndClicker
             }
         }
 
-        private void LstAvailableMacros_SelectedIndexChanged(object sender, MaterialListBoxItem selectedItem)
+        private void LstAvailableMacros_SelectedIndexChanged(object sender, MaterialListBoxItem selectedItem)           
         {
             if (!isSommeCommandIsActive)
             {
@@ -220,7 +225,7 @@ namespace CoordinateTrackerAndClicker
 
                 textBoxDisplayMacroInfo.Text = printer.DisplayMacroInfo(
                     macroService.macrosList[lstAvailableMacros.SelectedIndex],
-                    lstAvailableMacros.SelectedItem.ToString().Contains("🗹"));
+                    lstAvailableMacros.SelectedItem.Text.Contains("🗹"));
 
                 btnExecuteMacro.Enabled = true;
             }
@@ -252,6 +257,18 @@ namespace CoordinateTrackerAndClicker
             lstMacrosForExecute.Items.Add(new MaterialListBoxItem { Text = lstAvailableMacros.SelectedItem.Text.Remove(0, 5) });
             AddNumericUpDown(lstMacrosForExecute.Items.Count - 1);
             //lstMacrosForExecute.TopIndex = lstMacrosForExecute.Items.Count - 1; // Scroll to bottom of list if is necessary
+
+            if (lstMacrosForExecute.Items.Count > 0)
+            {
+                //var lastItem = lstMacrosForExecute.Items[lstMacrosForExecute.Items.Count - 1];
+
+                //lstMacrosForExecute.SelectedIndex = lstMacrosForExecute.Items.Count - 1;
+                //lstMacrosForExecute.AutoScrollOffset = new Point(0, lstMacrosForExecute.Height);
+                lstMacrosForExecute.AutoScrollOffset.Offset(new Point(0, lstMacrosForExecute.Height));
+   
+                
+            }
+        
         }
 
         private void LstActions_SelectedIndexChanged(object sender, MaterialListBoxItem selectedItem)
@@ -275,7 +292,7 @@ namespace CoordinateTrackerAndClicker
             // Ако няам добаевно макро за изпълнение добавя маркираното макро от списъка с макрота
             if (lstMacrosForExecute.Items.Count == 0)
             {
-                lstMacrosForExecute.Items.Add(new MaterialListBoxItem { Text = lstAvailableMacros.SelectedItem.ToString().Remove(0, 5) });
+                lstMacrosForExecute.Items.Add(new MaterialListBoxItem { Text = lstAvailableMacros.SelectedItem.Text.Remove(0, 5) });
             }
             // Ако няма избрарно макро от списъка за изпълнения на макрота, автоматично маркирва и избира първото ( индекс 0 )
             //int currentSelectedMacroToExecuteIndex = lstMacrosForExecute.SelectedIndex;
@@ -325,8 +342,9 @@ namespace CoordinateTrackerAndClicker
 
                 await macroService.ExecuteMacroAsync(
                     _printer,
+                    ProgressBarExecuteMacros,
                     macrosNameRepeatList,
-                    (int)countAllMacroRepeat.Value);
+                    countAllMacroRepeatSlider.Value);
             }
             catch (Exception ex)
             {
@@ -375,21 +393,21 @@ namespace CoordinateTrackerAndClicker
             int selectedMacroIndex = lstMacrosForExecute.SelectedIndex; // Индекс на маркираното макро
             lstMacrosForExecute.Items.RemoveAt(selectedMacroIndex); // Премахване на визуалния елемент от списъка
 
-            // Изтриване на съответния NumericUpDown
-            NumericUpDown numericUpDownToRemove = numericUpDownsForMacrosToExecute[selectedMacroIndex];
-            this.Controls.Remove(numericUpDownToRemove);
-            numericUpDownsForMacrosToExecute.RemoveAt(selectedMacroIndex);
+            //// Изтриване на съответния NumericUpDown
+            //NumericUpDown numericUpDownToRemove = numericUpDownsForMacrosToExecute[selectedMacroIndex];
+            //this.Controls.Remove(numericUpDownToRemove);
+            //numericUpDownsForMacrosToExecute.RemoveAt(selectedMacroIndex);
 
-            btnMacroForExecuteDelete.Enabled = false; //Деактивирване на бутона за триене
+            //btnMacroForExecuteDelete.Enabled = false; //Деактивирване на бутона за триене
 
-            // Препозициониране на останалите NumericUpDown контроли
-            int estimatedItemHeight = lstMacrosForExecute.Height / lstMacrosForExecute.Items.Count;
-            for (int i = selectedMacroIndex; i < numericUpDownsForMacrosToExecute.Count; i++)
-            {
-                numericUpDownsForMacrosToExecute[i].Location = new Point(
-                    lstMacrosForExecute.Right + 10,
-                    lstMacrosForExecute.Top + (i * estimatedItemHeight) + 2);
-            }
+            //// Препозициониране на останалите NumericUpDown контроли
+            //int estimatedItemHeight = lstMacrosForExecute.Height / lstMacrosForExecute.Items.Count;
+            //for (int i = selectedMacroIndex; i < numericUpDownsForMacrosToExecute.Count; i++)
+            //{
+            //    numericUpDownsForMacrosToExecute[i].Location = new Point(
+            //        lstMacrosForExecute.Right + 10,
+            //        lstMacrosForExecute.Top + (i * estimatedItemHeight) + 2);
+            //}
 
             _printer.Print("Премахнато Макро от списъка за изпълнение.", LogLevel.Success);
         }
@@ -636,7 +654,7 @@ namespace CoordinateTrackerAndClicker
             if (result)
             {
                 isSommeCommandIsActive = true;
-                string test = lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex].ToString();
+                string test = lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex].Text;
                 lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex] = new MaterialListBoxItem { Text = test.Replace("🗷", "🗹") };
                 _printer.Print("Успешен запис в архива.", LogLevel.Success);
             }
@@ -660,16 +678,18 @@ namespace CoordinateTrackerAndClicker
                 return;
             }
 
-            var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
+            //var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
+            var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.Text.Remove(0, 5));
 
             if (result)
             {
                 if (IsListEmpty(lstAvailableMacros) || IsIndexNegative(lstAvailableMacros)) return;
 
-                string test = lstAvailableMacros.SelectedItem.ToString().Remove(0, 5);
+                //string test = lstAvailableMacros.SelectedItem.ToString().Remove(0, 5);
+                string test = lstAvailableMacros.SelectedItem.Text.Remove(0, 5);
                 for (int i = 0; i < lstMacrosForExecute.Items.Count; i++)
                 {
-                    if (lstMacrosForExecute.Items[i].ToString() == test)
+                    if (lstMacrosForExecute.Items[i].Text == test)
                     {
                         lstMacrosForExecute.Items.RemoveAt(i); // Премахване на визуалния елемент от списъка
 
@@ -718,5 +738,91 @@ namespace CoordinateTrackerAndClicker
         {
             macroService.ChangeSavePath();
         }
+
+        private void NumericDelayBeforeSlider_MouseUp(object sender, MouseEventArgs e)
+        {
+            SetSliderCustomStep(sender as MaterialSlider, 100);
+        }
+
+        private void numericDelaySlider_MouseUp(object sender, MouseEventArgs e)
+        {
+            SetSliderCustomStep(sender as MaterialSlider, 100);
+        }
+
+        private static void SetSliderCustomStep(MaterialSlider slider, int step)
+        {
+            if (slider != null) slider.Value = (slider.Value / step) * step;
+        }
+
+
+        //--------------------------------- SETTINGS --------------------------------------------------
+
+        #region SETTINGS
+
+        #region COLOR and THEME
+        private void BtnSwitchTheme_CheckedChanged(object sender, EventArgs e)
+        {
+            settingsCommand.ChangeThemes(materialSkinManager, btnSwitchTheme.Checked);
+        }
+
+        private void RadioButtonOrange_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RadioButtonOrange.Checked)
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.Orange800, Primary.Orange900, Primary.Orange500, Accent.Orange200, TextShade.WHITE);
+        }
+
+        private void RadioButtonGreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RadioButtonGreen.Checked)
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.Green200, TextShade.WHITE);
+        }
+
+        private void RadioButtonBlue_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RadioButtonBlue.Checked)
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+        }
+
+
+        private void RadioButtonBase_CheckedChanged(object sender, EventArgs e)
+        {
+            if(RadioButtonBase.Checked)
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.Cyan800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+        }
+        #endregion
+
+
+        private void BtnSwitchModalAlert_CheckedChanged(object sender, EventArgs e)
+        {
+            modalAlertOn = BtnSwitchModalAlert.Checked;
+            CheckboxError.Checked = true;
+        }
+
+        public void Alert(string msg, LogLevel logLevel)
+        {      
+            FormAlert.enmType type = FormAlert.enmType.Empty; 
+
+            switch (logLevel)
+            {
+                case LogLevel.Info:
+                    if (CheckboxInfo.Checked) type = FormAlert.enmType.Info;
+                    break;
+                case LogLevel.Success:
+                    if (CheckboxSuccess.Checked) type = FormAlert.enmType.Success;
+                    break;
+                case LogLevel.Error:
+                    if (CheckboxError.Checked) type = FormAlert.enmType.Error;
+                    break;
+                default:
+                    type = FormAlert.enmType.Empty;
+                    break;
+            }
+
+            if (type == FormAlert.enmType.Empty) return;
+
+            FormAlert frm = new FormAlert();
+            frm.showAlert(msg, type);     
+        }
+        #endregion
     }
 }

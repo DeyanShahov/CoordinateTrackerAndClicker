@@ -1,6 +1,7 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
 using CoordinateTrackerAndClicker.Db_Json;
 using CoordinateTrackerAndClicker.Utils;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -95,7 +96,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList[targetElementIndexToSwap] = temp;
         }
 
-        public async Task ExecuteMacroAsync(Printer _printer, List<KeyValuePair<string, int>> macrosNameList, int macroAllRepeatCount = 1)
+        public async Task ExecuteMacroAsync(Printer _printer, MaterialProgressBar progressBar, List<KeyValuePair<string, int>> macrosNameList, int macroAllRepeatCount = 1)
         {
             ResetCancellationToken();
             int totalActions = 0;
@@ -151,6 +152,8 @@ namespace CoordinateTrackerAndClicker.Core.Services
                                     int elapsedMs = (int)stopwatch.Elapsed.TotalMilliseconds;
                                     int remainingMsDuration = totalDurationMs - elapsedMs;
                                     int remainingMsToExecute = estemidateTimeToExecute - elapsedMs;
+
+                                    progressBar.Value = (int)progressPercentage;
 
                                     _printer.Print($"Прогрес: {completedActions}/{totalActions} ({progressPercentage:F2}%) - " +
                                         $"Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss} - " +

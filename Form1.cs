@@ -308,10 +308,10 @@ namespace CoordinateTrackerAndClicker
                             (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value));
                 }
 
-                await macroService.ExecuteMacroAsync(
-                    _printer,
-                    macrosNameRepeatList,
-                    (int)countAllMacroRepeat.Value);
+                //await macroService.ExecuteMacroAsync(
+                //    _printer,
+                //    macrosNameRepeatList,
+                //    (int)countAllMacroRepeat.Value);
             }
             catch (Exception ex)
             {
