@@ -111,8 +111,9 @@ namespace CoordinateTrackerAndClicker.Core.Services
                 Macro macro = macrosList.FirstOrDefault(m => m.Name == element.Key);
                 macro.RepeatCount = element.Value;
                 macros.Add(macro);
+                int macroActionSum = macro.Actions.Sum(action => action.RepeatCount == 1 ? 0 : action.RepeatCount);
 
-                totalActions += macro.Actions.Sum(action => action.RepeatCount) * macro.RepeatCount * macroAllRepeatCount;
+                totalActions += (macroActionSum == 0 ? 1 : macroActionSum) * macro.RepeatCount * macroAllRepeatCount;
                 totalDurationMs += macro.Actions.Sum(action
                     => action.Duration * 60 * 1000)
                     * element.Value

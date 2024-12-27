@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CoordinateTrackerAndClicker.UI;
 
+
 namespace CoordinateTrackerAndClicker
 {
     public partial class Form2 : MaterialForm
@@ -38,8 +39,6 @@ namespace CoordinateTrackerAndClicker
         private readonly SettingsCommand settingsCommand;
         private readonly MaterialSkinManager materialSkinManager;
 
-        private readonly List<NumericUpDown> numericUpDownsForMacrosToExecute = new List<NumericUpDown>();
-
         public Form2()
         {
             macroService = new MacroService();
@@ -64,23 +63,48 @@ namespace CoordinateTrackerAndClicker
             _printer = new Printer((message, fontSize, logLevel) =>
             {
                 StatusLabel.Text = message;
+                StatusLabel2.Text = message;
                 LogMessagePrint(message, logLevel);
                 if (modalAlertOn) Alert(message, logLevel);
             });
 
-            InitializeButtonsBehavior();
 
-            cmbActionType.SelectedIndex = 0;
+            InitializeButtonsBehavior();
+            buttonHandler.ClickButtonMechanicsExecute(this);
 
             LoadSavedMacros();
+
+            RemoveFocusOnTextBox(new MaterialMultiLineTextBox[] { StatusLabel2, textBoxDisplayMacroInfo, StatusLabel, richTextBoxLogInfo, TextBoxlabelDisplayActionInfo });
+
+            RemoveFocusFromCoordinateFields(new MaterialTextBox2[] { txtX, txtY});
         }
 
+        private void RemoveFocusFromCoordinateFields(MaterialTextBox2[] textFields)
+        {
+            foreach (var field in textFields)
+            {
+                field.GotFocus += (s, e) => this.ActiveControl = null;
+                field.MouseDown += (s, e) => field.Parent.Focus();
+            }            
+        }
+
+        private void RemoveFocusOnTextBox(MaterialMultiLineTextBox[] textBoxes)
+        {
+            foreach (var box in textBoxes)
+            {
+                box.GotFocus += (s, e) => this.ActiveControl = null;
+                box.MouseDown += (s, e) => box.Parent.Focus();
+            }       
+        }
 
         private void MouseTrackTimer_Tick(Point mousePoint)
         {
-            btnStopRecording.MouseEnter += (s, e) => isRecording = false;
-            btnStopRecording.MouseLeave += (s, e) => isRecording = true;
-
+            if (isRecordingOn)
+            {
+                btnStopRecording.MouseEnter += (s, e) => isRecording = false;
+                btnStopRecording.MouseLeave += (s, e) => isRecording = true;
+            }
+            
             if (isRecording && isRecordingOn)
             {
                 Point point;
@@ -141,19 +165,24 @@ namespace CoordinateTrackerAndClicker
             isRecording = true;
             isRecordingOn = true;
             clickHistory.Clear();
+            ClearAllVisualMessages();
             _mouseTracker.StartTracking();
             _printer.Print("Следене на кординатите в процес ...", LogLevel.Info);
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            if (!clickHistory.Any())
+            {
+                _printer.Print("Няма записани кординати", LogLevel.Error);
+                return;
+            }
+
             buttonHandler.ClickButtonMechanicsExecute(sender);
             SaveLastValidCoordinate();
             isRecording = false;
             isRecordingOn = false;
-            _printer.Print(
-                clickHistory.Any() ? "Заредени кординати за действие" : "Няма записани кординати",
-                clickHistory.Any() ? LogLevel.Info : LogLevel.Error);
+            _printer.Print("Заредени кординати за действие", LogLevel.Info);
             clickHistory.Clear();
             _mouseTracker.StopTracking();
         }
@@ -201,13 +230,9 @@ namespace CoordinateTrackerAndClicker
 
                 buttonHandler.ClickButtonMechanicsExecute(sender);
 
-                lstAvailableMacros.Items.Add(new MaterialListBoxItem { Text = "🗷 - " + textBoxMacroName.Text }); // Refresh the macro list display
+                lstAvailableMacros.AddItem("🗷 - " + textBoxMacroName.Text); // Refresh the macro list display
 
                 lstAvailableActions.Items.Clear(); // Clear the work action list after macro create
-
-                //lstAvailableMacros.TopIndex = lstAvailableMacros.Items.Count - 1; // Scroll to bottom of list if is necessary 
-                lstAvailableMacros.SelectedIndex = lstAvailableMacros.Items.Count - 1;
-                lstAvailableMacros.Focus();
 
                 _printer.Print("Успешно добавяне към наличните макрота.", LogLevel.Success);
             }
@@ -244,7 +269,7 @@ namespace CoordinateTrackerAndClicker
             if (CheckForIncorrectCountOrIndex(lstAvailableMacros)) return;
 
             // Проверка за максималния брои на елементи в списъка
-            int maxMacrosInList = 5;    //lstMacrosForExecute.Height / lstMacrosForExecute.ItemHeight;
+            int maxMacrosInList = 4; 
             int currentMacrosInList = lstMacrosForExecute.Items.Count;
 
             if (maxMacrosInList <= currentMacrosInList)
@@ -253,30 +278,54 @@ namespace CoordinateTrackerAndClicker
                 return;
             }
 
-            //lstMacrosForExecute.Items.Add(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
-            lstMacrosForExecute.Items.Add(new MaterialListBoxItem { Text = lstAvailableMacros.SelectedItem.Text.Remove(0, 5) });
-            AddNumericUpDown(lstMacrosForExecute.Items.Count - 1);
-            //lstMacrosForExecute.TopIndex = lstMacrosForExecute.Items.Count - 1; // Scroll to bottom of list if is necessary
-
-            if (lstMacrosForExecute.Items.Count > 0)
-            {
-                //var lastItem = lstMacrosForExecute.Items[lstMacrosForExecute.Items.Count - 1];
-
-                //lstMacrosForExecute.SelectedIndex = lstMacrosForExecute.Items.Count - 1;
-                //lstMacrosForExecute.AutoScrollOffset = new Point(0, lstMacrosForExecute.Height);
-                lstMacrosForExecute.AutoScrollOffset.Offset(new Point(0, lstMacrosForExecute.Height));
-   
-                
-            }
-        
+            string macroNameToAdd = lstAvailableMacros.SelectedItem.Text.Remove(0, 5);
+            lstMacrosForExecute.AddItem(macroNameToAdd);
+            ActivateSliderForAddedMacro(lstMacrosForExecute.Count - 1);          
         }
 
-        private void LstActions_SelectedIndexChanged(object sender, MaterialListBoxItem selectedItem)
+        private void ActivateSliderForAddedMacro(int selectedIndex)
         {
-            if (CheckForIncorrectCountOrIndex(lstAvailableActions)) return;
+            switch (selectedIndex)
+            {
+                case 0:
+                    SliderMacroForExecuteSlot1.Visible = true;
+                    SliderMacroForExecuteSlot1.Enabled = true;
+                    SliderMacroForExecuteSlot1.Value = 1;
+                    break;
+                case 1:
+                    SliderMacroForExecuteSlot2.Visible = true;
+                    SliderMacroForExecuteSlot2.Enabled = true;
+                    SliderMacroForExecuteSlot2.Value = 1;
+                    break;
+                case 2:
+                    SliderMacroForExecuteSlot3.Visible = true;
+                    SliderMacroForExecuteSlot3.Enabled = true;
+                    SliderMacroForExecuteSlot3.Value = 1;
+                    break;
+                case 3:
+                    SliderMacroForExecuteSlot4.Visible = true;
+                    SliderMacroForExecuteSlot4.Enabled = true;
+                    SliderMacroForExecuteSlot4.Value = 1;
+                    break;
+                default:
+                    //?????/
+                    break;
+            }
+        }
 
-            //labelDisplayActionInfo.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstAvailableActions.SelectedIndex]);
-            buttonHandler.ClickButtonMechanicsExecute(sender);
+        private void lstAvailableActions_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (CheckForIncorrectCountOrIndex(lstAvailableActions) || isRecordingOn) return;
+
+            TextBoxlabelDisplayActionInfo.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstAvailableActions.SelectedIndex]);
+            groupBoxActionInfo.Visible = true;
+        }
+
+        private void lstAvailableActions_SelectedIndexChanged(object sender, MaterialListBoxItem selectedItem)
+        {
+            if (CheckForIncorrectCountOrIndex(lstAvailableActions) || isRecordingOn || TextBoxlabelDisplayActionInfo.Visible == false) return;
+
+            TextBoxlabelDisplayActionInfo.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstAvailableActions.SelectedIndex]);
         }
 
         private async void BtnExecuteMacro_Click(object sender, EventArgs e)
@@ -292,7 +341,7 @@ namespace CoordinateTrackerAndClicker
             // Ако няам добаевно макро за изпълнение добавя маркираното макро от списъка с макрота
             if (lstMacrosForExecute.Items.Count == 0)
             {
-                lstMacrosForExecute.Items.Add(new MaterialListBoxItem { Text = lstAvailableMacros.SelectedItem.Text.Remove(0, 5) });
+                lstMacrosForExecute.AddItem(lstAvailableMacros.SelectedItem.Text.Remove(0, 5));
             }
             // Ако няма избрарно макро от списъка за изпълнения на макрота, автоматично маркирва и избира първото ( индекс 0 )
             //int currentSelectedMacroToExecuteIndex = lstMacrosForExecute.SelectedIndex;
@@ -310,7 +359,7 @@ namespace CoordinateTrackerAndClicker
 
                 lstMacrosForExecute.SelectedIndex = 0;
                 //currentSelectedMacroToExecuteIndex = 0;
-                AddNumericUpDown(0);
+                //(0);
             }
 
             try
@@ -328,16 +377,15 @@ namespace CoordinateTrackerAndClicker
                     for (int i = 0; i < lstMacrosForExecute.Items.Count; i++)
                     {
                         macrosNameRepeatList.Add(new KeyValuePair<string, int>(
-                            //(string)lstMacrosForExecute.Items[i],
                             lstMacrosForExecute.Items[i].Text,
-                            (int)numericUpDownsForMacrosToExecute[i].Value));
-                    }
+                            GetSliderBarMacroExecution(i).Value));
+                }
                 }
                 else
                 {
                     macrosNameRepeatList.Add(new KeyValuePair<string, int>(
                             lstMacrosForExecute.SelectedItem.Text,
-                            (int)numericUpDownsForMacrosToExecute[lstMacrosForExecute.SelectedIndex].Value));
+                            GetSliderBarMacroExecution(lstMacrosForExecute.SelectedIndex).Value));
                 }
 
                 await macroService.ExecuteMacroAsync(
@@ -381,8 +429,8 @@ namespace CoordinateTrackerAndClicker
             lstAvailableActions.SelectedItems.Clear(); // Демаркирване на избрания елемент от списъка
             macroService.RemoveAction(index); // Премахване на елемент със същия индекс от работната колекция
             lstAvailableActions.Items.RemoveAt(index); // Премахване на визуалния елемент от списъка
-            btnActionDelete.Enabled = false; // Деактивирване на бутона за триене
-
+            buttonHandler.ClickButtonMechanicsExecute(sender);
+            if (IsListEmpty(lstAvailableActions)) btnCreateMacro.Enabled = false;
             _printer.Print("Премахнато Дейаствие от списъка за добавяне.", LogLevel.Success);
         }
 
@@ -392,24 +440,48 @@ namespace CoordinateTrackerAndClicker
 
             int selectedMacroIndex = lstMacrosForExecute.SelectedIndex; // Индекс на маркираното макро
             lstMacrosForExecute.Items.RemoveAt(selectedMacroIndex); // Премахване на визуалния елемент от списъка
-
-            //// Изтриване на съответния NumericUpDown
-            //NumericUpDown numericUpDownToRemove = numericUpDownsForMacrosToExecute[selectedMacroIndex];
-            //this.Controls.Remove(numericUpDownToRemove);
-            //numericUpDownsForMacrosToExecute.RemoveAt(selectedMacroIndex);
-
-            //btnMacroForExecuteDelete.Enabled = false; //Деактивирване на бутона за триене
-
-            //// Препозициониране на останалите NumericUpDown контроли
-            //int estimatedItemHeight = lstMacrosForExecute.Height / lstMacrosForExecute.Items.Count;
-            //for (int i = selectedMacroIndex; i < numericUpDownsForMacrosToExecute.Count; i++)
-            //{
-            //    numericUpDownsForMacrosToExecute[i].Location = new Point(
-            //        lstMacrosForExecute.Right + 10,
-            //        lstMacrosForExecute.Top + (i * estimatedItemHeight) + 2);
-            //}
+              
+            RemoveSliderBarForDeleteteMacro(selectedMacroIndex);
 
             _printer.Print("Премахнато Макро от списъка за изпълнение.", LogLevel.Success);
+        }
+
+        private void RemoveSliderBarForDeleteteMacro(int index)
+        {
+            if (index < 0 || index > 3) return;
+
+            for (int i = index; i < 3; i++)
+            {
+                var currentSlider = GetSliderBarMacroExecution(i);
+                var nextSlider = GetSliderBarMacroExecution(i + 1);
+
+                if(nextSlider != null && currentSlider != null)
+                {
+                    currentSlider.Value = nextSlider.Value;
+                    currentSlider.Visible = nextSlider.Visible;
+                    currentSlider.Enabled = nextSlider.Enabled;
+                }
+            }
+
+            var lastSlider = GetSliderBarMacroExecution(3);
+            if(lastSlider != null)
+            {
+                lastSlider.Visible = false;
+                lastSlider.Enabled = false;
+                lastSlider.Value = 1;
+            }
+        }
+
+        private MaterialSlider GetSliderBarMacroExecution(int index)
+        {
+            switch (index)
+            {
+                case 0: return SliderMacroForExecuteSlot1;
+                case 1: return SliderMacroForExecuteSlot2;
+                case 2: return SliderMacroForExecuteSlot3;
+                case 3: return SliderMacroForExecuteSlot4;
+                default: return null;
+            }
         }
 
         private void BtnMoveUpAction_Click(object sender, EventArgs e)
@@ -428,24 +500,6 @@ namespace CoordinateTrackerAndClicker
             SwapElementsInListBox(lstAvailableActions, lstAvailableActions.SelectedIndex, false);
             macroService.ChangeActionPosition(lstAvailableActions.SelectedIndex, false);
             lstAvailableActions.SelectedIndex++;
-        }
-
-        private void BtnMoveUpMacro_Click(object sender, EventArgs e)
-        {
-            if (lstMacrosForExecute.SelectedIndex == 0 || CheckForIncorrectCountOrIndex(lstMacrosForExecute)) return;
-
-            SwapElementsInListBox(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, true);
-            SwapNumericUpDown(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, true);
-            lstMacrosForExecute.SelectedIndex--;
-        }
-
-        private void BtnMoveDownMacro_Click(object sender, EventArgs e)
-        {
-            if (lstMacrosForExecute.SelectedIndex == lstMacrosForExecute.Items.Count - 1 || CheckForIncorrectCountOrIndex(lstMacrosForExecute)) return;
-
-            SwapElementsInListBox(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, false);
-            SwapNumericUpDown(lstMacrosForExecute, lstMacrosForExecute.SelectedIndex, false);
-            lstMacrosForExecute.SelectedIndex++;
         }
 
         private void ChkAllMacrosToExecute_CheckedChanged(object sender, EventArgs e)
@@ -500,23 +554,6 @@ namespace CoordinateTrackerAndClicker
             return false;
         }
 
-        private void AddNumericUpDown(int index)
-        {
-            NumericUpDown numericUpDown = new NumericUpDown
-            {
-                Minimum = 1,
-                Maximum = 100,
-                Value = 1,
-                Width = 50,
-                Location = new Point(
-                lstMacrosForExecute.Right + 10,
-                lstMacrosForExecute.Top + (index * 30) + 2)
-                //lstMacrosForExecute.Top + (index * lstMacrosForExecute.ItemHeight) + 2)
-            };
-            numericUpDownsForMacrosToExecute.Add(numericUpDown);
-            this.Controls.Add(numericUpDown);
-        }
-
         private void SwapElementsInListBox(MaterialListBox list, int index, bool isMoveUp)
         {
             if (list.Items.Count < 2 || index < 0 || index > list.Items.Count - 1) return;
@@ -528,46 +565,24 @@ namespace CoordinateTrackerAndClicker
             list.Items[targetElementIndexToSwap] = temp;
         }
 
-        private void SwapNumericUpDown(MaterialListBox list, int index, bool isMoveUp)
-        {
-            if (list.Items.Count < 2 || index < 0 || index > list.Items.Count - 1) return;
-
-            int targetElementIndexToSwap = index + (isMoveUp ? -1 : +1);
-
-            // Разменяне на NumericUpDown контролите
-            NumericUpDown tempNumericUpDown = numericUpDownsForMacrosToExecute[index];
-            numericUpDownsForMacrosToExecute[index] = numericUpDownsForMacrosToExecute[targetElementIndexToSwap];
-            numericUpDownsForMacrosToExecute[targetElementIndexToSwap] = tempNumericUpDown;
-
-            // Препозициониране на NaumericUpDown контролите
-            numericUpDownsForMacrosToExecute[index].Location = new Point(
-                list.Right + 10,
-                list.Top + (index * 30) + 2);
-            //list.Top + (index * list.ItemHeight) + 2);
-            numericUpDownsForMacrosToExecute[targetElementIndexToSwap].Location = new Point(
-                list.Right + 10,
-                list.Top + (targetElementIndexToSwap * 30) + 2);
-            //list.Top + (targetElementIndexToSwap * list.ItemHeight) + 2);
-        }
-
         //--------------------------------------------------------
-
         private void LogMessagePrint(string message, LogLevel logLevel)
         {
             Color color;
             switch (logLevel)
             {
                 case LogLevel.Info:
-                    color = Color.Black;
+                    color = materialSkinManager.Theme == MaterialSkinManager.Themes.DARK ? Color.WhiteSmoke : Color.Black;
                     break;
                 case LogLevel.Success:
-                    color = Color.Green;
+                    //color = Color.Green;
+                    color = Color.LimeGreen;
                     break;
                 case LogLevel.Error:
                     color = Color.Red;
                     break;
                 default:
-                    color = Color.Black;
+                    color = materialSkinManager.Theme == MaterialSkinManager.Themes.DARK ? Color.WhiteSmoke : Color.Black;
                     break;
             };
 
@@ -603,14 +618,36 @@ namespace CoordinateTrackerAndClicker
         {
             try
             {
-                buttonHandler.AddNewButton(btnStartRecording, new Button[] { btnStartRecording }, new Button[] { btnStopRecording });
-                buttonHandler.AddNewButton(btnStopRecording, new Button[] { btnStopRecording }, new Button[] { btnStartRecording, btnAddAction });
-                buttonHandler.AddNewButton(btnAddAction, new Button[] { btnAddAction }, new Button[] { btnCreateMacro });
-                buttonHandler.AddNewButton(btnCreateMacro, new Button[] { btnCreateMacro, btnActionDelete }, new Button[] { btnExecuteMacro });
-                buttonHandler.AddNewButton(btnExecuteMacro, new Button[] { btnExecuteMacro, btnMoveUpMacro, btnMoveDownMacro, btnMacroForExecuteDelete, btnMacroDelete }, new Button[] { btnStopMacro });
-                buttonHandler.AddNewButton(btnStopMacro, new Button[] { btnStopMacro }, new Button[] { btnExecuteMacro, btnMoveUpMacro, btnMoveDownMacro, btnMacroForExecuteDelete, btnMacroDelete });
-                buttonHandler.AddNewButton(lstAvailableActions, new Button[] { }, new Button[] { btnActionDelete });
-                buttonHandler.AddNewButton(lstMacrosForExecute, new Button[] { }, new Button[] { btnMacroForExecuteDelete });
+                buttonHandler.AddNewButton(this,
+                    new Button[] { btnStopRecording, btnAddAction, btnMoveUpAction, btnMoveDownAction, btnActionDelete, btnCreateMacro },
+                    new Button[] { });
+                buttonHandler.AddNewButton(btnStartRecording, 
+                    new Button[] { btnStartRecording, btnAddAction, btnMoveUpAction, btnMoveDownAction, btnActionDelete, btnCreateMacro },
+                    new Button[] { btnStopRecording });
+                buttonHandler.AddNewButton(btnStopRecording,
+                    new Button[] { btnStopRecording },
+                    new Button[] { btnStartRecording, btnAddAction });
+                buttonHandler.AddNewButton(btnAddAction,
+                    new Button[] { btnAddAction },
+                    new Button[] { btnMoveUpAction, btnMoveDownAction, btnActionDelete, btnCreateMacro });
+                buttonHandler.AddNewButton(btnActionDelete,
+                    new Button[] {btnActionDelete, btnMoveUpAction, btnMoveDownAction },
+                    new Button[] { });
+                buttonHandler.AddNewButton(btnCreateMacro,
+                    new Button[] { btnCreateMacro, btnActionDelete },
+                    new Button[] { btnExecuteMacro });
+                buttonHandler.AddNewButton(btnExecuteMacro,
+                    new Button[] { btnExecuteMacro, btnMacroForExecuteDelete, btnMacroDelete },
+                    new Button[] { btnStopMacro });
+                buttonHandler.AddNewButton(btnStopMacro,
+                    new Button[] { btnStopMacro },
+                    new Button[] { btnExecuteMacro, btnMacroForExecuteDelete, btnMacroDelete });
+                buttonHandler.AddNewButton(lstAvailableActions,
+                    new Button[] { },
+                    new Button[] { btnMoveUpAction, btnMoveDownAction, btnActionDelete });
+                buttonHandler.AddNewButton(lstMacrosForExecute,
+                    new Button[] { },
+                    new Button[] { btnMacroForExecuteDelete });
             }
             catch (Exception ex)
             {
@@ -627,15 +664,15 @@ namespace CoordinateTrackerAndClicker
             if (loadedMacrosName.Any())
             {
                 _printer.Print("Зареждане на макрота ...");
-                loadedMacrosName.ForEach(m => lstAvailableMacros.Items.Add(new MaterialListBoxItem { Text = "🗹 - " + m }));
-                _printer.Print(String.Join(", ", loadedMacrosName));
+                loadedMacrosName.ForEach(m => lstAvailableMacros.AddItem("🗹 - " + m));
+                _printer.Print(String.Join(", ", loadedMacrosName), LogLevel.Success);
                 _printer.Print("Макротата са заредени!");
             }
             else
-                _printer.Print("Списъка е празен и няма запаметени макрота.");
+                _printer.Print("Списъка е празен и няма запаметени макрота.", LogLevel.Error);
         }
 
-        private async void BtnMacroSave_Click(object sender, EventArgs e)
+        private async void BtnMacroSaveToDB_Click(object sender, EventArgs e)
         {
             if (lstAvailableMacros.SelectedIndex == -1)
             {
@@ -656,6 +693,11 @@ namespace CoordinateTrackerAndClicker
                 isSommeCommandIsActive = true;
                 string test = lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex].Text;
                 lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex] = new MaterialListBoxItem { Text = test.Replace("🗷", "🗹") };
+
+                textBoxDisplayMacroInfo.Text = printer.DisplayMacroInfo(
+                    macroService.macrosList[lstAvailableMacros.SelectedIndex],
+                    lstAvailableMacros.Items[lstAvailableMacros.SelectedIndex].Text.Contains("🗹"));
+
                 _printer.Print("Успешен запис в архива.", LogLevel.Success);
             }
             else
@@ -664,7 +706,7 @@ namespace CoordinateTrackerAndClicker
             isSommeCommandIsActive = false;
         }
 
-        private async void BtnMacroDelete_Click(object sender, EventArgs e)
+        private async void BtnMacroDeleteFromDB_Click(object sender, EventArgs e)
         {
             if (lstAvailableMacros.SelectedIndex == -1)
             {
@@ -677,15 +719,13 @@ namespace CoordinateTrackerAndClicker
                 _printer.Print("Проблем с директорията или файла за запаметяване.", LogLevel.Error);
                 return;
             }
-
-            //var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.ToString().Remove(0, 5));
+            
             var result = await macroService.DeleteMacroFromDBAsync(lstAvailableMacros.SelectedItem.Text.Remove(0, 5));
 
             if (result)
             {
                 if (IsListEmpty(lstAvailableMacros) || IsIndexNegative(lstAvailableMacros)) return;
 
-                //string test = lstAvailableMacros.SelectedItem.ToString().Remove(0, 5);
                 string test = lstAvailableMacros.SelectedItem.Text.Remove(0, 5);
                 for (int i = 0; i < lstMacrosForExecute.Items.Count; i++)
                 {
@@ -693,21 +733,9 @@ namespace CoordinateTrackerAndClicker
                     {
                         lstMacrosForExecute.Items.RemoveAt(i); // Премахване на визуалния елемент от списъка
 
-                        // Изтриване на съответния NumericUpDown
-                        NumericUpDown numericUpDownToRemove = numericUpDownsForMacrosToExecute[i];
-                        this.Controls.Remove(numericUpDownToRemove);
-                        numericUpDownsForMacrosToExecute.RemoveAt(i);
+                        RemoveSliderBarForDeleteteMacro(i);
 
                         btnMacroForExecuteDelete.Enabled = false; // Деактивирване на бутона за триене
-
-                        // Препозициониране на останалите NumericUpDown контроли
-                        for (int x = i; x < numericUpDownsForMacrosToExecute.Count; x++)
-                        {
-                            numericUpDownsForMacrosToExecute[x].Location = new Point(
-                                lstMacrosForExecute.Right + 10,
-                                lstMacrosForExecute.Top + (x * 30) + 5);
-                            //lstMacrosForExecute.Top + (x * lstMacrosForExecute.ItemHeight) + 5);
-                        }
 
                         // При триене в работещ цикъл, се връща един индекс назад инак се оплита индексацията
                         i--;
@@ -792,10 +820,12 @@ namespace CoordinateTrackerAndClicker
         #endregion
 
 
+        #region MODAL ALERT
         private void BtnSwitchModalAlert_CheckedChanged(object sender, EventArgs e)
         {
             modalAlertOn = BtnSwitchModalAlert.Checked;
             CheckboxError.Checked = true;
+            CheckboxSuccess.Checked = true;
         }
 
         public void Alert(string msg, LogLevel logLevel)
@@ -823,6 +853,54 @@ namespace CoordinateTrackerAndClicker
             FormAlert frm = new FormAlert();
             frm.showAlert(msg, type);     
         }
+
         #endregion
+
+        #endregion
+
+
+        // ----------------------- SLIDERS MINIMUM VALUES -----------------------------------------
+        private void FrequencyInputSlider_onValueChanged(object sender, int newValue)
+            => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void DurationInputSlider_onValueChanged(object sender, int newValue) 
+            => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void CountInputSlider_onValueChanged(object sender, int newValue)
+           => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void numericDelayBeforeSlider_onValueChanged(object sender, int newValue)
+            => SetMinValueSelectToOne(sender, newValue, 1000);
+
+        private void numericDelaySlider_onValueChanged(object sender, int newValue)
+            => SetMinValueSelectToOne(sender, newValue, 1000);
+
+        private void countAllMacroRepeatSlider_onValueChanged(object sender, int newValue)
+            => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void SliderMacroForExecuteSlot1_onValueChanged(object sender, int newValue)
+             => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void SliderMacroForExecuteSlot2_onValueChanged(object sender, int newValue)
+             => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void SliderMacroForExecuteSlot3_onValueChanged(object sender, int newValue)
+             => SetMinValueSelectToOne(sender, newValue, 1);
+
+        private void SliderMacroForExecuteSlot4_onValueChanged(object sender, int newValue)
+             => SetMinValueSelectToOne(sender, newValue, 1);
+        private static void SetMinValueSelectToOne(object sender, int newValue, int targetValue)
+        {
+            if (newValue <= 0) (sender as MaterialSlider).Value = targetValue;
+        }
+
+        private void BtnCloseCardActionInfo_Click(object sender, EventArgs e)
+        {
+            //materialCardActionInfo.Visible = false;
+            groupBoxActionInfo.Visible = false;
+        }
+
+        // -------------------------------------------------------------------------------
+
     }
 }
