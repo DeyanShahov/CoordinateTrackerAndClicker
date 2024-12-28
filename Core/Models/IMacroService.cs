@@ -11,7 +11,7 @@ namespace CoordinateTrackerAndClicker.Core.Models
         void AddAction(string textBoxActionName, Point lastCoordinate, MouseActionType actionType,
             int numericDelayAfter, int numericDelayBefore, bool chkReturnToOriginal,
             int FrequencyInput, int DurationInput, int CountInput);
-        void RemoveAction(int actionIndex);
+        void RemoveActionByIndex(int actionIndex);
         void CreateMacro(string name);
         Task<bool> SaveMacroToDBAsync(Macro macro);
         Task<List<string>> LoadMacroFromDBAsync();

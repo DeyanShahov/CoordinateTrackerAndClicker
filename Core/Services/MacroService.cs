@@ -16,7 +16,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
     {
         private readonly MouseActionExecutor actionExecutor;
         public List<Macro> macrosList;
-        public List<MouseAction> currentActionsList;
+        private readonly List<MouseAction> currentActionsList;
         private Macro currentMacro;
 
         private CancellationTokenSource _cancellationTokenSource;
@@ -78,12 +78,22 @@ namespace CoordinateTrackerAndClicker.Core.Services
             currentActionsList.Add(action);
         }
 
-        public void RemoveAction(int actionIndex)
+        public string[] LoadActionsNames()
+        {
+            return currentActionsList.Select(action => action.Name).ToArray();
+        }
+
+        public MouseAction LoadActionByIndex(int index)
+        {
+            return currentActionsList[index];
+        }
+
+        public void RemoveActionByIndex(int actionIndex)
         {
             currentActionsList.RemoveAt(actionIndex);
         }
 
-        public void RemoveMacro(int macroIndex)
+        public void RemoveMacroByIndex(int macroIndex)
         {
             macrosList.RemoveAt(macroIndex);
         }
@@ -99,10 +109,12 @@ namespace CoordinateTrackerAndClicker.Core.Services
         public async Task ExecuteMacroAsync(Printer _printer, MaterialProgressBar progressBar, List<KeyValuePair<string, int>> macrosNameList, int macroAllRepeatCount = 1)
         {
             ResetCancellationToken();
+            int totalMacros = 0;
             int totalActions = 0;
             int totalDurationMs = 0;
             int estemidateTimeToExecute = 0;
             int completedActions = 0;
+            int completedMacros = 0;
 
             List<Macro> macros = new List<Macro>();
 
@@ -111,7 +123,14 @@ namespace CoordinateTrackerAndClicker.Core.Services
                 Macro macro = macrosList.FirstOrDefault(m => m.Name == element.Key);
                 macro.RepeatCount = element.Value;
                 macros.Add(macro);
-                int macroActionSum = macro.Actions.Sum(action => action.RepeatCount == 1 ? 0 : action.RepeatCount);
+
+                totalMacros += macro.RepeatCount * macroAllRepeatCount;
+
+                int macroActionSum = 0;// = macro.Actions.Sum(action => action.RepeatCount == 1 ? 0 : action.RepeatCount);
+                foreach (var action in macro.Actions)
+                {
+                    macroActionSum += action.RepeatCount;
+                }
 
                 totalActions += (macroActionSum == 0 ? 1 : macroActionSum) * macro.RepeatCount * macroAllRepeatCount;
                 totalDurationMs += macro.Actions.Sum(action
@@ -134,12 +153,17 @@ namespace CoordinateTrackerAndClicker.Core.Services
             {
                 for (int macroAllRepeat = 0; macroAllRepeat < macroAllRepeatCount; macroAllRepeat++)
                 {
+                    _printer.Print($"Глобално повторение номер: {macroAllRepeat + 1}/{macroAllRepeatCount}", LogLevel.Success);
                     foreach (var macro in macros)
                     {
+                        _printer.Print($"Стартирано Макро име: {macro.Name}", LogLevel.Success);
                         for (int macroRepeat = 0; macroRepeat < macro.RepeatCount; macroRepeat++)
                         {
+                            _printer.Print($"Макро повторение номер: {macroRepeat + 1}/{macro.RepeatCount}", LogLevel.Success);
+                            string message = "";
                             foreach (var action in macro.Actions)
                             {
+                                _printer.Print($"Стартирано Действие име: {action.Name}", LogLevel.Success);
                                 for (int actionRepeat = 0; actionRepeat < action.RepeatCount; actionRepeat++)
                                 {
                                     _cancellationTokenSource.Token.ThrowIfCancellationRequested();
@@ -156,11 +180,37 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                                     progressBar.Value = (int)progressPercentage;
 
-                                    _printer.Print($"Прогрес: {completedActions}/{totalActions} ({progressPercentage:F2}%) - " +
-                                        $"Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss} - " +
-                                        $"Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}", LogLevel.Info);
+                                    _printer.Print($"Действието повторение номер: {actionRepeat + 1}/{action.RepeatCount}", LogLevel.Success);
+
+                                    if (actionRepeat != action.RepeatCount - 1)
+                                    {
+                                        message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
+                                       $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
+                                       $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
+
+                                        if (actionRepeat != action.RepeatCount) message += $"\n  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
+
+                                        _printer.Print(message);
+                                    }
+                                    else
+                                    {
+                                        message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
+                                       $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
+                                       $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
+                                    }
+
+                                    //_printer.Print(//$"Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%) - " + 
+                                    //    $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
+                                    //    $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
+                                    //    $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)");// + 
+                                        //$"  {actionRepeat != action.RepeatCount - 1 ? "ddd" : "er"}");
+
+                                        //$"  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)");
                                 }
                             }
+                            completedMacros++;
+                            message += $"\n  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
+                            _printer.Print(message);
                         }
                     }                  
                 }

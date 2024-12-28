@@ -33,8 +33,8 @@
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnCloseCardActionInfo = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxActionInfo = new System.Windows.Forms.GroupBox();
+            this.btnCloseCardActionInfo = new MaterialSkin.Controls.MaterialButton();
             this.TextBoxlabelDisplayActionInfo = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.CountInputSlider = new MaterialSkin.Controls.MaterialSlider();
             this.DurationInputSlider = new MaterialSkin.Controls.MaterialSlider();
@@ -166,6 +166,21 @@
             this.tabPage2.Text = "Създай макро";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBoxActionInfo
+            // 
+            this.groupBoxActionInfo.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxActionInfo.Controls.Add(this.btnCloseCardActionInfo);
+            this.groupBoxActionInfo.Controls.Add(this.TextBoxlabelDisplayActionInfo);
+            this.groupBoxActionInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBoxActionInfo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxActionInfo.Location = new System.Drawing.Point(115, 202);
+            this.groupBoxActionInfo.Name = "groupBoxActionInfo";
+            this.groupBoxActionInfo.Size = new System.Drawing.Size(297, 240);
+            this.groupBoxActionInfo.TabIndex = 4;
+            this.groupBoxActionInfo.TabStop = false;
+            this.groupBoxActionInfo.Text = "Информация действие ━━━━━━━━━━━━━━━━━              ";
+            this.groupBoxActionInfo.Visible = false;
+            // 
             // btnCloseCardActionInfo
             // 
             this.btnCloseCardActionInfo.AutoSize = false;
@@ -186,21 +201,6 @@
             this.btnCloseCardActionInfo.UseAccentColor = false;
             this.btnCloseCardActionInfo.UseVisualStyleBackColor = true;
             this.btnCloseCardActionInfo.Click += new System.EventHandler(this.BtnCloseCardActionInfo_Click);
-            // 
-            // groupBoxActionInfo
-            // 
-            this.groupBoxActionInfo.BackColor = System.Drawing.Color.Transparent;
-            this.groupBoxActionInfo.Controls.Add(this.btnCloseCardActionInfo);
-            this.groupBoxActionInfo.Controls.Add(this.TextBoxlabelDisplayActionInfo);
-            this.groupBoxActionInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBoxActionInfo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBoxActionInfo.Location = new System.Drawing.Point(115, 202);
-            this.groupBoxActionInfo.Name = "groupBoxActionInfo";
-            this.groupBoxActionInfo.Size = new System.Drawing.Size(297, 240);
-            this.groupBoxActionInfo.TabIndex = 4;
-            this.groupBoxActionInfo.TabStop = false;
-            this.groupBoxActionInfo.Text = "Информация действие ━━━━━━━━━━━━━━━━━              ";
-            this.groupBoxActionInfo.Visible = false;
             // 
             // TextBoxlabelDisplayActionInfo
             // 
@@ -378,7 +378,7 @@
             this.numericDelaySlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.numericDelaySlider.Name = "numericDelaySlider";
             this.numericDelaySlider.RangeMax = 10000;
-            this.numericDelaySlider.RangeMin = 1000;
+            this.numericDelaySlider.RangeMin = 100;
             this.numericDelaySlider.Size = new System.Drawing.Size(328, 40);
             this.numericDelaySlider.TabIndex = 54;
             this.numericDelaySlider.Text = "Забавяне след (мс)               ";
@@ -398,7 +398,7 @@
             this.numericDelayBeforeSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.numericDelayBeforeSlider.Name = "numericDelayBeforeSlider";
             this.numericDelayBeforeSlider.RangeMax = 10000;
-            this.numericDelayBeforeSlider.RangeMin = 1000;
+            this.numericDelayBeforeSlider.RangeMin = 100;
             this.numericDelayBeforeSlider.Size = new System.Drawing.Size(328, 40);
             this.numericDelayBeforeSlider.TabIndex = 53;
             this.numericDelayBeforeSlider.Text = "Забавяне преди (мс)            ";
@@ -549,6 +549,7 @@
             this.lstAvailableActions.Size = new System.Drawing.Size(280, 205);
             this.lstAvailableActions.TabIndex = 43;
             this.lstAvailableActions.SelectedIndexChanged += new MaterialSkin.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.lstAvailableActions_SelectedIndexChanged);
+            this.lstAvailableActions.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstAvailableActions_MouseClick);
             this.lstAvailableActions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstAvailableActions_MouseDoubleClick);
             // 
             // btnAddAction
@@ -931,6 +932,7 @@
             this.chkAllMacrosToExecute.Ripple = true;
             this.chkAllMacrosToExecute.Size = new System.Drawing.Size(271, 40);
             this.chkAllMacrosToExecute.TabIndex = 50;
+            this.chkAllMacrosToExecute.TabStop = false;
             this.chkAllMacrosToExecute.Text = "Изпълни всички от списъка ";
             this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
             this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.ChkAllMacrosToExecute_CheckedChanged);

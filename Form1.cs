@@ -243,8 +243,7 @@ namespace CoordinateTrackerAndClicker
         private void LstActions_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CheckForIncorrectCountOrIndex(lstAvailableActions)) return;
-
-            labelDisplayActionInfo.Text = printer.DisplayActionInfo(macroService.currentActionsList[lstAvailableActions.SelectedIndex]);
+            labelDisplayActionInfo.Text = printer.DisplayActionInfo(macroService.LoadActionByIndex(lstAvailableActions.SelectedIndex));
             buttonHandler.ClickButtonMechanicsExecute(sender);
         }
 
@@ -346,7 +345,7 @@ namespace CoordinateTrackerAndClicker
 
             int index = lstAvailableActions.SelectedIndex; // Индекс на маркираното действие
             lstAvailableActions.SelectedItems.Clear(); // Демаркирване на избрания елемент от списъка
-            macroService.RemoveAction(index); // Премахване на елемент със същия индекс от работната колекция
+            macroService.RemoveActionByIndex(index); // Премахване на елемент със същия индекс от работната колекция
             lstAvailableActions.Items.RemoveAt(index); // Премахване на визуалния елемент от списъка
             btnActionDelete.Enabled = false; // Деактивирване на бутона за триене
 
@@ -681,7 +680,7 @@ namespace CoordinateTrackerAndClicker
                 lstAvailableMacros.SelectedItems.Clear(); // Демаркирване на избрания елемент от списъка
                 lstAvailableMacros.Items.RemoveAt(index); // Премахване на визуалния елемент от списъка
                 textBoxDisplayMacroInfo.Clear(); // Изчиства инфото за изтритото макро
-                macroService.RemoveMacro(index); // Премахване на елемент със същия индекс от работната колекция
+                macroService.RemoveMacroByIndex(index); // Премахване на елемент със същия индекс от работната колекция
 
                 _printer.Print("Uspeshen delete", LogLevel.Success);
             }
