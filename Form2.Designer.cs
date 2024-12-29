@@ -36,6 +36,11 @@
             this.groupBoxActionInfo = new System.Windows.Forms.GroupBox();
             this.btnCloseCardActionInfo = new MaterialSkin.Controls.MaterialButton();
             this.TextBoxlabelDisplayActionInfo = new MaterialSkin.Controls.MaterialMultiLineTextBox();
+            this.numericDelaySliderLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.numericDelayBeforeSliderLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.DurationInputSliderLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.CountInputSliderLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.FrequencyInputSliderLabel = new MaterialSkin.Controls.MaterialLabel();
             this.CountInputSlider = new MaterialSkin.Controls.MaterialSlider();
             this.DurationInputSlider = new MaterialSkin.Controls.MaterialSlider();
             this.FrequencyInputSlider = new MaterialSkin.Controls.MaterialSlider();
@@ -59,6 +64,7 @@
             this.btnStopRecording = new MaterialSkin.Controls.MaterialButton();
             this.btnStartRecording = new MaterialSkin.Controls.MaterialButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.countAllMacroRepeatSliderLabel = new MaterialSkin.Controls.MaterialLabel();
             this.richTextBoxLogInfo = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.ProgressBarExecuteMacros = new MaterialSkin.Controls.MaterialProgressBar();
             this.countAllMacroRepeatSlider = new MaterialSkin.Controls.MaterialSlider();
@@ -78,29 +84,35 @@
             this.SliderMacroForExecuteSlot3 = new MaterialSkin.Controls.MaterialSlider();
             this.SliderMacroForExecuteSlot4 = new MaterialSkin.Controls.MaterialSlider();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.groupBoxLanguages = new System.Windows.Forms.GroupBox();
+            this.RadioButtonLanguageFR = new MaterialSkin.Controls.MaterialRadioButton();
+            this.RadioButtonLanguageDE = new MaterialSkin.Controls.MaterialRadioButton();
+            this.RadioButtonLanguageEN = new MaterialSkin.Controls.MaterialRadioButton();
+            this.RadioButtonLanguageBG = new MaterialSkin.Controls.MaterialRadioButton();
+            this.groupBoxAllert = new System.Windows.Forms.GroupBox();
+            this.materialLabelAllert = new MaterialSkin.Controls.MaterialLabel();
             this.CheckboxInfo = new MaterialSkin.Controls.MaterialCheckbox();
             this.CheckboxSuccess = new MaterialSkin.Controls.MaterialCheckbox();
             this.CheckboxError = new MaterialSkin.Controls.MaterialCheckbox();
             this.BtnSwitchModalAlert = new MaterialSkin.Controls.MaterialSwitch();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxCollors = new System.Windows.Forms.GroupBox();
             this.RadioButtonBase = new MaterialSkin.Controls.MaterialRadioButton();
             this.RadioButtonBlue = new MaterialSkin.Controls.MaterialRadioButton();
             this.RadioButtonGreen = new MaterialSkin.Controls.MaterialRadioButton();
             this.RadioButtonOrange = new MaterialSkin.Controls.MaterialRadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.groupBoxTheme = new System.Windows.Forms.GroupBox();
             this.btnSwitchTheme = new MaterialSkin.Controls.MaterialSwitch();
+            this.materialLabelTheme = new MaterialSkin.Controls.MaterialLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.materialTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBoxActionInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxLanguages.SuspendLayout();
+            this.groupBoxAllert.SuspendLayout();
+            this.groupBoxCollors.SuspendLayout();
+            this.groupBoxTheme.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -129,12 +141,17 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(829, 570);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Влизане";
+            this.tabPage1.Text = ".  .  .";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBoxActionInfo);
+            this.tabPage2.Controls.Add(this.numericDelaySliderLabel);
+            this.tabPage2.Controls.Add(this.numericDelayBeforeSliderLabel);
+            this.tabPage2.Controls.Add(this.DurationInputSliderLabel);
+            this.tabPage2.Controls.Add(this.CountInputSliderLabel);
+            this.tabPage2.Controls.Add(this.FrequencyInputSliderLabel);
             this.tabPage2.Controls.Add(this.CountInputSlider);
             this.tabPage2.Controls.Add(this.DurationInputSlider);
             this.tabPage2.Controls.Add(this.FrequencyInputSlider);
@@ -163,7 +180,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(829, 570);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Създай макро";
+            this.tabPage2.Text = ".  .  .";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBoxActionInfo
@@ -178,7 +195,6 @@
             this.groupBoxActionInfo.Size = new System.Drawing.Size(297, 240);
             this.groupBoxActionInfo.TabIndex = 4;
             this.groupBoxActionInfo.TabStop = false;
-            this.groupBoxActionInfo.Text = "Информация действие ━━━━━━━━━━━━━━━━━              ";
             this.groupBoxActionInfo.Visible = false;
             // 
             // btnCloseCardActionInfo
@@ -219,6 +235,71 @@
             this.TextBoxlabelDisplayActionInfo.TabIndex = 3;
             this.TextBoxlabelDisplayActionInfo.Text = " .  .  . ";
             // 
+            // numericDelaySliderLabel
+            // 
+            this.numericDelaySliderLabel.Depth = 0;
+            this.numericDelaySliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.numericDelaySliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.numericDelaySliderLabel.Location = new System.Drawing.Point(419, 127);
+            this.numericDelaySliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.numericDelaySliderLabel.Name = "numericDelaySliderLabel";
+            this.numericDelaySliderLabel.Size = new System.Drawing.Size(153, 23);
+            this.numericDelaySliderLabel.TabIndex = 63;
+            this.numericDelaySliderLabel.Text = ".  .  .";
+            this.numericDelaySliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numericDelayBeforeSliderLabel
+            // 
+            this.numericDelayBeforeSliderLabel.Depth = 0;
+            this.numericDelayBeforeSliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.numericDelayBeforeSliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.numericDelayBeforeSliderLabel.Location = new System.Drawing.Point(419, 87);
+            this.numericDelayBeforeSliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.numericDelayBeforeSliderLabel.Name = "numericDelayBeforeSliderLabel";
+            this.numericDelayBeforeSliderLabel.Size = new System.Drawing.Size(153, 23);
+            this.numericDelayBeforeSliderLabel.TabIndex = 62;
+            this.numericDelayBeforeSliderLabel.Text = ".  .  .";
+            this.numericDelayBeforeSliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // DurationInputSliderLabel
+            // 
+            this.DurationInputSliderLabel.Depth = 0;
+            this.DurationInputSliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.DurationInputSliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.DurationInputSliderLabel.Location = new System.Drawing.Point(41, 372);
+            this.DurationInputSliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.DurationInputSliderLabel.Name = "DurationInputSliderLabel";
+            this.DurationInputSliderLabel.Size = new System.Drawing.Size(159, 23);
+            this.DurationInputSliderLabel.TabIndex = 61;
+            this.DurationInputSliderLabel.Text = ".  .  .";
+            this.DurationInputSliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CountInputSliderLabel
+            // 
+            this.CountInputSliderLabel.Depth = 0;
+            this.CountInputSliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.CountInputSliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.CountInputSliderLabel.Location = new System.Drawing.Point(41, 413);
+            this.CountInputSliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.CountInputSliderLabel.Name = "CountInputSliderLabel";
+            this.CountInputSliderLabel.Size = new System.Drawing.Size(153, 23);
+            this.CountInputSliderLabel.TabIndex = 60;
+            this.CountInputSliderLabel.Text = ".  .  .";
+            this.CountInputSliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // FrequencyInputSliderLabel
+            // 
+            this.FrequencyInputSliderLabel.Depth = 0;
+            this.FrequencyInputSliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.FrequencyInputSliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.FrequencyInputSliderLabel.Location = new System.Drawing.Point(41, 333);
+            this.FrequencyInputSliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.FrequencyInputSliderLabel.Name = "FrequencyInputSliderLabel";
+            this.FrequencyInputSliderLabel.Size = new System.Drawing.Size(153, 23);
+            this.FrequencyInputSliderLabel.TabIndex = 59;
+            this.FrequencyInputSliderLabel.Text = ".  .  .";
+            this.FrequencyInputSliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // CountInputSlider
             // 
             this.CountInputSlider.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -226,13 +307,13 @@
             this.CountInputSlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.CountInputSlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.CountInputSlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.CountInputSlider.Location = new System.Drawing.Point(40, 402);
+            this.CountInputSlider.Location = new System.Drawing.Point(194, 402);
             this.CountInputSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.CountInputSlider.Name = "CountInputSlider";
             this.CountInputSlider.RangeMin = 1;
-            this.CountInputSlider.Size = new System.Drawing.Size(328, 40);
+            this.CountInputSlider.Size = new System.Drawing.Size(174, 40);
             this.CountInputSlider.TabIndex = 52;
-            this.CountInputSlider.Text = "Пъти на изпълнение             ";
+            this.CountInputSlider.Text = "";
             this.CountInputSlider.Value = 1;
             this.CountInputSlider.ValueMax = 100;
             this.CountInputSlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.CountInputSlider_onValueChanged);
@@ -244,13 +325,13 @@
             this.DurationInputSlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.DurationInputSlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.DurationInputSlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.DurationInputSlider.Location = new System.Drawing.Point(40, 362);
+            this.DurationInputSlider.Location = new System.Drawing.Point(194, 362);
             this.DurationInputSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.DurationInputSlider.Name = "DurationInputSlider";
             this.DurationInputSlider.RangeMin = 1;
-            this.DurationInputSlider.Size = new System.Drawing.Size(328, 40);
+            this.DurationInputSlider.Size = new System.Drawing.Size(174, 40);
             this.DurationInputSlider.TabIndex = 51;
-            this.DurationInputSlider.Text = "Продължителност (мин)     ";
+            this.DurationInputSlider.Text = "";
             this.DurationInputSlider.Value = 1;
             this.DurationInputSlider.ValueMax = 100;
             this.DurationInputSlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.DurationInputSlider_onValueChanged);
@@ -262,13 +343,13 @@
             this.FrequencyInputSlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FrequencyInputSlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.FrequencyInputSlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.FrequencyInputSlider.Location = new System.Drawing.Point(40, 322);
+            this.FrequencyInputSlider.Location = new System.Drawing.Point(194, 322);
             this.FrequencyInputSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.FrequencyInputSlider.Name = "FrequencyInputSlider";
             this.FrequencyInputSlider.RangeMin = 1;
-            this.FrequencyInputSlider.Size = new System.Drawing.Size(328, 40);
+            this.FrequencyInputSlider.Size = new System.Drawing.Size(174, 40);
             this.FrequencyInputSlider.TabIndex = 49;
-            this.FrequencyInputSlider.Text = "Честота (секунди)                  ";
+            this.FrequencyInputSlider.Text = "";
             this.FrequencyInputSlider.Value = 1;
             this.FrequencyInputSlider.ValueMax = 100;
             this.FrequencyInputSlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.FrequencyInputSlider_onValueChanged);
@@ -287,7 +368,7 @@
             this.chkReturnMouseToOriginal.Ripple = true;
             this.chkReturnMouseToOriginal.Size = new System.Drawing.Size(328, 40);
             this.chkReturnMouseToOriginal.TabIndex = 27;
-            this.chkReturnMouseToOriginal.Text = "Завръщане на оригиналната позиция";
+            this.chkReturnMouseToOriginal.Text = ".  .  .";
             this.chkReturnMouseToOriginal.UseVisualStyleBackColor = true;
             // 
             // StatusLabel2
@@ -298,7 +379,7 @@
             this.StatusLabel2.Depth = 0;
             this.StatusLabel2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.StatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.StatusLabel2.Hint = "Полседно действие:";
+            this.StatusLabel2.Hint = ".  .  .";
             this.StatusLabel2.Location = new System.Drawing.Point(40, 540);
             this.StatusLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.StatusLabel2.Name = "StatusLabel2";
@@ -316,7 +397,7 @@
             this.txtY.Depth = 0;
             this.txtY.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtY.HideSelection = true;
-            this.txtY.Hint = "кординат  Y";
+            this.txtY.Hint = ".  .  .";
             this.txtY.LeadingIcon = null;
             this.txtY.Location = new System.Drawing.Point(208, 148);
             this.txtY.MaxLength = 32767;
@@ -346,7 +427,7 @@
             this.txtX.Depth = 0;
             this.txtX.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtX.HideSelection = true;
-            this.txtX.Hint = "кординат X ";
+            this.txtX.Hint = ".  .  .";
             this.txtX.LeadingIcon = null;
             this.txtX.Location = new System.Drawing.Point(40, 148);
             this.txtX.MaxLength = 32767;
@@ -374,14 +455,14 @@
             this.numericDelaySlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.numericDelaySlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.numericDelaySlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.numericDelaySlider.Location = new System.Drawing.Point(419, 119);
+            this.numericDelaySlider.Location = new System.Drawing.Point(572, 119);
             this.numericDelaySlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.numericDelaySlider.Name = "numericDelaySlider";
             this.numericDelaySlider.RangeMax = 10000;
             this.numericDelaySlider.RangeMin = 100;
-            this.numericDelaySlider.Size = new System.Drawing.Size(328, 40);
+            this.numericDelaySlider.Size = new System.Drawing.Size(175, 40);
             this.numericDelaySlider.TabIndex = 54;
-            this.numericDelaySlider.Text = "Забавяне след (мс)               ";
+            this.numericDelaySlider.Text = "";
             this.numericDelaySlider.Value = 1000;
             this.numericDelaySlider.ValueMax = 10000;
             this.numericDelaySlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.numericDelaySlider_onValueChanged);
@@ -394,14 +475,14 @@
             this.numericDelayBeforeSlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.numericDelayBeforeSlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.numericDelayBeforeSlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.numericDelayBeforeSlider.Location = new System.Drawing.Point(419, 79);
+            this.numericDelayBeforeSlider.Location = new System.Drawing.Point(572, 79);
             this.numericDelayBeforeSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.numericDelayBeforeSlider.Name = "numericDelayBeforeSlider";
             this.numericDelayBeforeSlider.RangeMax = 10000;
             this.numericDelayBeforeSlider.RangeMin = 100;
-            this.numericDelayBeforeSlider.Size = new System.Drawing.Size(328, 40);
+            this.numericDelayBeforeSlider.Size = new System.Drawing.Size(174, 40);
             this.numericDelayBeforeSlider.TabIndex = 53;
-            this.numericDelayBeforeSlider.Text = "Забавяне преди (мс)            ";
+            this.numericDelayBeforeSlider.Text = "";
             this.numericDelayBeforeSlider.Value = 1000;
             this.numericDelayBeforeSlider.ValueMax = 10000;
             this.numericDelayBeforeSlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.numericDelayBeforeSlider_onValueChanged);
@@ -423,7 +504,7 @@
             this.btnCreateMacro.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnCreateMacro.Size = new System.Drawing.Size(328, 48);
             this.btnCreateMacro.TabIndex = 48;
-            this.btnCreateMacro.Text = "Създай Макрото";
+            this.btnCreateMacro.Text = ".  .  .";
             this.btnCreateMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnCreateMacro.UseAccentColor = false;
             this.btnCreateMacro.UseVisualStyleBackColor = true;
@@ -441,7 +522,7 @@
             this.textBoxMacroName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxMacroName.HidePromptOnLeave = false;
             this.textBoxMacroName.HideSelection = true;
-            this.textBoxMacroName.Hint = "Име на Макрото";
+            this.textBoxMacroName.Hint = ".  .  .";
             this.textBoxMacroName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.textBoxMacroName.LeadingIcon = null;
             this.textBoxMacroName.Location = new System.Drawing.Point(40, 483);
@@ -465,7 +546,7 @@
             this.textBoxMacroName.SkipLiterals = true;
             this.textBoxMacroName.TabIndex = 47;
             this.textBoxMacroName.TabStop = false;
-            this.textBoxMacroName.Text = "Макро 1";
+            this.textBoxMacroName.Text = ".  .  .";
             this.textBoxMacroName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxMacroName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
             this.textBoxMacroName.TrailingIcon = null;
@@ -568,7 +649,7 @@
             this.btnAddAction.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnAddAction.Size = new System.Drawing.Size(328, 40);
             this.btnAddAction.TabIndex = 42;
-            this.btnAddAction.Text = "Добави като ново действие";
+            this.btnAddAction.Text = ".  .  .";
             this.btnAddAction.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAddAction.UseAccentColor = false;
             this.btnAddAction.UseVisualStyleBackColor = true;
@@ -586,7 +667,7 @@
             this.textBoxActionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxActionName.HidePromptOnLeave = false;
             this.textBoxActionName.HideSelection = true;
-            this.textBoxActionName.Hint = "Въведете име за действието";
+            this.textBoxActionName.Hint = ".  .  .";
             this.textBoxActionName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.textBoxActionName.LeadingIcon = null;
             this.textBoxActionName.Location = new System.Drawing.Point(418, 19);
@@ -610,7 +691,7 @@
             this.textBoxActionName.SkipLiterals = true;
             this.textBoxActionName.TabIndex = 37;
             this.textBoxActionName.TabStop = false;
-            this.textBoxActionName.Text = "Действие 1";
+            this.textBoxActionName.Text = ".  .  .";
             this.textBoxActionName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxActionName.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
             this.textBoxActionName.TrailingIcon = null;
@@ -631,11 +712,6 @@
             this.cmbActionType.FormattingEnabled = true;
             this.cmbActionType.IntegralHeight = false;
             this.cmbActionType.ItemHeight = 43;
-            this.cmbActionType.Items.AddRange(new object[] {
-            "Единичен килк",
-            "Двоен клик",
-            "Скролване",
-            "Десен бутон"});
             this.cmbActionType.Location = new System.Drawing.Point(40, 217);
             this.cmbActionType.MaxDropDownItems = 4;
             this.cmbActionType.MouseState = MaterialSkin.MouseState.OUT;
@@ -653,7 +729,7 @@
             this.LastClickLabel.Name = "LastClickLabel";
             this.LastClickLabel.Size = new System.Drawing.Size(328, 19);
             this.LastClickLabel.TabIndex = 23;
-            this.LastClickLabel.Text = "Последно кликане: ";
+            this.LastClickLabel.Text = ".  .  .";
             this.LastClickLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CurrentPositionLabel
@@ -665,7 +741,7 @@
             this.CurrentPositionLabel.Name = "CurrentPositionLabel";
             this.CurrentPositionLabel.Size = new System.Drawing.Size(328, 19);
             this.CurrentPositionLabel.TabIndex = 22;
-            this.CurrentPositionLabel.Text = "Текуща позиция . . .";
+            this.CurrentPositionLabel.Text = " . . .";
             this.CurrentPositionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnStopRecording
@@ -685,7 +761,7 @@
             this.btnStopRecording.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnStopRecording.Size = new System.Drawing.Size(160, 40);
             this.btnStopRecording.TabIndex = 21;
-            this.btnStopRecording.Text = "Стоп запис";
+            this.btnStopRecording.Text = ".  .  .";
             this.btnStopRecording.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnStopRecording.UseAccentColor = false;
             this.btnStopRecording.UseVisualStyleBackColor = true;
@@ -708,7 +784,7 @@
             this.btnStartRecording.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnStartRecording.Size = new System.Drawing.Size(160, 40);
             this.btnStartRecording.TabIndex = 20;
-            this.btnStartRecording.Text = "Старт запис";
+            this.btnStartRecording.Text = ". . .";
             this.btnStartRecording.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnStartRecording.UseAccentColor = false;
             this.btnStartRecording.UseVisualStyleBackColor = true;
@@ -716,6 +792,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.countAllMacroRepeatSliderLabel);
             this.tabPage3.Controls.Add(this.richTextBoxLogInfo);
             this.tabPage3.Controls.Add(this.ProgressBarExecuteMacros);
             this.tabPage3.Controls.Add(this.countAllMacroRepeatSlider);
@@ -740,8 +817,21 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(829, 570);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Използвай макро";
+            this.tabPage3.Text = ".  .  .";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // countAllMacroRepeatSliderLabel
+            // 
+            this.countAllMacroRepeatSliderLabel.Depth = 0;
+            this.countAllMacroRepeatSliderLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.countAllMacroRepeatSliderLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.countAllMacroRepeatSliderLabel.Location = new System.Drawing.Point(409, 25);
+            this.countAllMacroRepeatSliderLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.countAllMacroRepeatSliderLabel.Name = "countAllMacroRepeatSliderLabel";
+            this.countAllMacroRepeatSliderLabel.Size = new System.Drawing.Size(153, 23);
+            this.countAllMacroRepeatSliderLabel.TabIndex = 71;
+            this.countAllMacroRepeatSliderLabel.Text = ".  .  .";
+            this.countAllMacroRepeatSliderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // richTextBoxLogInfo
             // 
@@ -757,7 +847,7 @@
             this.richTextBoxLogInfo.ReadOnly = true;
             this.richTextBoxLogInfo.Size = new System.Drawing.Size(319, 169);
             this.richTextBoxLogInfo.TabIndex = 70;
-            this.richTextBoxLogInfo.Text = "Хронология . . .";
+            this.richTextBoxLogInfo.Text = ".  .  .";
             // 
             // ProgressBarExecuteMacros
             // 
@@ -776,13 +866,13 @@
             this.countAllMacroRepeatSlider.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.countAllMacroRepeatSlider.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.countAllMacroRepeatSlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.countAllMacroRepeatSlider.Location = new System.Drawing.Point(409, 16);
+            this.countAllMacroRepeatSlider.Location = new System.Drawing.Point(558, 16);
             this.countAllMacroRepeatSlider.MouseState = MaterialSkin.MouseState.HOVER;
             this.countAllMacroRepeatSlider.Name = "countAllMacroRepeatSlider";
             this.countAllMacroRepeatSlider.RangeMin = 1;
-            this.countAllMacroRepeatSlider.Size = new System.Drawing.Size(319, 40);
+            this.countAllMacroRepeatSlider.Size = new System.Drawing.Size(173, 40);
             this.countAllMacroRepeatSlider.TabIndex = 59;
-            this.countAllMacroRepeatSlider.Text = "Пъти на изпълнение";
+            this.countAllMacroRepeatSlider.Text = "";
             this.countAllMacroRepeatSlider.Value = 1;
             this.countAllMacroRepeatSlider.ValueMax = 100;
             this.countAllMacroRepeatSlider.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.countAllMacroRepeatSlider_onValueChanged);
@@ -797,14 +887,14 @@
             this.btnNewSavePath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnNewSavePath.HighEmphasis = true;
             this.btnNewSavePath.Icon = null;
-            this.btnNewSavePath.Location = new System.Drawing.Point(285, 383);
+            this.btnNewSavePath.Location = new System.Drawing.Point(263, 383);
             this.btnNewSavePath.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNewSavePath.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNewSavePath.Name = "btnNewSavePath";
             this.btnNewSavePath.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnNewSavePath.Size = new System.Drawing.Size(78, 30);
+            this.btnNewSavePath.Size = new System.Drawing.Size(100, 30);
             this.btnNewSavePath.TabIndex = 57;
-            this.btnNewSavePath.Text = "Локация";
+            this.btnNewSavePath.Text = ".  .  .";
             this.btnNewSavePath.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnNewSavePath.UseAccentColor = false;
             this.btnNewSavePath.UseVisualStyleBackColor = true;
@@ -820,14 +910,14 @@
             this.btnMacroDelete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMacroDelete.HighEmphasis = true;
             this.btnMacroDelete.Icon = null;
-            this.btnMacroDelete.Location = new System.Drawing.Point(169, 383);
+            this.btnMacroDelete.Location = new System.Drawing.Point(154, 383);
             this.btnMacroDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnMacroDelete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMacroDelete.Name = "btnMacroDelete";
             this.btnMacroDelete.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMacroDelete.Size = new System.Drawing.Size(78, 30);
+            this.btnMacroDelete.Size = new System.Drawing.Size(100, 30);
             this.btnMacroDelete.TabIndex = 56;
-            this.btnMacroDelete.Text = "Изтрии";
+            this.btnMacroDelete.Text = ".  .  .";
             this.btnMacroDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnMacroDelete.UseAccentColor = false;
             this.btnMacroDelete.UseVisualStyleBackColor = true;
@@ -848,9 +938,9 @@
             this.btnMacroSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMacroSave.Name = "btnMacroSave";
             this.btnMacroSave.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnMacroSave.Size = new System.Drawing.Size(78, 30);
+            this.btnMacroSave.Size = new System.Drawing.Size(100, 30);
             this.btnMacroSave.TabIndex = 55;
-            this.btnMacroSave.Text = "Запази";
+            this.btnMacroSave.Text = ".  .  .";
             this.btnMacroSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnMacroSave.UseAccentColor = false;
             this.btnMacroSave.UseVisualStyleBackColor = true;
@@ -890,7 +980,7 @@
             this.btnStopMacro.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnStopMacro.Size = new System.Drawing.Size(150, 40);
             this.btnStopMacro.TabIndex = 52;
-            this.btnStopMacro.Text = "Спри";
+            this.btnStopMacro.Text = ".  .  .";
             this.btnStopMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnStopMacro.UseAccentColor = false;
             this.btnStopMacro.UseVisualStyleBackColor = true;
@@ -913,7 +1003,7 @@
             this.btnExecuteMacro.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnExecuteMacro.Size = new System.Drawing.Size(150, 40);
             this.btnExecuteMacro.TabIndex = 51;
-            this.btnExecuteMacro.Text = "Изпълни";
+            this.btnExecuteMacro.Text = ".  .  .";
             this.btnExecuteMacro.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnExecuteMacro.UseAccentColor = false;
             this.btnExecuteMacro.UseVisualStyleBackColor = true;
@@ -933,7 +1023,7 @@
             this.chkAllMacrosToExecute.Size = new System.Drawing.Size(271, 40);
             this.chkAllMacrosToExecute.TabIndex = 50;
             this.chkAllMacrosToExecute.TabStop = false;
-            this.chkAllMacrosToExecute.Text = "Изпълни всички от списъка ";
+            this.chkAllMacrosToExecute.Text = ".  .  . ";
             this.chkAllMacrosToExecute.UseVisualStyleBackColor = true;
             this.chkAllMacrosToExecute.CheckedChanged += new System.EventHandler(this.ChkAllMacrosToExecute_CheckedChanged);
             // 
@@ -988,7 +1078,7 @@
             this.textBoxDisplayMacroInfo.ReadOnly = true;
             this.textBoxDisplayMacroInfo.Size = new System.Drawing.Size(319, 169);
             this.textBoxDisplayMacroInfo.TabIndex = 2;
-            this.textBoxDisplayMacroInfo.Text = "Макро информация:";
+            this.textBoxDisplayMacroInfo.Text = ".  .  .";
             // 
             // lstAvailableMacros
             // 
@@ -1088,43 +1178,124 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.groupBox3);
-            this.tabPage4.Controls.Add(this.groupBox2);
-            this.tabPage4.Controls.Add(this.groupBox1);
+            this.tabPage4.Controls.Add(this.groupBoxLanguages);
+            this.tabPage4.Controls.Add(this.groupBoxAllert);
+            this.tabPage4.Controls.Add(this.groupBoxCollors);
+            this.tabPage4.Controls.Add(this.groupBoxTheme);
             this.tabPage4.ImageKey = "icons8-settings-32.png";
             this.tabPage4.Location = new System.Drawing.Point(4, 39);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(829, 570);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Настройки";
+            this.tabPage4.Text = ".  .  .";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // groupBoxLanguages
             // 
-            this.groupBox3.Controls.Add(this.materialLabel2);
-            this.groupBox3.Controls.Add(this.CheckboxInfo);
-            this.groupBox3.Controls.Add(this.CheckboxSuccess);
-            this.groupBox3.Controls.Add(this.CheckboxError);
-            this.groupBox3.Controls.Add(this.BtnSwitchModalAlert);
-            this.groupBox3.Location = new System.Drawing.Point(228, 316);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(331, 169);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Модални прозорци";
+            this.groupBoxLanguages.Controls.Add(this.RadioButtonLanguageFR);
+            this.groupBoxLanguages.Controls.Add(this.RadioButtonLanguageDE);
+            this.groupBoxLanguages.Controls.Add(this.RadioButtonLanguageEN);
+            this.groupBoxLanguages.Controls.Add(this.RadioButtonLanguageBG);
+            this.groupBoxLanguages.Location = new System.Drawing.Point(398, 175);
+            this.groupBoxLanguages.Name = "groupBoxLanguages";
+            this.groupBoxLanguages.Size = new System.Drawing.Size(331, 97);
+            this.groupBoxLanguages.TabIndex = 10;
+            this.groupBoxLanguages.TabStop = false;
+            this.groupBoxLanguages.Text = ".  .  .";
             // 
-            // materialLabel2
+            // RadioButtonLanguageFR
             // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(21, 27);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(55, 19);
-            this.materialLabel2.TabIndex = 12;
-            this.materialLabel2.Text = "Спрени";
+            this.RadioButtonLanguageFR.AutoSize = true;
+            this.RadioButtonLanguageFR.Depth = 0;
+            this.RadioButtonLanguageFR.Location = new System.Drawing.Point(140, 52);
+            this.RadioButtonLanguageFR.Margin = new System.Windows.Forms.Padding(0);
+            this.RadioButtonLanguageFR.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RadioButtonLanguageFR.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RadioButtonLanguageFR.Name = "RadioButtonLanguageFR";
+            this.RadioButtonLanguageFR.Ripple = true;
+            this.RadioButtonLanguageFR.Size = new System.Drawing.Size(63, 37);
+            this.RadioButtonLanguageFR.TabIndex = 8;
+            this.RadioButtonLanguageFR.TabStop = true;
+            this.RadioButtonLanguageFR.Text = ".  .  .";
+            this.RadioButtonLanguageFR.UseVisualStyleBackColor = true;
+            this.RadioButtonLanguageFR.CheckedChanged += new System.EventHandler(this.RadioButtonLanguageFrench_CheckedChanged);
+            // 
+            // RadioButtonLanguageDE
+            // 
+            this.RadioButtonLanguageDE.AutoSize = true;
+            this.RadioButtonLanguageDE.Depth = 0;
+            this.RadioButtonLanguageDE.Location = new System.Drawing.Point(140, 18);
+            this.RadioButtonLanguageDE.Margin = new System.Windows.Forms.Padding(0);
+            this.RadioButtonLanguageDE.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RadioButtonLanguageDE.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RadioButtonLanguageDE.Name = "RadioButtonLanguageDE";
+            this.RadioButtonLanguageDE.Ripple = true;
+            this.RadioButtonLanguageDE.Size = new System.Drawing.Size(63, 37);
+            this.RadioButtonLanguageDE.TabIndex = 7;
+            this.RadioButtonLanguageDE.TabStop = true;
+            this.RadioButtonLanguageDE.Text = ".  .  .";
+            this.RadioButtonLanguageDE.UseVisualStyleBackColor = true;
+            this.RadioButtonLanguageDE.CheckedChanged += new System.EventHandler(this.RadioButtonLanguageDeutsch_CheckedChanged);
+            // 
+            // RadioButtonLanguageEN
+            // 
+            this.RadioButtonLanguageEN.AutoSize = true;
+            this.RadioButtonLanguageEN.Depth = 0;
+            this.RadioButtonLanguageEN.Location = new System.Drawing.Point(8, 52);
+            this.RadioButtonLanguageEN.Margin = new System.Windows.Forms.Padding(0);
+            this.RadioButtonLanguageEN.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RadioButtonLanguageEN.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RadioButtonLanguageEN.Name = "RadioButtonLanguageEN";
+            this.RadioButtonLanguageEN.Ripple = true;
+            this.RadioButtonLanguageEN.Size = new System.Drawing.Size(63, 37);
+            this.RadioButtonLanguageEN.TabIndex = 6;
+            this.RadioButtonLanguageEN.TabStop = true;
+            this.RadioButtonLanguageEN.Text = ".  .  .";
+            this.RadioButtonLanguageEN.UseVisualStyleBackColor = true;
+            this.RadioButtonLanguageEN.CheckedChanged += new System.EventHandler(this.RadioButtonLanguageEN_CheckedChanged);
+            // 
+            // RadioButtonLanguageBG
+            // 
+            this.RadioButtonLanguageBG.AutoSize = true;
+            this.RadioButtonLanguageBG.Depth = 0;
+            this.RadioButtonLanguageBG.Location = new System.Drawing.Point(8, 18);
+            this.RadioButtonLanguageBG.Margin = new System.Windows.Forms.Padding(0);
+            this.RadioButtonLanguageBG.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RadioButtonLanguageBG.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RadioButtonLanguageBG.Name = "RadioButtonLanguageBG";
+            this.RadioButtonLanguageBG.Ripple = true;
+            this.RadioButtonLanguageBG.Size = new System.Drawing.Size(63, 37);
+            this.RadioButtonLanguageBG.TabIndex = 6;
+            this.RadioButtonLanguageBG.TabStop = true;
+            this.RadioButtonLanguageBG.Text = ".  .  .";
+            this.RadioButtonLanguageBG.UseVisualStyleBackColor = true;
+            this.RadioButtonLanguageBG.CheckedChanged += new System.EventHandler(this.RadioButtonLanguageBG_CheckedChanged);
+            // 
+            // groupBoxAllert
+            // 
+            this.groupBoxAllert.Controls.Add(this.materialLabelAllert);
+            this.groupBoxAllert.Controls.Add(this.CheckboxInfo);
+            this.groupBoxAllert.Controls.Add(this.CheckboxSuccess);
+            this.groupBoxAllert.Controls.Add(this.CheckboxError);
+            this.groupBoxAllert.Controls.Add(this.BtnSwitchModalAlert);
+            this.groupBoxAllert.Location = new System.Drawing.Point(42, 318);
+            this.groupBoxAllert.Name = "groupBoxAllert";
+            this.groupBoxAllert.Size = new System.Drawing.Size(331, 169);
+            this.groupBoxAllert.TabIndex = 10;
+            this.groupBoxAllert.TabStop = false;
+            this.groupBoxAllert.Text = ".  .  .";
+            // 
+            // materialLabelAllert
+            // 
+            this.materialLabelAllert.Depth = 0;
+            this.materialLabelAllert.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabelAllert.Location = new System.Drawing.Point(21, 27);
+            this.materialLabelAllert.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabelAllert.Name = "materialLabelAllert";
+            this.materialLabelAllert.Size = new System.Drawing.Size(55, 19);
+            this.materialLabelAllert.TabIndex = 12;
+            this.materialLabelAllert.Text = ".  .  .";
             // 
             // CheckboxInfo
             // 
@@ -1138,7 +1309,7 @@
             this.CheckboxInfo.Ripple = true;
             this.CheckboxInfo.Size = new System.Drawing.Size(195, 36);
             this.CheckboxInfo.TabIndex = 11;
-            this.CheckboxInfo.Text = "Информация";
+            this.CheckboxInfo.Text = ".  .  .";
             this.CheckboxInfo.UseVisualStyleBackColor = true;
             // 
             // CheckboxSuccess
@@ -1153,7 +1324,7 @@
             this.CheckboxSuccess.Ripple = true;
             this.CheckboxSuccess.Size = new System.Drawing.Size(195, 36);
             this.CheckboxSuccess.TabIndex = 10;
-            this.CheckboxSuccess.Text = "Успехи";
+            this.CheckboxSuccess.Text = ".  .  .";
             this.CheckboxSuccess.UseVisualStyleBackColor = true;
             // 
             // CheckboxError
@@ -1168,7 +1339,7 @@
             this.CheckboxError.Ripple = true;
             this.CheckboxError.Size = new System.Drawing.Size(195, 36);
             this.CheckboxError.TabIndex = 9;
-            this.CheckboxError.Text = "Грешки";
+            this.CheckboxError.Text = ".  .  .";
             this.CheckboxError.UseVisualStyleBackColor = true;
             // 
             // BtnSwitchModalAlert
@@ -1182,24 +1353,24 @@
             this.BtnSwitchModalAlert.MouseState = MaterialSkin.MouseState.HOVER;
             this.BtnSwitchModalAlert.Name = "BtnSwitchModalAlert";
             this.BtnSwitchModalAlert.Ripple = true;
-            this.BtnSwitchModalAlert.Size = new System.Drawing.Size(120, 37);
+            this.BtnSwitchModalAlert.Size = new System.Drawing.Size(86, 37);
             this.BtnSwitchModalAlert.TabIndex = 8;
-            this.BtnSwitchModalAlert.Text = "Пуснати";
+            this.BtnSwitchModalAlert.Text = ".  .  .";
             this.BtnSwitchModalAlert.UseVisualStyleBackColor = false;
             this.BtnSwitchModalAlert.CheckedChanged += new System.EventHandler(this.BtnSwitchModalAlert_CheckedChanged);
             // 
-            // groupBox2
+            // groupBoxCollors
             // 
-            this.groupBox2.Controls.Add(this.RadioButtonBase);
-            this.groupBox2.Controls.Add(this.RadioButtonBlue);
-            this.groupBox2.Controls.Add(this.RadioButtonGreen);
-            this.groupBox2.Controls.Add(this.RadioButtonOrange);
-            this.groupBox2.Location = new System.Drawing.Point(228, 173);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(331, 97);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Цветови варианти";
+            this.groupBoxCollors.Controls.Add(this.RadioButtonBase);
+            this.groupBoxCollors.Controls.Add(this.RadioButtonBlue);
+            this.groupBoxCollors.Controls.Add(this.RadioButtonGreen);
+            this.groupBoxCollors.Controls.Add(this.RadioButtonOrange);
+            this.groupBoxCollors.Location = new System.Drawing.Point(42, 175);
+            this.groupBoxCollors.Name = "groupBoxCollors";
+            this.groupBoxCollors.Size = new System.Drawing.Size(331, 97);
+            this.groupBoxCollors.TabIndex = 9;
+            this.groupBoxCollors.TabStop = false;
+            this.groupBoxCollors.Text = ".  .  .";
             // 
             // RadioButtonBase
             // 
@@ -1211,10 +1382,10 @@
             this.RadioButtonBase.MouseState = MaterialSkin.MouseState.HOVER;
             this.RadioButtonBase.Name = "RadioButtonBase";
             this.RadioButtonBase.Ripple = true;
-            this.RadioButtonBase.Size = new System.Drawing.Size(80, 37);
+            this.RadioButtonBase.Size = new System.Drawing.Size(63, 37);
             this.RadioButtonBase.TabIndex = 7;
             this.RadioButtonBase.TabStop = true;
-            this.RadioButtonBase.Text = "Базов";
+            this.RadioButtonBase.Text = ".  .  .";
             this.RadioButtonBase.UseVisualStyleBackColor = true;
             this.RadioButtonBase.CheckedChanged += new System.EventHandler(this.RadioButtonBase_CheckedChanged);
             // 
@@ -1231,7 +1402,7 @@
             this.RadioButtonBlue.Size = new System.Drawing.Size(63, 37);
             this.RadioButtonBlue.TabIndex = 6;
             this.RadioButtonBlue.TabStop = true;
-            this.RadioButtonBlue.Text = "Син";
+            this.RadioButtonBlue.Text = ".  .  .";
             this.RadioButtonBlue.UseVisualStyleBackColor = true;
             this.RadioButtonBlue.CheckedChanged += new System.EventHandler(this.RadioButtonBlue_CheckedChanged);
             // 
@@ -1245,10 +1416,10 @@
             this.RadioButtonGreen.MouseState = MaterialSkin.MouseState.HOVER;
             this.RadioButtonGreen.Name = "RadioButtonGreen";
             this.RadioButtonGreen.Ripple = true;
-            this.RadioButtonGreen.Size = new System.Drawing.Size(79, 37);
+            this.RadioButtonGreen.Size = new System.Drawing.Size(63, 37);
             this.RadioButtonGreen.TabIndex = 6;
             this.RadioButtonGreen.TabStop = true;
-            this.RadioButtonGreen.Text = "Зелен";
+            this.RadioButtonGreen.Text = ".  .  .";
             this.RadioButtonGreen.UseVisualStyleBackColor = true;
             this.RadioButtonGreen.CheckedChanged += new System.EventHandler(this.RadioButtonGreen_CheckedChanged);
             // 
@@ -1262,35 +1433,23 @@
             this.RadioButtonOrange.MouseState = MaterialSkin.MouseState.HOVER;
             this.RadioButtonOrange.Name = "RadioButtonOrange";
             this.RadioButtonOrange.Ripple = true;
-            this.RadioButtonOrange.Size = new System.Drawing.Size(102, 37);
+            this.RadioButtonOrange.Size = new System.Drawing.Size(63, 37);
             this.RadioButtonOrange.TabIndex = 6;
             this.RadioButtonOrange.TabStop = true;
-            this.RadioButtonOrange.Text = "Оранжев";
+            this.RadioButtonOrange.Text = ".  .  .";
             this.RadioButtonOrange.UseVisualStyleBackColor = true;
             this.RadioButtonOrange.CheckedChanged += new System.EventHandler(this.RadioButtonOrange_CheckedChanged);
             // 
-            // groupBox1
+            // groupBoxTheme
             // 
-            this.groupBox1.Controls.Add(this.materialLabel1);
-            this.groupBox1.Controls.Add(this.btnSwitchTheme);
-            this.groupBox1.Location = new System.Drawing.Point(227, 46);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(332, 85);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Тема";
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(77, 36);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(51, 19);
-            this.materialLabel1.TabIndex = 5;
-            this.materialLabel1.Text = "Тъмна";
+            this.groupBoxTheme.Controls.Add(this.btnSwitchTheme);
+            this.groupBoxTheme.Controls.Add(this.materialLabelTheme);
+            this.groupBoxTheme.Location = new System.Drawing.Point(41, 48);
+            this.groupBoxTheme.Name = "groupBoxTheme";
+            this.groupBoxTheme.Size = new System.Drawing.Size(332, 85);
+            this.groupBoxTheme.TabIndex = 8;
+            this.groupBoxTheme.TabStop = false;
+            this.groupBoxTheme.Text = ".  .  .";
             // 
             // btnSwitchTheme
             // 
@@ -1303,11 +1462,22 @@
             this.btnSwitchTheme.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSwitchTheme.Name = "btnSwitchTheme";
             this.btnSwitchTheme.Ripple = true;
-            this.btnSwitchTheme.Size = new System.Drawing.Size(111, 37);
+            this.btnSwitchTheme.Size = new System.Drawing.Size(86, 37);
             this.btnSwitchTheme.TabIndex = 4;
-            this.btnSwitchTheme.Text = "Светла";
+            this.btnSwitchTheme.Text = ".  .  .";
             this.btnSwitchTheme.UseVisualStyleBackColor = false;
             this.btnSwitchTheme.CheckedChanged += new System.EventHandler(this.BtnSwitchTheme_CheckedChanged);
+            // 
+            // materialLabelTheme
+            // 
+            this.materialLabelTheme.Depth = 0;
+            this.materialLabelTheme.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabelTheme.Location = new System.Drawing.Point(77, 36);
+            this.materialLabelTheme.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabelTheme.Name = "materialLabelTheme";
+            this.materialLabelTheme.Size = new System.Drawing.Size(60, 19);
+            this.materialLabelTheme.TabIndex = 5;
+            this.materialLabelTheme.Text = ".  .  .";
             // 
             // imageList1
             // 
@@ -1343,12 +1513,14 @@
             this.groupBoxActionInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxLanguages.ResumeLayout(false);
+            this.groupBoxLanguages.PerformLayout();
+            this.groupBoxAllert.ResumeLayout(false);
+            this.groupBoxAllert.PerformLayout();
+            this.groupBoxCollors.ResumeLayout(false);
+            this.groupBoxCollors.PerformLayout();
+            this.groupBoxTheme.ResumeLayout(false);
+            this.groupBoxTheme.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1391,16 +1563,16 @@
         private MaterialSkin.Controls.MaterialTextBox2 txtX;
         private MaterialSkin.Controls.MaterialTextBox2 txtY;
         private MaterialSkin.Controls.MaterialProgressBar ProgressBarExecuteMacros;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.GroupBox groupBoxTheme;
+        private MaterialSkin.Controls.MaterialLabel materialLabelTheme;
         private MaterialSkin.Controls.MaterialSwitch btnSwitchTheme;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxCollors;
         private MaterialSkin.Controls.MaterialRadioButton RadioButtonBlue;
         private MaterialSkin.Controls.MaterialRadioButton RadioButtonGreen;
         private MaterialSkin.Controls.MaterialRadioButton RadioButtonOrange;
         private MaterialSkin.Controls.MaterialRadioButton RadioButtonBase;
         private MaterialSkin.Controls.MaterialSwitch BtnSwitchModalAlert;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBoxAllert;
         private MaterialSkin.Controls.MaterialCheckbox CheckboxInfo;
         private MaterialSkin.Controls.MaterialCheckbox CheckboxSuccess;
         private MaterialSkin.Controls.MaterialCheckbox CheckboxError;
@@ -1414,9 +1586,20 @@
         private MaterialSkin.Controls.MaterialSlider FrequencyInputSlider;
         private MaterialSkin.Controls.MaterialSlider DurationInputSlider;
         private MaterialSkin.Controls.MaterialSlider CountInputSlider;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabelAllert;
         private MaterialSkin.Controls.MaterialButton btnCloseCardActionInfo;
         private MaterialSkin.Controls.MaterialMultiLineTextBox TextBoxlabelDisplayActionInfo;
         private System.Windows.Forms.GroupBox groupBoxActionInfo;
+        private System.Windows.Forms.GroupBox groupBoxLanguages;
+        private MaterialSkin.Controls.MaterialRadioButton RadioButtonLanguageEN;
+        private MaterialSkin.Controls.MaterialRadioButton RadioButtonLanguageBG;
+        private MaterialSkin.Controls.MaterialRadioButton RadioButtonLanguageDE;
+        private MaterialSkin.Controls.MaterialRadioButton RadioButtonLanguageFR;
+        private MaterialSkin.Controls.MaterialLabel FrequencyInputSliderLabel;
+        private MaterialSkin.Controls.MaterialLabel CountInputSliderLabel;
+        private MaterialSkin.Controls.MaterialLabel DurationInputSliderLabel;
+        private MaterialSkin.Controls.MaterialLabel numericDelayBeforeSliderLabel;
+        private MaterialSkin.Controls.MaterialLabel numericDelaySliderLabel;
+        private MaterialSkin.Controls.MaterialLabel countAllMacroRepeatSliderLabel;
     }
 }

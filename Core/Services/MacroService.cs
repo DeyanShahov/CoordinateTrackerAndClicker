@@ -33,7 +33,6 @@ namespace CoordinateTrackerAndClicker.Core.Services
             _cancellationTokenSource = new CancellationTokenSource();
 
             //Избиране на стратегия за запаметяване на информацията - JSON
-            //_storageStrategy = new JsonDataStorage();
             _storageStrategy = new JsonDataStorageManualSelect();
             //Инициялизиране на записващия мениджер
             macroStorageManager = new MacroStorageManager(_storageStrategy);
@@ -126,7 +125,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                 totalMacros += macro.RepeatCount * macroAllRepeatCount;
 
-                int macroActionSum = 0;// = macro.Actions.Sum(action => action.RepeatCount == 1 ? 0 : action.RepeatCount);
+                int macroActionSum = 0;
                 foreach (var action in macro.Actions)
                 {
                     macroActionSum += action.RepeatCount;
@@ -181,31 +180,15 @@ namespace CoordinateTrackerAndClicker.Core.Services
                                     progressBar.Value = (int)progressPercentage;
 
                                     _printer.Print($"Действието повторение номер: {actionRepeat + 1}/{action.RepeatCount}", LogLevel.Success);
+                                    message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
+                                      $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
+                                      $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
 
                                     if (actionRepeat != action.RepeatCount - 1)
-                                    {
-                                        message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
-                                       $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
-                                       $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
-
+                                    {                                     
                                         if (actionRepeat != action.RepeatCount) message += $"\n  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
-
                                         _printer.Print(message);
-                                    }
-                                    else
-                                    {
-                                        message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
-                                       $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
-                                       $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
-                                    }
-
-                                    //_printer.Print(//$"Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%) - " + 
-                                    //    $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
-                                    //    $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
-                                    //    $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)");// + 
-                                        //$"  {actionRepeat != action.RepeatCount - 1 ? "ddd" : "er"}");
-
-                                        //$"  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)");
+                                    }                                               
                                 }
                             }
                             completedMacros++;

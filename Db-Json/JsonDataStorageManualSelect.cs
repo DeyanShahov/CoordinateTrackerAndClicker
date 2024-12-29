@@ -34,14 +34,7 @@ namespace CoordinateTrackerAndClicker.Db_Json
                 SaveFilePath = Path.Combine(SaveFolder, "SaveMacros.json");
                 return true;
             }
-            return false;
-
-            //if (string.IsNullOrEmpty(SaveFolder) || !Directory.Exists(SaveFolder))
-            //{
-            //    SaveFolder = AppDomain.CurrentDomain.BaseDirectory; // Ако няма валиден път, използвай основната директория.
-            //}
-
-            //SaveFilePath = Path.Combine(SaveFolder, "SaveMacros.json");
+            return false;       
         }
 
         /// <summary>

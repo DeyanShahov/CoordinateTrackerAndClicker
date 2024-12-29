@@ -56,6 +56,8 @@ namespace CoordinateTrackerAndClicker
 
             InitializeComponent();
 
+            RadioButtonLanguageEN.Select(); // Поставя определен език за стартов при началото на програмата ( EN в случая )
+
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
@@ -79,7 +81,7 @@ namespace CoordinateTrackerAndClicker
 
             RemoveFocusFromCoordinateFields(new MaterialTextBox2[] { txtX, txtY});
         }
-
+    
         private void RemoveFocusFromCoordinateFields(MaterialTextBox2[] textFields)
         {
             foreach (var field in textFields)
@@ -363,35 +365,6 @@ namespace CoordinateTrackerAndClicker
             // Спира изпълнението ако няма добавени макрота
             if (IsListEmpty(lstAvailableMacros) || IsNotingSelectedInList(lstMacrosForExecute)) return;
 
-            // Ако няма избрарно макро от списъка с налични макрота, автоматично маркирва и избира първото ( индекс 0 )
-            //int currentSelectedIndex1 = lstAvailableMacros.SelectedIndex;
-            //if (currentSelectedIndex1 == -1) { lstAvailableMacros.SelectedIndex = 0; currentSelectedIndex1 = 0; }
-
-
-            // Ако няам добаевно макро за изпълнение добавя маркираното макро от списъка с макрота
-            //if (lstMacrosForExecute.Items.Count == 0)
-            //{
-            //    lstMacrosForExecute.AddItem(lstAvailableMacros.SelectedItem.Text.Remove(0, 5));
-            //}
-            // Ако няма избрарно макро от списъка за изпълнения на макрота, автоматично маркирва и избира първото ( индекс 0 )
-            //int currentSelectedMacroToExecuteIndex = lstMacrosForExecute.SelectedIndex;
-            //if (currentSelectedMacroToExecuteIndex == -1) { lstMacrosForExecute.SelectedIndex = 0; currentSelectedMacroToExecuteIndex = 0; }
-            //if (lstMacrosForExecute.SelectedIndex == -1)
-            //{
-            //    if (lstAvailableMacros.SelectedIndex == -1)
-            //    {
-            //        lstMacrosForExecute.SelectedIndex = 0;
-            //    }
-            //    else
-            //    {
-            //        //lstMacrosForExecute.SelectedIndex = 
-            //    }
-
-            //    lstMacrosForExecute.SelectedIndex = 0;
-            //    //currentSelectedMacroToExecuteIndex = 0;
-            //    //(0);
-            //}
-
             try
             {
                 // Стартиране механика на бутона
@@ -481,10 +454,7 @@ namespace CoordinateTrackerAndClicker
               
             RemoveSliderBarForDeleteteMacro(selectedMacroIndex);
 
-            //if (lstMacrosForExecute.Count == 0) buttonHandler.ClickButtonMechanicsExecute(sender);
-            //btnMacroForExecuteDelete.Enabled = false;
             buttonHandler.ClickButtonMechanicsExecute(sender);
-            //btnMacroForExecuteDelete.Focus();
 
             _printer.Print("Премахнато Макро от списъка за изпълнение.", LogLevel.Success);
         }
@@ -847,6 +817,8 @@ namespace CoordinateTrackerAndClicker
 
         #region SETTINGS
 
+        //----------------------------- COLOR AND THEME ------------------------------------------
+
         #region COLOR and THEME
         private void BtnSwitchTheme_CheckedChanged(object sender, EventArgs e)
         {
@@ -879,6 +851,7 @@ namespace CoordinateTrackerAndClicker
         }
         #endregion
 
+        //------------------------------ MODAL ALLERT --------------------------------------------
 
         #region MODAL ALERT
         private void BtnSwitchModalAlert_CheckedChanged(object sender, EventArgs e)
@@ -919,7 +892,7 @@ namespace CoordinateTrackerAndClicker
         #endregion
 
 
-        // ----------------------- SLIDERS MINIMUM VALUES -----------------------------------------
+        // ----------------------- SLIDERS MINIMUM VALUES ----------------------------------------
         private void FrequencyInputSlider_onValueChanged(object sender, int newValue)
             => SetMinValueSelectToOne(sender, newValue, 1);
 
@@ -960,5 +933,118 @@ namespace CoordinateTrackerAndClicker
          => groupBoxActionInfo.Visible = false;
 
 
+        //--------------------------------- LANGUAGE CHANGE -------------------------------
+
+        #region LANGUAGE CHANGE
+
+        private void RadioButtonLanguageEN_CheckedChanged(object sender, EventArgs e)
+            => LanguageChanger("EN");
+
+        private void RadioButtonLanguageBG_CheckedChanged(object sender, EventArgs e)
+            => LanguageChanger("BG");
+
+        private void RadioButtonLanguageDeutsch_CheckedChanged(object sender, EventArgs e)
+            => LanguageChanger("DE");
+
+        private void RadioButtonLanguageFrench_CheckedChanged(object sender, EventArgs e)
+            => LanguageChanger("FR");
+
+        private void LanguageChanger(string language)
+        {
+            switch (language)
+            {
+                case "EN": LanguageManager.SetLanguage("en");
+                    break;
+                case "BG": LanguageManager.SetLanguage("bg");
+                    break;
+                case "DE": LanguageManager.SetLanguage("de");
+                    break;
+                case "FR": LanguageManager.SetLanguage("fr");
+                    break;
+                default: LanguageManager.SetLanguage("en");
+                    break;
+            }
+
+            ApplyLocalization();
+        }
+
+        private void ApplyLocalization()
+        {
+            this.Text = LanguageManager.GetString(this.Name);
+            tabPage1.Text = LanguageManager.GetString(tabPage1.Name);
+            tabPage2.Text = LanguageManager.GetString(tabPage2.Name);
+            tabPage3.Text = LanguageManager.GetString(tabPage3.Name);
+            tabPage4.Text = LanguageManager.GetString(tabPage4.Name);
+
+            btnStartRecording.Text = LanguageManager.GetString(btnStartRecording.Name);
+            btnStopRecording.Text = LanguageManager.GetString(btnStopRecording.Name);
+            CurrentPositionLabel.Text = LanguageManager.GetString(CurrentPositionLabel.Name);
+            LastClickLabel.Text = LanguageManager.GetString(LastClickLabel.Name);
+            txtX.Hint = LanguageManager.GetString(txtX.Name);
+            txtY.Hint = LanguageManager.GetString(txtY.Name);
+
+            string cmbActionTypeText = LanguageManager.GetString(cmbActionType.Name);
+            List<string> result = cmbActionTypeText.Split(',').ToList();
+            cmbActionType.Items.Clear();
+            foreach (var item in result)
+            {
+                cmbActionType.Items.Add(item);
+            }
+            cmbActionType.SelectedIndex = 0;
+
+            chkReturnMouseToOriginal.Text = LanguageManager.GetString(chkReturnMouseToOriginal.Name);
+            FrequencyInputSliderLabel.Text = LanguageManager.GetString(FrequencyInputSliderLabel.Name);
+            DurationInputSliderLabel.Text = LanguageManager.GetString(DurationInputSliderLabel.Name);
+            CountInputSliderLabel.Text = LanguageManager.GetString(CountInputSliderLabel.Name);
+
+            textBoxMacroName.Hint = LanguageManager.GetString(textBoxMacroName.Name + "Hint");
+            textBoxMacroName.Text = LanguageManager.GetString(textBoxMacroName.Name + "Text");
+
+            textBoxActionName.Hint = LanguageManager.GetString(textBoxActionName.Name + "Hint");
+            textBoxActionName.Text = LanguageManager.GetString(textBoxActionName.Name + "Text");
+
+            numericDelayBeforeSliderLabel.Text = LanguageManager.GetString(numericDelayBeforeSliderLabel.Name);
+            numericDelaySliderLabel.Text = LanguageManager.GetString(numericDelaySliderLabel.Name);
+            btnAddAction.Text = LanguageManager.GetString(btnAddAction.Name);
+            btnCreateMacro.Text = LanguageManager.GetString(btnCreateMacro.Name);
+
+            btnMacroSave.Text = LanguageManager.GetString(btnMacroSave.Name);
+            btnMacroDelete.Text = LanguageManager.GetString(btnMacroDelete.Name);
+            btnNewSavePath.Text = LanguageManager.GetString(btnNewSavePath.Name);
+            textBoxDisplayMacroInfo.Text = LanguageManager.GetString(textBoxDisplayMacroInfo.Name);
+
+            countAllMacroRepeatSliderLabel.Text = LanguageManager.GetString(countAllMacroRepeatSliderLabel.Name);
+            chkAllMacrosToExecute.Text = LanguageManager.GetString(chkAllMacrosToExecute.Name);
+            btnExecuteMacro.Text = LanguageManager.GetString(btnExecuteMacro.Name);
+            btnStopMacro.Text = LanguageManager.GetString(btnStopMacro.Name);
+            richTextBoxLogInfo.Text = LanguageManager.GetString(richTextBoxLogInfo.Name);
+
+            groupBoxTheme.Text = LanguageManager.GetString(groupBoxTheme.Name);
+            materialLabelTheme.Text = LanguageManager.GetString(materialLabelTheme.Name);
+            btnSwitchTheme.Text = LanguageManager.GetString(btnSwitchTheme.Name);
+
+            groupBoxCollors.Text = LanguageManager.GetString(groupBoxCollors.Name);
+            RadioButtonOrange.Text = LanguageManager.GetString(RadioButtonOrange.Name);
+            RadioButtonGreen.Text = LanguageManager.GetString(RadioButtonGreen.Name);
+            RadioButtonBlue.Text = LanguageManager.GetString(RadioButtonBlue.Name);
+            RadioButtonBase.Text = LanguageManager.GetString(RadioButtonBase.Name);
+
+            groupBoxLanguages.Text = LanguageManager.GetString(groupBoxLanguages.Name);
+            RadioButtonLanguageBG.Text = LanguageManager.GetString(RadioButtonLanguageBG.Name);
+            RadioButtonLanguageEN.Text = LanguageManager.GetString(RadioButtonLanguageEN.Name);
+            RadioButtonLanguageDE.Text = LanguageManager.GetString(RadioButtonLanguageDE.Name);
+            RadioButtonLanguageFR.Text = LanguageManager.GetString(RadioButtonLanguageFR.Name);
+
+            groupBoxAllert.Text = LanguageManager.GetString(groupBoxAllert.Name);
+            materialLabelAllert.Text = LanguageManager.GetString(materialLabelAllert.Name);
+            BtnSwitchModalAlert.Text = LanguageManager.GetString(BtnSwitchModalAlert.Name);
+            CheckboxError.Text = LanguageManager.GetString(CheckboxError.Name);
+            CheckboxSuccess.Text = LanguageManager.GetString(CheckboxSuccess.Name);
+            CheckboxInfo.Text = LanguageManager.GetString(CheckboxInfo.Name);
+        }
+
+        #endregion
+
+        //---------------------------------------------------------------------------------
     }
 }
