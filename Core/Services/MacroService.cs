@@ -43,7 +43,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
         {
             if (macrosList.Any(m => m.Name == macroName))
             {
-                throw new CustomException("Макро с такова име вече съществува!");
+                throw new CustomException(SAM.CREATE_MACRO_NAME_EXIST);
             }
 
             currentMacro = new Macro 
@@ -142,9 +142,10 @@ namespace CoordinateTrackerAndClicker.Core.Services
                     * macroAllRepeatCount;
             }          
 
-            _printer.Print($"Повторения: {totalActions} - " +
-                $"Продължителност: {TimeSpan.FromMilliseconds(totalDurationMs):hh\\:mm\\:ss} - " +
-                $"Очаквана продалжителност: {TimeSpan.FromMilliseconds(estemidateTimeToExecute):hh\\:mm\\:ss}", LogLevel.Info);
+            _printer.Print($"\n" +
+                $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_REPETITIONS)}: {totalActions}\n" +
+                $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_DURATION)}: {TimeSpan.FromMilliseconds(totalDurationMs):hh\\:mm\\:ss}\n" +
+                $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_EXPECTED_DURATION)}: {TimeSpan.FromMilliseconds(estemidateTimeToExecute):hh\\:mm\\:ss}", LogLevel.Info);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -152,17 +153,17 @@ namespace CoordinateTrackerAndClicker.Core.Services
             {
                 for (int macroAllRepeat = 0; macroAllRepeat < macroAllRepeatCount; macroAllRepeat++)
                 {
-                    _printer.Print($"Глобално повторение номер: {macroAllRepeat + 1}/{macroAllRepeatCount}", LogLevel.Success);
+                    _printer.Print($"{LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_REPETITION)}: {macroAllRepeat + 1}/{macroAllRepeatCount}", LogLevel.Success);
                     foreach (var macro in macros)
                     {
-                        _printer.Print($"Стартирано Макро име: {macro.Name}", LogLevel.Success);
+                        _printer.Print($"{LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_STARTED)}: {macro.Name}", LogLevel.Success);
                         for (int macroRepeat = 0; macroRepeat < macro.RepeatCount; macroRepeat++)
                         {
-                            _printer.Print($"Макро повторение номер: {macroRepeat + 1}/{macro.RepeatCount}", LogLevel.Success);
+                            _printer.Print($"{LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_MACRO_REPETITION)}: {macroRepeat + 1}/{macro.RepeatCount}", LogLevel.Success);
                             string message = "";
                             foreach (var action in macro.Actions)
                             {
-                                _printer.Print($"Стартирано Действие име: {action.Name}", LogLevel.Success);
+                                _printer.Print($"{LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_ACTION_STARTED)}: {action.Name}", LogLevel.Success);
                                 for (int actionRepeat = 0; actionRepeat < action.RepeatCount; actionRepeat++)
                                 {
                                     _cancellationTokenSource.Token.ThrowIfCancellationRequested();
@@ -179,32 +180,33 @@ namespace CoordinateTrackerAndClicker.Core.Services
 
                                     progressBar.Value = (int)progressPercentage;
 
-                                    _printer.Print($"Действието повторение номер: {actionRepeat + 1}/{action.RepeatCount}", LogLevel.Success);
-                                    message = $"\n  Оставащо време: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
-                                      $"  Край след: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
-                                      $"  Прогрес действия: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
+                                    _printer.Print($"{LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_ACTION_REPETITION)}: {actionRepeat + 1}/{action.RepeatCount}", LogLevel.Success);
+                                    
+                                    message = $"\n  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_REMAIN_TIME)}: {TimeSpan.FromMilliseconds(remainingMsDuration):hh\\:mm\\:ss}\n" +
+                                      $"  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_END_AFTER)}: {TimeSpan.FromMilliseconds(remainingMsToExecute):hh\\:mm\\:ss}\n" +
+                                      $"  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_ACTION_PROGRESS)}: {completedActions}/{totalActions} ({progressPercentage:F2}%)";
 
                                     if (actionRepeat != action.RepeatCount - 1)
                                     {                                     
-                                        if (actionRepeat != action.RepeatCount) message += $"\n  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
+                                        if (actionRepeat != action.RepeatCount) message += $"\n  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_MACRO_PROGRESS)}: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
                                         _printer.Print(message);
                                     }                                               
                                 }
                             }
                             completedMacros++;
-                            message += $"\n  Прогрес макорси: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
+                            message += $"\n  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_ACTION_PROGRESS)}: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
                             _printer.Print(message);
                         }
                     }                  
                 }
 
                 stopwatch.Stop();
-                _printer.Print("Макросът е завършен!");
+                _printer.Print(SAM.EXECUTE_MACRO_ASYNC_MACRO_COMPLETED);
             }
             catch (OperationCanceledException)
             {
                 stopwatch.Stop();
-                _printer.Print("Макросът беше прекъснат!");
+                _printer.Print(SAM.EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED);
             }
         }
        

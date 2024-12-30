@@ -170,6 +170,7 @@
     <Compile Include="Utils\MouseTracker.cs" />
     <Compile Include="Utils\Printer.cs" />
     <Compile Include="Utils\PrintText.cs" />
+    <Compile Include="Utils\SAM.cs" />
     <EmbeddedResource Include="FormAlert.resx">
       <DependentUpon>FormAlert.cs</DependentUpon>
     </EmbeddedResource>

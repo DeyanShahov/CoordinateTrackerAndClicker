@@ -276,4 +276,190 @@
   <data name="CheckboxInfo" xml:space="preserve">
     <value>Информация</value>
   </data>
+  <data name="START_BUTTON_OK" xml:space="preserve">
+    <value>Следене на координатите в процес  .  .  .</value>
+  </data>
+  <data name="STOP_BUTTON_NO_RECORD" xml:space="preserve">
+    <value>Няма записани координати.</value>
+  </data>
+  <data name="STOP_BUTTON_OK_RECORD" xml:space="preserve">
+    <value>Заредени координати за действие.</value>
+  </data>
+  <data name="ON_GLOBAL_MOUSE_CLICK" xml:space="preserve">
+    <value>Отчетени нови координати.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_NO_RECORD" xml:space="preserve">
+    <value>Няма записани координати в полетата.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_OK" xml:space="preserve">
+    <value>Успешно добавяне към списъка с действия.</value>
+  </data>
+  <data name="BTN_CREATE_MACRO_OK" xml:space="preserve">
+    <value>Успешно добавяне към наличните макрота.</value>
+  </data>
+  <data name="LST_AVEILABLE_MACROS_FULL" xml:space="preserve">
+    <value>Списъкът с макрота е пълен.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_START" xml:space="preserve">
+    <value>Автоматично кликане в прогрес  .  .  .</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_MISSING_MACRO" xml:space="preserve">
+    <value>Няма такова макро за изпълнение.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_FINISH" xml:space="preserve">
+    <value>Автоматичното кликане приключи.</value>
+  </data>
+  <data name="BTN_STOP_MACRO" xml:space="preserve">
+    <value>Автоматичното кликане беше спряно.</value>
+  </data>
+  <data name="BTN_ACTION_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Премахнато действие от списъка за добавяне.</value>
+  </data>
+  <data name="BTN_MACRO_FOR_EXECUTE_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Премахнато макро от списъка за изпълнение.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_ALL" xml:space="preserve">
+    <value>Всички макрота от списъка са за изпълнение.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_SINGLE" xml:space="preserve">
+    <value>Само избраното макро ще бъде изпълнено.</value>
+  </data>
+  <data name="IS_NAME_INVALID" xml:space="preserve">
+    <value>Невалидно име.</value>
+  </data>
+  <data name="IS_LIST_EMPTY" xml:space="preserve">
+    <value>Няма елементи в списъка.</value>
+  </data>
+  <data name="IS_NOTING_SELECTED_IN_LIST" xml:space="preserve">
+    <value>Няма избран елемент от списъка.</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Инфо</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Грешка</value>
+  </data>
+  <data name="INITIALIZE_BUTTONS_BEHAVIOR_ERROR" xml:space="preserve">
+    <value>Грешка при добавяне на поведение към бутоните.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_BASE_DIRECTORY" xml:space="preserve">
+    <value>Базова директория на приложението</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_PATH_TO_SAVE" xml:space="preserve">
+    <value>Път до файла със записите</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADING" xml:space="preserve">
+    <value>Зареждане на макрота  .  .  .</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADED" xml:space="preserve">
+    <value>Макротата са заредени.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LIST_EMPTY" xml:space="preserve">
+    <value>Списъкът е празен и няма запаметени макрота.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_NO_SELECTED" xml:space="preserve">
+    <value>Няма избрано макро.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Проблем с директорията или файла за запаметяване.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_OK" xml:space="preserve">
+    <value>Успешен запис в архива.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_M_EXISTS_OR_ERROR" xml:space="preserve">
+    <value>Има такова макро в архива или възникна грешка при записа.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_NO_SELECTED" xml:space="preserve">
+    <value>Няма избрано макро.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Проблем с директорията или файла за запаметяване.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_REQUEST" xml:space="preserve">
+    <value>Неуспешна заявка.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_OK" xml:space="preserve">
+    <value>Успешно изтриване.</value>
+  </data>
+  <data name="CREATE_MACRO_NAME_EXIST" xml:space="preserve">
+    <value>Макро с такова име вече съществува.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITIONS" xml:space="preserve">
+    <value>Повторения</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_DURATION" xml:space="preserve">
+    <value>Продължителност</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_EXPECTED_DURATION" xml:space="preserve">
+    <value>Очаквана продължителност</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITION" xml:space="preserve">
+    <value>Глобално повторение</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_STARTED" xml:space="preserve">
+    <value>Стартирано макро</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_REPETITION" xml:space="preserve">
+    <value>Макро повторение</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_STARTED" xml:space="preserve">
+    <value>Стартирано действие</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_REPETITION" xml:space="preserve">
+    <value>Действие повторение</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REMAIN_TIME" xml:space="preserve">
+    <value>Оставащо време</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_END_AFTER" xml:space="preserve">
+    <value>Край след</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_PROGRESS" xml:space="preserve">
+    <value>Прогрес на действието</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_PROGRESS" xml:space="preserve">
+    <value>Прогрес на макроси</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_COMPLETED" xml:space="preserve">
+    <value>Макросът е завършен.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED" xml:space="preserve">
+    <value>Макросът беше прекъснат.</value>
+  </data>
+  <data name="SET_SAVE_DIRECTORY" xml:space="preserve">
+    <value>Изберете директория за запазване на макроси.</value>
+  </data>
+  <data name="ADD_NEW_BUTTON_ERROR" xml:space="preserve">
+    <value>Ключът вече съществува в колекцията. Действието се пропуска.</value>
+  </data>
+  <data name="CLICK_BUTTON_MECHANICS_EXECUTE_ERROR" xml:space="preserve">
+    <value>Предоставеният ключ не съществува в колекцията.</value>
+  </data>
+  <data name="CHECK_FOR_NULL" xml:space="preserve">
+    <value>Изпращачът не може да е празен.</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_CORDINATES" xml:space="preserve">
+    <value>Кординати</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ACTION" xml:space="preserve">
+    <value>Действие</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_BEFORE" xml:space="preserve">
+    <value>Забавяне преди</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_AFTER" xml:space="preserve">
+    <value>Забавяне след</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_FREQUENCY" xml:space="preserve">
+    <value>Честота</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ORIGINAL_POSITION" xml:space="preserve">
+    <value>Оригинална позиция</value>
+  </data>
+  <data name="DISPLAY_MACRO_INFO" xml:space="preserve">
+    <value>Запаметен в архива.</value>
+  </data>
 </root>

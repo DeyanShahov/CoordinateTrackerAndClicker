@@ -12,7 +12,7 @@ namespace CoordinateTrackerAndClicker.Utils
         {
             CheckForNull(sender);
 
-            if (commands.ContainsKey(sender)) throw new CustomException("Ключа вече съществува в колекцията. Действието се пропуска.");
+            if (commands.ContainsKey(sender)) throw new CustomException(LanguageManager.GetString(SAM.ADD_NEW_BUTTON_ERROR));
 
             commands[sender] = new ButtonCommand(buttonsToDisable, buttonsToEnable);
         }
@@ -21,14 +21,14 @@ namespace CoordinateTrackerAndClicker.Utils
         {
             CheckForNull(sender);
 
-            if (!commands.ContainsKey(sender)) throw new CustomException("Предоставения ключ не съществува в колекцията.");
+            if (!commands.ContainsKey(sender)) throw new CustomException(LanguageManager.GetString(SAM.CLICK_BUTTON_MECHANICS_EXECUTE_ERROR));
 
             commands[sender].Execute();
         }
 
         private static void CheckForNull(object sender)
         {
-            if (sender is null) throw new CustomException("Изпращача не може да е празен.");
+            if (sender is null) throw new CustomException(LanguageManager.GetString(SAM.CHECK_FOR_NULL));
         }     
     }
 }

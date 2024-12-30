@@ -9,14 +9,14 @@ namespace CoordinateTrackerAndClicker.Utils
         {
             var textResult = new StringBuilder();
             textResult.AppendLine($"    {action.Name}");
-            textResult.AppendLine($"     Кординати: X {action.Coordinates.X} : Y {action.Coordinates.Y}");
-            textResult.AppendLine($"     Действие: {action.ActionType}");
-            textResult.AppendLine($"     Забавяне преди: {action.DelayBefore}");
-            textResult.AppendLine($"     Забавяне след: {action.DelayAfter}");
-            textResult.AppendLine($"     Честота: {action.Frequency}");
-            textResult.AppendLine($"     Продължителност: {action.Duration}");
-            textResult.AppendLine($"     Повторения: {action.RepeatCount}");
-            textResult.AppendLine($"     Оригинална позиция: {action.ReturnToOriginal}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_CORDINATES)}: X {action.Coordinates.X} : Y {action.Coordinates.Y}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_ACTION)}: {action.ActionType}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_BEFORE)}: {action.DelayBefore}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_AFTER)}: {action.DelayAfter}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_FREQUENCY)}: {action.Frequency}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_DURATION)}: {action.Duration}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_REPETITIONS)}: {action.RepeatCount}");
+            textResult.AppendLine($"     {LanguageManager.GetString(SAM.DISPLAY_ACTION_INFO_ORIGINAL_POSITION)}: {action.ReturnToOriginal}");
 
             return textResult.ToString();
         }
@@ -25,7 +25,7 @@ namespace CoordinateTrackerAndClicker.Utils
         {
             var textToPrint = new StringBuilder();
             textToPrint.AppendLine(macro.Name);
-            if (isSavedToDB) textToPrint.AppendLine($"  ЗАПАМЕТЕН В ДБ.");
+            if (isSavedToDB) textToPrint.AppendLine($"  {LanguageManager.GetString(SAM.DISPLAY_MACRO_INFO)}");
             else textToPrint.AppendLine($"  . . . . .");
 
             macro.Actions.ForEach(action => textToPrint.AppendLine(DisplayActionInfo(action)));

@@ -1,4 +1,5 @@
 ﻿using CoordinateTrackerAndClicker.Core.Models;
+using CoordinateTrackerAndClicker.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -65,7 +66,7 @@ namespace CoordinateTrackerAndClicker.Db_Json
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
-                folderDialog.Description = "Изберете директория за запазване на макроси";
+                folderDialog.Description = LanguageManager.GetString(SAM.SET_SAVE_DIRECTORY);
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
                     SaveFolder = folderDialog.SelectedPath;

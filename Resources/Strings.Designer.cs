@@ -61,6 +61,168 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ключът вече съществува в колекцията. Действието се пропуска..
+        /// </summary>
+        internal static string ADD_NEW_BUTTON_ERROR {
+            get {
+                return ResourceManager.GetString("ADD_NEW_BUTTON_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Премахнато действие от списъка за добавяне..
+        /// </summary>
+        internal static string BTN_ACTION_DELETE_OK_REMOVE {
+            get {
+                return ResourceManager.GetString("BTN_ACTION_DELETE_OK_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма записани координати в полетата..
+        /// </summary>
+        internal static string BTN_ADD_ACTION_NO_RECORD {
+            get {
+                return ResourceManager.GetString("BTN_ADD_ACTION_NO_RECORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно добавяне към списъка с действия..
+        /// </summary>
+        internal static string BTN_ADD_ACTION_OK {
+            get {
+                return ResourceManager.GetString("BTN_ADD_ACTION_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно добавяне към наличните макрота..
+        /// </summary>
+        internal static string BTN_CREATE_MACRO_OK {
+            get {
+                return ResourceManager.GetString("BTN_CREATE_MACRO_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автоматичното кликане приключи..
+        /// </summary>
+        internal static string BTN_EXECUTE_MACRO_FINISH {
+            get {
+                return ResourceManager.GetString("BTN_EXECUTE_MACRO_FINISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма такова макро за изпълнение..
+        /// </summary>
+        internal static string BTN_EXECUTE_MACRO_MISSING_MACRO {
+            get {
+                return ResourceManager.GetString("BTN_EXECUTE_MACRO_MISSING_MACRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автоматично кликане в прогрес  .  .  ..
+        /// </summary>
+        internal static string BTN_EXECUTE_MACRO_START {
+            get {
+                return ResourceManager.GetString("BTN_EXECUTE_MACRO_START", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Проблем с директорията или файла за запаметяване..
+        /// </summary>
+        internal static string BTN_MACRO_DELETE_FROM_DB_ERROR_DIR_OR_FILE {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_DELETE_FROM_DB_ERROR_DIR_OR_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неуспешна заявка..
+        /// </summary>
+        internal static string BTN_MACRO_DELETE_FROM_DB_ERROR_REQUEST {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_DELETE_FROM_DB_ERROR_REQUEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма избрано макро..
+        /// </summary>
+        internal static string BTN_MACRO_DELETE_FROM_DB_NO_SELECTED {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_DELETE_FROM_DB_NO_SELECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешно изтриване..
+        /// </summary>
+        internal static string BTN_MACRO_DELETE_FROM_DB_OK {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_DELETE_FROM_DB_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Премахнато макро от списъка за изпълнение..
+        /// </summary>
+        internal static string BTN_MACRO_FOR_EXECUTE_DELETE_OK_REMOVE {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_FOR_EXECUTE_DELETE_OK_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Проблем с директорията или файла за запаметяване..
+        /// </summary>
+        internal static string BTN_MACRO_SAVE_TO_DB_ERROR_DIR_OR_FILE {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_SAVE_TO_DB_ERROR_DIR_OR_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Има такова макро в архива или възникна грешка при записа..
+        /// </summary>
+        internal static string BTN_MACRO_SAVE_TO_DB_M_EXISTS_OR_ERROR {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_SAVE_TO_DB_M_EXISTS_OR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма избрано макро..
+        /// </summary>
+        internal static string BTN_MACRO_SAVE_TO_DB_NO_SELECTED {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_SAVE_TO_DB_NO_SELECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успешен запис в архива..
+        /// </summary>
+        internal static string BTN_MACRO_SAVE_TO_DB_OK {
+            get {
+                return ResourceManager.GetString("BTN_MACRO_SAVE_TO_DB_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автоматичното кликане беше спряно..
+        /// </summary>
+        internal static string BTN_STOP_MACRO {
+            get {
+                return ResourceManager.GetString("BTN_STOP_MACRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добави като ново действие.
         /// </summary>
         internal static string btnAddAction {
@@ -160,6 +322,15 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изпращачът не може да е празен..
+        /// </summary>
+        internal static string CHECK_FOR_NULL {
+            get {
+                return ResourceManager.GetString("CHECK_FOR_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Грешки.
         /// </summary>
         internal static string CheckboxError {
@@ -187,6 +358,24 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Всички макрота от списъка са за изпълнение..
+        /// </summary>
+        internal static string CHK_ALL_MACROS_TO_EXECUTE_ALL {
+            get {
+                return ResourceManager.GetString("CHK_ALL_MACROS_TO_EXECUTE_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Само избраното макро ще бъде изпълнено..
+        /// </summary>
+        internal static string CHK_ALL_MACROS_TO_EXECUTE_SINGLE {
+            get {
+                return ResourceManager.GetString("CHK_ALL_MACROS_TO_EXECUTE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Изпълни всички.
         /// </summary>
         internal static string chkAllMacrosToExecute {
@@ -201,6 +390,15 @@ namespace CoordinateTrackerAndClicker.Resources {
         internal static string chkReturnMouseToOriginal {
             get {
                 return ResourceManager.GetString("chkReturnMouseToOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предоставеният ключ не съществува в колекцията..
+        /// </summary>
+        internal static string CLICK_BUTTON_MECHANICS_EXECUTE_ERROR {
+            get {
+                return ResourceManager.GetString("CLICK_BUTTON_MECHANICS_EXECUTE_ERROR", resourceCulture);
             }
         }
         
@@ -235,6 +433,15 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Макро с такова име вече съществува..
+        /// </summary>
+        internal static string CREATE_MACRO_NAME_EXIST {
+            get {
+                return ResourceManager.GetString("CREATE_MACRO_NAME_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текуща позиция: .
         /// </summary>
         internal static string CurrentPositionLabel {
@@ -244,11 +451,209 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Действие.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_ACTION {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забавяне след.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_AFTER {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_AFTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забавяне преди.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_BEFORE {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_BEFORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кординати.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_CORDINATES {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_CORDINATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Честота.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_FREQUENCY {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_FREQUENCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оригинална позиция.
+        /// </summary>
+        internal static string DISPLAY_ACTION_INFO_ORIGINAL_POSITION {
+            get {
+                return ResourceManager.GetString("DISPLAY_ACTION_INFO_ORIGINAL_POSITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Запаметен в архива..
+        /// </summary>
+        internal static string DISPLAY_MACRO_INFO {
+            get {
+                return ResourceManager.GetString("DISPLAY_MACRO_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продължителност (минути).
         /// </summary>
         internal static string DurationInputSliderLabel {
             get {
                 return ResourceManager.GetString("DurationInputSliderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Грешка.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прогрес на действието.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_ACTION_PROGRESS {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_ACTION_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Действие повторение.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_ACTION_REPETITION {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_ACTION_REPETITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стартирано действие.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_ACTION_STARTED {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_ACTION_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Продължителност.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_DURATION {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Край след.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_END_AFTER {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_END_AFTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Очаквана продължителност.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_EXPECTED_DURATION {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_EXPECTED_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Макросът е завършен..
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_MACRO_COMPLETED {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_MACRO_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Макросът беше прекъснат..
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прогрес на макроси.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_MACRO_PROGRESS {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_MACRO_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Макро повторение.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_MACRO_REPETITION {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_MACRO_REPETITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оставащо време.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_REMAIN_TIME {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_REMAIN_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Глобално повторение.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_REPETITION {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_REPETITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Повторения.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_REPETITIONS {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_REPETITIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стартирано макро.
+        /// </summary>
+        internal static string EXECUTE_MACRO_ASYNC_STARTED {
+            get {
+                return ResourceManager.GetString("EXECUTE_MACRO_ASYNC_STARTED", resourceCulture);
             }
         }
         
@@ -307,11 +712,110 @@ namespace CoordinateTrackerAndClicker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Инфо.
+        /// </summary>
+        internal static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Грешка при добавяне на поведение към бутоните..
+        /// </summary>
+        internal static string INITIALIZE_BUTTONS_BEHAVIOR_ERROR {
+            get {
+                return ResourceManager.GetString("INITIALIZE_BUTTONS_BEHAVIOR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма елементи в списъка..
+        /// </summary>
+        internal static string IS_LIST_EMPTY {
+            get {
+                return ResourceManager.GetString("IS_LIST_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невалидно име..
+        /// </summary>
+        internal static string IS_NAME_INVALID {
+            get {
+                return ResourceManager.GetString("IS_NAME_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма избран елемент от списъка..
+        /// </summary>
+        internal static string IS_NOTING_SELECTED_IN_LIST {
+            get {
+                return ResourceManager.GetString("IS_NOTING_SELECTED_IN_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Последен клик: .
         /// </summary>
         internal static string LastClickLabel {
             get {
                 return ResourceManager.GetString("LastClickLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Базова директория на приложението.
+        /// </summary>
+        internal static string LOAD_SAVED_MACROS_BASE_DIRECTORY {
+            get {
+                return ResourceManager.GetString("LOAD_SAVED_MACROS_BASE_DIRECTORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Списъкът е празен и няма запаметени макрота..
+        /// </summary>
+        internal static string LOAD_SAVED_MACROS_LIST_EMPTY {
+            get {
+                return ResourceManager.GetString("LOAD_SAVED_MACROS_LIST_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Макротата са заредени..
+        /// </summary>
+        internal static string LOAD_SAVED_MACROS_LOADED {
+            get {
+                return ResourceManager.GetString("LOAD_SAVED_MACROS_LOADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зареждане на макрота  .  .  ..
+        /// </summary>
+        internal static string LOAD_SAVED_MACROS_LOADING {
+            get {
+                return ResourceManager.GetString("LOAD_SAVED_MACROS_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Път до файла със записите.
+        /// </summary>
+        internal static string LOAD_SAVED_MACROS_PATH_TO_SAVE {
+            get {
+                return ResourceManager.GetString("LOAD_SAVED_MACROS_PATH_TO_SAVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Списъкът с макрота е пълен..
+        /// </summary>
+        internal static string LST_AVEILABLE_MACROS_FULL {
+            get {
+                return ResourceManager.GetString("LST_AVEILABLE_MACROS_FULL", resourceCulture);
             }
         }
         
@@ -348,6 +852,15 @@ namespace CoordinateTrackerAndClicker.Resources {
         internal static string numericDelaySliderLabel {
             get {
                 return ResourceManager.GetString("numericDelaySliderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отчетени нови координати..
+        /// </summary>
+        internal static string ON_GLOBAL_MOUSE_CLICK {
+            get {
+                return ResourceManager.GetString("ON_GLOBAL_MOUSE_CLICK", resourceCulture);
             }
         }
         
@@ -429,6 +942,51 @@ namespace CoordinateTrackerAndClicker.Resources {
         internal static string richTextBoxLogInfo {
             get {
                 return ResourceManager.GetString("richTextBoxLogInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изберете директория за запазване на макроси..
+        /// </summary>
+        internal static string SET_SAVE_DIRECTORY {
+            get {
+                return ResourceManager.GetString("SET_SAVE_DIRECTORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Следене на координатите в процес  .  .  ..
+        /// </summary>
+        internal static string START_BUTTON_OK {
+            get {
+                return ResourceManager.GetString("START_BUTTON_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Няма записани координати..
+        /// </summary>
+        internal static string STOP_BUTTON_NO_RECORD {
+            get {
+                return ResourceManager.GetString("STOP_BUTTON_NO_RECORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заредени координати за действие..
+        /// </summary>
+        internal static string STOP_BUTTON_OK_RECORD {
+            get {
+                return ResourceManager.GetString("STOP_BUTTON_OK_RECORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успех.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

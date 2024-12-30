@@ -276,4 +276,190 @@ Rechtsklick</value>
   <data name="CheckboxInfo" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="START_BUTTON_OK" xml:space="preserve">
+    <value>Koordinatenverfolgung im Gange  .  .  .</value>
+  </data>
+  <data name="STOP_BUTTON_NO_RECORD" xml:space="preserve">
+    <value>Keine Koordinaten gespeichert.</value>
+  </data>
+  <data name="STOP_BUTTON_OK_RECORD" xml:space="preserve">
+    <value>Geladene Koordinaten für Aktion.</value>
+  </data>
+  <data name="ON_GLOBAL_MOUSE_CLICK" xml:space="preserve">
+    <value>Neue Koordinaten erfasst.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_NO_RECORD" xml:space="preserve">
+    <value>Keine Koordinaten in den Feldern gespeichert.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_OK" xml:space="preserve">
+    <value>Erfolgreich zur Aktionsliste hinzugefügt.</value>
+  </data>
+  <data name="BTN_CREATE_MACRO_OK" xml:space="preserve">
+    <value>Erfolgreich zu den verfügbaren Makros hinzugefügt.</value>
+  </data>
+  <data name="LST_AVEILABLE_MACROS_FULL" xml:space="preserve">
+    <value>Die Makroliste ist voll.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_START" xml:space="preserve">
+    <value>Automatisches Klicken läuft  .  .  .</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_MISSING_MACRO" xml:space="preserve">
+    <value>Kein solches Makro zum Ausführen.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_FINISH" xml:space="preserve">
+    <value>Das automatische Klicken ist beendet</value>
+  </data>
+  <data name="BTN_STOP_MACRO" xml:space="preserve">
+    <value>Das automatische Klicken wurde gestoppt.</value>
+  </data>
+  <data name="BTN_ACTION_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Aktion aus der Hinzufügungsliste entfernt.</value>
+  </data>
+  <data name="BTN_MACRO_FOR_EXECUTE_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Makro aus der Ausführungsliste entfernt.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_ALL" xml:space="preserve">
+    <value>Alle Makros in der Liste sind zur Ausführung.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_SINGLE" xml:space="preserve">
+    <value>Nur das ausgewählte Makro wird ausgeführt.</value>
+  </data>
+  <data name="IS_NAME_INVALID" xml:space="preserve">
+    <value>Ungültiger Name.</value>
+  </data>
+  <data name="IS_LIST_EMPTY" xml:space="preserve">
+    <value>Keine Elemente in der Liste.</value>
+  </data>
+  <data name="IS_NOTING_SELECTED_IN_LIST" xml:space="preserve">
+    <value>Kein Element aus der Liste ausgewählt.</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Erfolg</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="INITIALIZE_BUTTONS_BEHAVIOR_ERROR" xml:space="preserve">
+    <value>Fehler beim Hinzufügen des Verhaltens zu den Tasten.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_BASE_DIRECTORY" xml:space="preserve">
+    <value>Basisverzeichnis der Anwendung</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_PATH_TO_SAVE" xml:space="preserve">
+    <value>Pfad zur Datei mit den Aufzeichnungen</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADING" xml:space="preserve">
+    <value>Laden von Makros  .  .  .</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADED" xml:space="preserve">
+    <value>Die Makros sind geladen.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LIST_EMPTY" xml:space="preserve">
+    <value>Die Liste ist leer und keine Makros sind gespeichert.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_NO_SELECTED" xml:space="preserve">
+    <value>Kein Makro ausgewählt.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Problem mit dem Verzeichnis oder der Datei zum Speichern.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_OK" xml:space="preserve">
+    <value>Erfolgreiche Speicherung im Archiv.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_M_EXISTS_OR_ERROR" xml:space="preserve">
+    <value>Ein solches Makro befindet sich im Archiv oder es ist ein Fehler beim Speichern aufgetreten.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_NO_SELECTED" xml:space="preserve">
+    <value>Kein Makro ausgewählt.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Problem mit dem Verzeichnis oder der Datei zum Speichern.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_REQUEST" xml:space="preserve">
+    <value>Fehlgeschlagene Anfrage.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_OK" xml:space="preserve">
+    <value>Erfolgreiches Löschen.</value>
+  </data>
+  <data name="CREATE_MACRO_NAME_EXIST" xml:space="preserve">
+    <value>Ein Makro mit diesem Namen existiert bereits.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITIONS" xml:space="preserve">
+    <value>Wiederholungen</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_DURATION" xml:space="preserve">
+    <value>Dauer</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_EXPECTED_DURATION" xml:space="preserve">
+    <value>Erwartete Dauer</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITION" xml:space="preserve">
+    <value>Globale Wiederholung</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_STARTED" xml:space="preserve">
+    <value>Makro gestartet</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_REPETITION" xml:space="preserve">
+    <value>Makro-Wiederholung</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_STARTED" xml:space="preserve">
+    <value>Aktion gestartet</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_REPETITION" xml:space="preserve">
+    <value>Aktion Wiederholung</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REMAIN_TIME" xml:space="preserve">
+    <value>Verbleibende Zeit</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_END_AFTER" xml:space="preserve">
+    <value>Ende nach</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_PROGRESS" xml:space="preserve">
+    <value>Aktionsfortschritt</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_PROGRESS" xml:space="preserve">
+    <value>Makro-Fortschritt</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_COMPLETED" xml:space="preserve">
+    <value>Das Makro ist abgeschlossen.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED" xml:space="preserve">
+    <value>Das Makro wurde unterbrochen.</value>
+  </data>
+  <data name="SET_SAVE_DIRECTORY" xml:space="preserve">
+    <value>Wählen Sie ein Verzeichnis zum Speichern von Makros aus.</value>
+  </data>
+  <data name="ADD_NEW_BUTTON_ERROR" xml:space="preserve">
+    <value>Der Schlüssel existiert bereits in der Sammlung. Die Aktion wird übersprungen.</value>
+  </data>
+  <data name="CLICK_BUTTON_MECHANICS_EXECUTE_ERROR" xml:space="preserve">
+    <value>Der bereitgestellte Schlüssel existiert nicht in der Sammlung.</value>
+  </data>
+  <data name="CHECK_FOR_NULL" xml:space="preserve">
+    <value>Der Absender darf nicht leer sein.</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_CORDINATES" xml:space="preserve">
+    <value>Koordinaten</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ACTION" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_BEFORE" xml:space="preserve">
+    <value>Verzögerung vor</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_AFTER" xml:space="preserve">
+    <value>Verzögerung nach</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_FREQUENCY" xml:space="preserve">
+    <value>Häufigkeit</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ORIGINAL_POSITION" xml:space="preserve">
+    <value>Originalposition</value>
+  </data>
+  <data name="DISPLAY_MACRO_INFO" xml:space="preserve">
+    <value>Im Archiv gespeichert.</value>
+  </data>
 </root>

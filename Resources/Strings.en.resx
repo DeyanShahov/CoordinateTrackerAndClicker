@@ -276,4 +276,190 @@ Right-click</value>
   <data name="CheckboxInfo" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="START_BUTTON_OK" xml:space="preserve">
+    <value>Tracking coordinates in progress  .  .  .</value>
+  </data>
+  <data name="STOP_BUTTON_NO_RECORD" xml:space="preserve">
+    <value>No coordinates recorded.</value>
+  </data>
+  <data name="STOP_BUTTON_OK_RECORD" xml:space="preserve">
+    <value>Loaded coordinates for action.</value>
+  </data>
+  <data name="ON_GLOBAL_MOUSE_CLICK" xml:space="preserve">
+    <value>New coordinates detected.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_NO_RECORD" xml:space="preserve">
+    <value>No coordinates recorded in the fields.</value>
+  </data>
+  <data name="BTN_ADD_ACTION_OK" xml:space="preserve">
+    <value>Successfully added to the action list.</value>
+  </data>
+  <data name="BTN_CREATE_MACRO_OK" xml:space="preserve">
+    <value>Successfully added to the available macros.</value>
+  </data>
+  <data name="LST_AVEILABLE_MACROS_FULL" xml:space="preserve">
+    <value>The macro list is full.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_START" xml:space="preserve">
+    <value>Automatic clicking in progress  .  .  .</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_MISSING_MACRO" xml:space="preserve">
+    <value>No such macro to execute.</value>
+  </data>
+  <data name="BTN_EXECUTE_MACRO_FINISH" xml:space="preserve">
+    <value>Automatic clicking has ended.</value>
+  </data>
+  <data name="BTN_STOP_MACRO" xml:space="preserve">
+    <value>The automatic clicking was stopped.</value>
+  </data>
+  <data name="BTN_ACTION_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Action removed from the add list.</value>
+  </data>
+  <data name="BTN_MACRO_FOR_EXECUTE_DELETE_OK_REMOVE" xml:space="preserve">
+    <value>Macro removed from the execution list.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_ALL" xml:space="preserve">
+    <value>All macros in the list are for execution.</value>
+  </data>
+  <data name="CHK_ALL_MACROS_TO_EXECUTE_SINGLE" xml:space="preserve">
+    <value>Only the selected macro will be executed.</value>
+  </data>
+  <data name="IS_NAME_INVALID" xml:space="preserve">
+    <value>Invalid name.</value>
+  </data>
+  <data name="IS_LIST_EMPTY" xml:space="preserve">
+    <value>No items in the list.</value>
+  </data>
+  <data name="IS_NOTING_SELECTED_IN_LIST" xml:space="preserve">
+    <value>No item selected from the list.</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="INITIALIZE_BUTTONS_BEHAVIOR_ERROR" xml:space="preserve">
+    <value>Error adding behavior to the buttons.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_BASE_DIRECTORY" xml:space="preserve">
+    <value>Base directory of the application</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_PATH_TO_SAVE" xml:space="preserve">
+    <value>Path to the file with records</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADING" xml:space="preserve">
+    <value>Loading macros  .  .  .</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LOADED" xml:space="preserve">
+    <value>The macros are loaded.</value>
+  </data>
+  <data name="LOAD_SAVED_MACROS_LIST_EMPTY" xml:space="preserve">
+    <value>The list is empty and no macros are saved.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_NO_SELECTED" xml:space="preserve">
+    <value>No macro selected.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Problem with the directory or file for saving.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_OK" xml:space="preserve">
+    <value>Successful save to the archive.</value>
+  </data>
+  <data name="BTN_MACRO_SAVE_TO_DB_M_EXISTS_OR_ERROR" xml:space="preserve">
+    <value>There is such a macro in the archive or an error occurred during the save.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_NO_SELECTED" xml:space="preserve">
+    <value>No macro selected.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_DIR_OR_FILE" xml:space="preserve">
+    <value>Problem with the directory or file for saving.</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_ERROR_REQUEST" xml:space="preserve">
+    <value>Unsuccessful request</value>
+  </data>
+  <data name="BTN_MACRO_DELETE_FROM_DB_OK" xml:space="preserve">
+    <value>Successful delete.</value>
+  </data>
+  <data name="CREATE_MACRO_NAME_EXIST" xml:space="preserve">
+    <value>A macro with this name already exists.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITIONS" xml:space="preserve">
+    <value>Repetitions</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_DURATION" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_EXPECTED_DURATION" xml:space="preserve">
+    <value>Expected duration</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REPETITION" xml:space="preserve">
+    <value>Global repetition</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_STARTED" xml:space="preserve">
+    <value>Macro started</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_REPETITION" xml:space="preserve">
+    <value>Macro repetition</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_STARTED" xml:space="preserve">
+    <value>Action started</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_REPETITION" xml:space="preserve">
+    <value>Action repetition</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_REMAIN_TIME" xml:space="preserve">
+    <value>Remaining time</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_END_AFTER" xml:space="preserve">
+    <value>End after</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_ACTION_PROGRESS" xml:space="preserve">
+    <value>Action progress</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_PROGRESS" xml:space="preserve">
+    <value>Macro progress</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_COMPLETED" xml:space="preserve">
+    <value>The macro is completed.</value>
+  </data>
+  <data name="EXECUTE_MACRO_ASYNC_MACRO_INTERRUPTED" xml:space="preserve">
+    <value>The macro was interrupted.</value>
+  </data>
+  <data name="SET_SAVE_DIRECTORY" xml:space="preserve">
+    <value>Select a directory to save macros.</value>
+  </data>
+  <data name="ADD_NEW_BUTTON_ERROR" xml:space="preserve">
+    <value>The key already exists in the collection. The action is skipped.</value>
+  </data>
+  <data name="CLICK_BUTTON_MECHANICS_EXECUTE_ERROR" xml:space="preserve">
+    <value>The provided key does not exist in the collection.</value>
+  </data>
+  <data name="CHECK_FOR_NULL" xml:space="preserve">
+    <value>The sender cannot be empty</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_CORDINATES" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ACTION" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_BEFORE" xml:space="preserve">
+    <value>Delay before</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_AFTER" xml:space="preserve">
+    <value>Delay after</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_FREQUENCY" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="DISPLAY_ACTION_INFO_ORIGINAL_POSITION" xml:space="preserve">
+    <value>Original position</value>
+  </data>
+  <data name="DISPLAY_MACRO_INFO" xml:space="preserve">
+    <value>Saved in the archive.</value>
+  </data>
 </root>
