@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CoordinateTrackerAndClicker.Users;
+using System;
 using System.Windows.Forms;
 
 namespace CoordinateTrackerAndClicker
@@ -14,6 +12,7 @@ namespace CoordinateTrackerAndClicker
         [STAThread]
         static void Main()
         {
+            FirestoreHelper.SetEnvironmentVariable(); // Първо викам настройките за Firebase-a
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());

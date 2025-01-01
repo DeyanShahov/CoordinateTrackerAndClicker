@@ -145,7 +145,7 @@ namespace CoordinateTrackerAndClicker.Core.Services
             _printer.Print($"\n" +
                 $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_REPETITIONS)}: {totalActions}\n" +
                 $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_DURATION)}: {TimeSpan.FromMilliseconds(totalDurationMs):hh\\:mm\\:ss}\n" +
-                $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_EXPECTED_DURATION)}: {TimeSpan.FromMilliseconds(estemidateTimeToExecute):hh\\:mm\\:ss}", LogLevel.Info);
+                $"      {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_EXPECTED_DURATION)}: {TimeSpan.FromMilliseconds(estemidateTimeToExecute):hh\\:mm\\:ss}", LogLevel.Info, false);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -189,13 +189,13 @@ namespace CoordinateTrackerAndClicker.Core.Services
                                     if (actionRepeat != action.RepeatCount - 1)
                                     {                                     
                                         if (actionRepeat != action.RepeatCount) message += $"\n  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_MACRO_PROGRESS)}: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
-                                        _printer.Print(message);
+                                        _printer.Print(message, LogLevel.Info, false);
                                     }                                               
                                 }
                             }
                             completedMacros++;
                             message += $"\n  {LanguageManager.GetString(SAM.EXECUTE_MACRO_ASYNC_ACTION_PROGRESS)}: {completedMacros}/{totalMacros} ({((completedMacros / (double)totalMacros) * 100):F2}%)";
-                            _printer.Print(message);
+                            _printer.Print(message, LogLevel.Info, false);
                         }
                     }                  
                 }

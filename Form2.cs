@@ -2,7 +2,9 @@
 using CoordinateTrackerAndClicker.Core.Services;
 using CoordinateTrackerAndClicker.Db_Json;
 using CoordinateTrackerAndClicker.UI;
+using CoordinateTrackerAndClicker.Users;
 using CoordinateTrackerAndClicker.Utils;
+using Google.Cloud.Firestore;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -63,15 +66,18 @@ namespace CoordinateTrackerAndClicker
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Cyan800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
-            _printer = new Printer((message, fontSize, logLevel) =>
+            _printer = new Printer((message, show, logLevel) =>
             {
                 string testMessages = LanguageManager.GetString(message);
                 if (testMessages != null) message = testMessages;
 
-                StatusLabel.Text =  message;
-                StatusLabel2.Text = message;
+                if (show)
+                {
+                    StatusLabel.Text = message;
+                    StatusLabel2.Text = message;
+                }                
                 LogMessagePrint(message, logLevel);
-                if (modalAlertOn) Alert(message, logLevel);
+                if (modalAlertOn && show) Alert(message, logLevel);
             });
 
 
@@ -131,9 +137,8 @@ namespace CoordinateTrackerAndClicker
             {
                 clickHistory.Add(clickPoint);
                 currentCoordinate = clickPoint;
-                //UpdateCurrentPositionLabel(clickPoint);
                 UpdateLastClickLabel();
-                _printer.Print(SAM.ON_GLOBAL_MOUSE_CLICK, LogLevel.Info);
+                _printer.Print(SAM.ON_GLOBAL_MOUSE_CLICK, LogLevel.Info, false);
             }
         }
 
@@ -192,14 +197,6 @@ namespace CoordinateTrackerAndClicker
             clickHistory.Clear();
             _mouseTracker.StopTracking();
         }
-
-        //private void UpdateCurrentPositionLabel(Point point)
-        //{
-        //    if (point == null) return;
-        //    //LanguageManager.GetString(CurrentPositionLabel.Name);
-        //    //CurrentPositionLabel.Text = $"Текуща позиция: X={point.X}, Y={point.Y}";
-        //    //CurrentPositionLabel.Text = $"{LanguageManager.GetString(CurrentPositionLabel.Name)} X={point.X}, Y={point.Y}";
-        //}
 
         private void BtnAddAction_Click(object sender, EventArgs e)
         {
@@ -1028,9 +1025,72 @@ namespace CoordinateTrackerAndClicker
             CheckboxSuccess.Text = LanguageManager.GetString(CheckboxSuccess.Name);
             CheckboxInfo.Text = LanguageManager.GetString(CheckboxInfo.Name);
         }
-
         #endregion
 
         //---------------------------------------------------------------------------------
+
+        #region LOGIN & REGITER
+        private void materialButtonLoginUser_Click(object sender, EventArgs e)
+        {
+            string userName = materialTextBoxUserName.Text.Trim();
+            string password = materialTextBoxUserPassword.Text;
+
+            var db = FirestoreHelper.Database;
+            DocumentReference docRef = db.Collection("UserData").Document(userName);
+            UserData data= docRef.GetSnapshotAsync().Result.ConvertTo<UserData>();
+
+            if (data != null) MessageBox.Show(password == Security.Decrypt(data.Password) ? "Login Success" : "Login Failed");
+            else MessageBox.Show("Login Failed");
+        }
+
+        private async void materialButtonRegisterUser_Click(object sender, EventArgs e)
+        {
+            var db = FirestoreHelper.Database;
+
+            if (CheckIfUserAlreadyExist())
+            {
+                MessageBox.Show("User Already Exist");
+                return;
+            }
+
+            var data = GetWriteData();
+
+            try
+            {
+                DocumentReference docRef = db.Collection("UserData").Document(data.UserName);
+                await docRef.SetAsync(data);
+                MessageBox.Show("Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error registering user: {ex.Message}");
+            }
+          
+        }
+
+        private UserData GetWriteData()
+        {         
+            string userName = materialTextBoxInputName.Text.Trim();
+            string password = Security.Encrypt(materialTextBoxInputPassword.Text);
+
+            var user = new UserData() { UserName = userName, Password = password};
+
+            return user;
+        }
+
+        private bool CheckIfUserAlreadyExist()
+        {
+            string userName = materialTextBoxInputName.Text.Trim();
+
+            var db = FirestoreHelper.Database;
+            DocumentReference docRef = db.Collection("UserData").Document(userName);
+            UserData data = docRef.GetSnapshotAsync().Result.ConvertTo<UserData>();
+
+            return data != null;
+        }
+
+        #endregion
+
+       
     }
 }

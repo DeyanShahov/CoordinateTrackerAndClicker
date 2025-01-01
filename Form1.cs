@@ -247,7 +247,7 @@ namespace CoordinateTrackerAndClicker
             buttonHandler.ClickButtonMechanicsExecute(sender);
         }
 
-        private async void BtnExecuteMacro_Click(object sender, EventArgs e)
+        private void BtnExecuteMacro_Click(object sender, EventArgs e)
         {
             // Спира изпълнението ако няма добавени макрота
             if (IsListEmpty(lstAvailableMacros)) return;

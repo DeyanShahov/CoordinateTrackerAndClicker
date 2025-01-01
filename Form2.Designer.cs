@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.materialTextBoxUserPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialTextBoxUserName = new MaterialSkin.Controls.MaterialTextBox2();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBoxActionInfo = new System.Windows.Forms.GroupBox();
             this.btnCloseCardActionInfo = new MaterialSkin.Controls.MaterialButton();
@@ -104,7 +106,14 @@
             this.btnSwitchTheme = new MaterialSkin.Controls.MaterialSwitch();
             this.materialLabelTheme = new MaterialSkin.Controls.MaterialLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialTextBoxInputName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialTextBoxInputPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialTextBoxRepeatPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialButtonLoginUser = new MaterialSkin.Controls.MaterialButton();
+            this.materialButtonRegisterUser = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBoxActionInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -134,6 +143,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.materialButtonRegisterUser);
+            this.tabPage1.Controls.Add(this.materialButtonLoginUser);
+            this.tabPage1.Controls.Add(this.materialTextBoxRepeatPassword);
+            this.tabPage1.Controls.Add(this.materialTextBoxInputPassword);
+            this.tabPage1.Controls.Add(this.materialTextBoxInputName);
+            this.tabPage1.Controls.Add(this.materialTextBoxUserPassword);
+            this.tabPage1.Controls.Add(this.materialTextBoxUserName);
             this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabPage1.ImageKey = "icons8-home-page-32.png";
             this.tabPage1.Location = new System.Drawing.Point(4, 39);
@@ -143,6 +159,66 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = ".  .  .";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // materialTextBoxUserPassword
+            // 
+            this.materialTextBoxUserPassword.AnimateReadOnly = false;
+            this.materialTextBoxUserPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxUserPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxUserPassword.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.materialTextBoxUserPassword.Depth = 0;
+            this.materialTextBoxUserPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxUserPassword.HideSelection = true;
+            this.materialTextBoxUserPassword.Hint = "Въведи Парола";
+            this.materialTextBoxUserPassword.LeadingIcon = null;
+            this.materialTextBoxUserPassword.Location = new System.Drawing.Point(69, 148);
+            this.materialTextBoxUserPassword.MaxLength = 32767;
+            this.materialTextBoxUserPassword.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxUserPassword.Name = "materialTextBoxUserPassword";
+            this.materialTextBoxUserPassword.PasswordChar = '●';
+            this.materialTextBoxUserPassword.PrefixSuffixText = null;
+            this.materialTextBoxUserPassword.ReadOnly = false;
+            this.materialTextBoxUserPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxUserPassword.SelectedText = "";
+            this.materialTextBoxUserPassword.SelectionLength = 0;
+            this.materialTextBoxUserPassword.SelectionStart = 0;
+            this.materialTextBoxUserPassword.ShortcutsEnabled = true;
+            this.materialTextBoxUserPassword.Size = new System.Drawing.Size(280, 48);
+            this.materialTextBoxUserPassword.TabIndex = 58;
+            this.materialTextBoxUserPassword.TabStop = false;
+            this.materialTextBoxUserPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxUserPassword.TrailingIcon = null;
+            this.materialTextBoxUserPassword.UseSystemPasswordChar = true;
+            // 
+            // materialTextBoxUserName
+            // 
+            this.materialTextBoxUserName.AnimateReadOnly = false;
+            this.materialTextBoxUserName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxUserName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxUserName.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.materialTextBoxUserName.Depth = 0;
+            this.materialTextBoxUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxUserName.HideSelection = true;
+            this.materialTextBoxUserName.Hint = "Въведи Потербителско Име";
+            this.materialTextBoxUserName.LeadingIcon = null;
+            this.materialTextBoxUserName.Location = new System.Drawing.Point(69, 73);
+            this.materialTextBoxUserName.MaxLength = 32767;
+            this.materialTextBoxUserName.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxUserName.Name = "materialTextBoxUserName";
+            this.materialTextBoxUserName.PasswordChar = '\0';
+            this.materialTextBoxUserName.PrefixSuffixText = null;
+            this.materialTextBoxUserName.ReadOnly = false;
+            this.materialTextBoxUserName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxUserName.SelectedText = "";
+            this.materialTextBoxUserName.SelectionLength = 0;
+            this.materialTextBoxUserName.SelectionStart = 0;
+            this.materialTextBoxUserName.ShortcutsEnabled = true;
+            this.materialTextBoxUserName.Size = new System.Drawing.Size(280, 48);
+            this.materialTextBoxUserName.TabIndex = 57;
+            this.materialTextBoxUserName.TabStop = false;
+            this.materialTextBoxUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxUserName.TrailingIcon = null;
+            this.materialTextBoxUserName.UseSystemPasswordChar = false;
             // 
             // tabPage2
             // 
@@ -1491,11 +1567,158 @@
             this.imageList1.Images.SetKeyName(5, "icons8-down-32.png");
             this.imageList1.Images.SetKeyName(6, "icons8-up-32.png");
             // 
+            // materialLabel1
+            // 
+            this.materialLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.ForeColor = System.Drawing.Color.Transparent;
+            this.materialLabel1.Location = new System.Drawing.Point(767, 32);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(67, 23);
+            this.materialLabel1.TabIndex = 59;
+            this.materialLabel1.Text = "ГОСТ";
+            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // materialTextBoxInputName
+            // 
+            this.materialTextBoxInputName.AnimateReadOnly = false;
+            this.materialTextBoxInputName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxInputName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxInputName.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.materialTextBoxInputName.Depth = 0;
+            this.materialTextBoxInputName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxInputName.HideSelection = true;
+            this.materialTextBoxInputName.Hint = "Въведи Потербителско Име";
+            this.materialTextBoxInputName.LeadingIcon = null;
+            this.materialTextBoxInputName.Location = new System.Drawing.Point(421, 73);
+            this.materialTextBoxInputName.MaxLength = 32767;
+            this.materialTextBoxInputName.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxInputName.Name = "materialTextBoxInputName";
+            this.materialTextBoxInputName.PasswordChar = '\0';
+            this.materialTextBoxInputName.PrefixSuffixText = null;
+            this.materialTextBoxInputName.ReadOnly = false;
+            this.materialTextBoxInputName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxInputName.SelectedText = "";
+            this.materialTextBoxInputName.SelectionLength = 0;
+            this.materialTextBoxInputName.SelectionStart = 0;
+            this.materialTextBoxInputName.ShortcutsEnabled = true;
+            this.materialTextBoxInputName.Size = new System.Drawing.Size(280, 48);
+            this.materialTextBoxInputName.TabIndex = 59;
+            this.materialTextBoxInputName.TabStop = false;
+            this.materialTextBoxInputName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxInputName.TrailingIcon = null;
+            this.materialTextBoxInputName.UseSystemPasswordChar = false;
+            // 
+            // materialTextBoxInputPassword
+            // 
+            this.materialTextBoxInputPassword.AnimateReadOnly = false;
+            this.materialTextBoxInputPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxInputPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxInputPassword.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.materialTextBoxInputPassword.Depth = 0;
+            this.materialTextBoxInputPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxInputPassword.HideSelection = true;
+            this.materialTextBoxInputPassword.Hint = "Въведи Парола";
+            this.materialTextBoxInputPassword.LeadingIcon = null;
+            this.materialTextBoxInputPassword.Location = new System.Drawing.Point(421, 148);
+            this.materialTextBoxInputPassword.MaxLength = 32767;
+            this.materialTextBoxInputPassword.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxInputPassword.Name = "materialTextBoxInputPassword";
+            this.materialTextBoxInputPassword.PasswordChar = '●';
+            this.materialTextBoxInputPassword.PrefixSuffixText = null;
+            this.materialTextBoxInputPassword.ReadOnly = false;
+            this.materialTextBoxInputPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxInputPassword.SelectedText = "";
+            this.materialTextBoxInputPassword.SelectionLength = 0;
+            this.materialTextBoxInputPassword.SelectionStart = 0;
+            this.materialTextBoxInputPassword.ShortcutsEnabled = true;
+            this.materialTextBoxInputPassword.Size = new System.Drawing.Size(280, 48);
+            this.materialTextBoxInputPassword.TabIndex = 60;
+            this.materialTextBoxInputPassword.TabStop = false;
+            this.materialTextBoxInputPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxInputPassword.TrailingIcon = null;
+            this.materialTextBoxInputPassword.UseSystemPasswordChar = true;
+            // 
+            // materialTextBoxRepeatPassword
+            // 
+            this.materialTextBoxRepeatPassword.AnimateReadOnly = false;
+            this.materialTextBoxRepeatPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxRepeatPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxRepeatPassword.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.materialTextBoxRepeatPassword.Depth = 0;
+            this.materialTextBoxRepeatPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxRepeatPassword.HideSelection = true;
+            this.materialTextBoxRepeatPassword.Hint = "Повтори Паролата";
+            this.materialTextBoxRepeatPassword.LeadingIcon = null;
+            this.materialTextBoxRepeatPassword.Location = new System.Drawing.Point(421, 229);
+            this.materialTextBoxRepeatPassword.MaxLength = 32767;
+            this.materialTextBoxRepeatPassword.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxRepeatPassword.Name = "materialTextBoxRepeatPassword";
+            this.materialTextBoxRepeatPassword.PasswordChar = '●';
+            this.materialTextBoxRepeatPassword.PrefixSuffixText = null;
+            this.materialTextBoxRepeatPassword.ReadOnly = false;
+            this.materialTextBoxRepeatPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxRepeatPassword.SelectedText = "";
+            this.materialTextBoxRepeatPassword.SelectionLength = 0;
+            this.materialTextBoxRepeatPassword.SelectionStart = 0;
+            this.materialTextBoxRepeatPassword.ShortcutsEnabled = true;
+            this.materialTextBoxRepeatPassword.Size = new System.Drawing.Size(280, 48);
+            this.materialTextBoxRepeatPassword.TabIndex = 61;
+            this.materialTextBoxRepeatPassword.TabStop = false;
+            this.materialTextBoxRepeatPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxRepeatPassword.TrailingIcon = null;
+            this.materialTextBoxRepeatPassword.UseSystemPasswordChar = true;
+            // 
+            // materialButtonLoginUser
+            // 
+            this.materialButtonLoginUser.AutoSize = false;
+            this.materialButtonLoginUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonLoginUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButtonLoginUser.Depth = 0;
+            this.materialButtonLoginUser.HighEmphasis = true;
+            this.materialButtonLoginUser.Icon = null;
+            this.materialButtonLoginUser.Location = new System.Drawing.Point(191, 241);
+            this.materialButtonLoginUser.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonLoginUser.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonLoginUser.Name = "materialButtonLoginUser";
+            this.materialButtonLoginUser.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonLoginUser.Size = new System.Drawing.Size(158, 36);
+            this.materialButtonLoginUser.TabIndex = 62;
+            this.materialButtonLoginUser.Text = "Влез";
+            this.materialButtonLoginUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonLoginUser.UseAccentColor = false;
+            this.materialButtonLoginUser.UseVisualStyleBackColor = true;
+            this.materialButtonLoginUser.Click += new System.EventHandler(this.materialButtonLoginUser_Click);
+            // 
+            // materialButtonRegisterUser
+            // 
+            this.materialButtonRegisterUser.AutoSize = false;
+            this.materialButtonRegisterUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonRegisterUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButtonRegisterUser.Depth = 0;
+            this.materialButtonRegisterUser.HighEmphasis = true;
+            this.materialButtonRegisterUser.Icon = null;
+            this.materialButtonRegisterUser.Location = new System.Drawing.Point(543, 309);
+            this.materialButtonRegisterUser.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonRegisterUser.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonRegisterUser.Name = "materialButtonRegisterUser";
+            this.materialButtonRegisterUser.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonRegisterUser.Size = new System.Drawing.Size(158, 36);
+            this.materialButtonRegisterUser.TabIndex = 64;
+            this.materialButtonRegisterUser.Text = "Регистрирай";
+            this.materialButtonRegisterUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonRegisterUser.UseAccentColor = false;
+            this.materialButtonRegisterUser.UseVisualStyleBackColor = true;
+            this.materialButtonRegisterUser.Click += new System.EventHandler(this.materialButtonRegisterUser_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 680);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.materialTabControl1);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
@@ -1509,6 +1732,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Кликер";
             this.materialTabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBoxActionInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -1601,5 +1825,13 @@
         private MaterialSkin.Controls.MaterialLabel numericDelayBeforeSliderLabel;
         private MaterialSkin.Controls.MaterialLabel numericDelaySliderLabel;
         private MaterialSkin.Controls.MaterialLabel countAllMacroRepeatSliderLabel;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxUserPassword;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxUserName;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxRepeatPassword;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxInputPassword;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxInputName;
+        private MaterialSkin.Controls.MaterialButton materialButtonRegisterUser;
+        private MaterialSkin.Controls.MaterialButton materialButtonLoginUser;
     }
 }
